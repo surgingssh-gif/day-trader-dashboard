@@ -1,0 +1,8 @@
+.plugin/
+trader/auto/cache/
+trader/auto/logs/
+trader/universe.txt
+trader/watchlist.json
+__pycache__/
+*.tmp
+.DS_Store

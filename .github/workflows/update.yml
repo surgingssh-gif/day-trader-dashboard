@@ -1,0 +1,76 @@
+name: Update journal and dashboard
+
+on:
+  schedule:
+    - cron: "30 21 * * 1-5"   # weekdays after the close: 5:30 PM New York in summer, 4:30 PM in winter
+    - cron: "0 15 * * 6"      # Saturdays, 8 AM Mountain in winter (9 AM in summer): weekly backtest
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Which job to run"
+        type: choice
+        options: [daily, weekly, both]
+        default: both
+      backfill:
+        description: "Daily job: also log the last N sessions (0 = only new ones)"
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: journal
+  cancel-in-progress: false
+
+env:
+  PLUGIN_REPO: Jakeschincariol/day-trader-skill
+  PLUGIN_SHA: 3d0f4ef6986f4984b7c6bd46f7ff4f87744c3abd   # pinned: reviewed version of the pack
+  PLUGIN_DIR: ${{ github.workspace }}/.plugin
+  DASHBOARD_PATH: ${{ github.workspace }}/docs/index.html
+  TZ: America/Denver
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Get the day-trader-skill pack (pinned version)
+        run: |
+          git init -q .plugin
+          git -C .plugin fetch -q --depth 1 "https://github.com/$PLUGIN_REPO.git" "$PLUGIN_SHA"
+          git -C .plugin checkout -q FETCH_HEAD
+
+      - name: Pick the job
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "job=${{ inputs.job }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "0 15 * * 6" ]; then
+            echo "job=weekly" >> "$GITHUB_OUTPUT"
+          else
+            echo "job=daily" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Daily journal
+        if: steps.pick.outputs.job == 'daily' || steps.pick.outputs.job == 'both'
+        run: python -W ignore autotrader/autotrader.py daily --backfill "${{ inputs.backfill || '0' }}"
+
+      - name: Weekly backtest
+        if: steps.pick.outputs.job == 'weekly' || steps.pick.outputs.job == 'both'
+        run: python -W ignore autotrader/autotrader.py weekly
+
+      - name: Save results
+        run: |
+          git config user.name "journal-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trader/auto/journal.json trader/auto/backtest.json docs/index.html 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          git commit -q -m "Update journal: $(date '+%a %b %-d %Y')"
+          git pull -q --rebase
+          git push -q

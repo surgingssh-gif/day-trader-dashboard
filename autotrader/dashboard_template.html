@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day-trader paper journal</title>
+<style>
+.viz-root {
+  color-scheme: light;
+  --page: #f4f3f0;
+  --surface-1: #fcfcfb;
+  --border: #e4e2dc;
+  --grid: #ecebe6;
+  --axis: #b9b7ae;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7a7972;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --good: #0ca30c;
+  --critical: #d03b3b;
+  --neutral: #8a8980;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) .viz-root {
+    color-scheme: dark;
+    --page: #111110;
+    --surface-1: #1a1a19;
+    --border: #2e2e2c;
+    --grid: #262624;
+    --axis: #4a4a46;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8e86;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+  }
+}
+:root[data-theme="dark"] .viz-root {
+  color-scheme: dark;
+  --page: #111110; --surface-1: #1a1a19; --border: #2e2e2c; --grid: #262624; --axis: #4a4a46;
+  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+  --series-1: #3987e5; --series-2: #d95926;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; padding: 28px 20px 60px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+h2 { font-size: 16px; margin: 0 0 2px; }
+.sub { color: var(--text-secondary); margin: 0; }
+.muted { color: var(--text-muted); font-size: 12.5px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-secondary);
+  border: 1px solid var(--border); background: var(--surface-1); border-radius: 999px; padding: 4px 10px; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 14px; margin-bottom: 16px; }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.tile .k { color: var(--text-secondary); font-size: 12.5px; }
+.tile .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 2px 0; font-variant-numeric: tabular-nums; }
+.tile .n { color: var(--text-muted); font-size: 12px; }
+.grid2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
+.grid2 > .card { margin-bottom: 0; }
+.row-gap { margin-bottom: 16px; }
+svg text { fill: var(--text-secondary); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-secondary); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--text-muted); font-weight: 500; font-size: 12px; }
+td.num, th.num { text-align: right; }
+.tscroll { overflow-x: auto; }
+.res { display: inline-flex; align-items: center; gap: 5px; }
+.res .dot { width: 8px; height: 8px; border-radius: 50%; }
+.controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg button { background: transparent; color: var(--text-secondary); border: 0; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button[aria-pressed="true"] { background: var(--grid); color: var(--text-primary); font-weight: 600; }
+label.chk { font-size: 12.5px; color: var(--text-secondary); display: inline-flex; gap: 6px; align-items: center; }
+.empty { color: var(--text-muted); padding: 26px 8px; text-align: center; }
+.tip { font: 12.5px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,.12); opacity: 0; transition: opacity .08s; z-index: 10; max-width: 260px; }
+.tip b { font-weight: 600; }
+.tip .tl { color: var(--text-secondary); }
+.note { color: var(--text-muted); font-size: 12.5px; margin-top: 8px; }
+.best { font-weight: 600; }
+@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, 1fr); } .grid2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Day-trader paper journal</h1>
+      <p class="sub">Opening-range breakout, checked every trading day. Nothing here places an order.</p>
+    </div>
+    <span class="badge" id="built"></span>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="grid2 row-gap">
+    <section class="card">
+      <div class="card-head">
+        <div><h2>Running total, in R</h2>
+          <div class="muted">1R = what you'd lose at the stop. Above zero means the setup is paying for its losers.</div></div>
+      </div>
+      <div id="cum"></div>
+    </section>
+    <section class="card">
+      <div class="card-head">
+        <div><h2>Was the Time Machine right?</h2>
+          <div class="muted">Of trades that hit the stop or the target, how often the target came first.</div></div>
+        <div class="legend"><span><i style="background:var(--series-1)"></i>Predicted</span><span><i style="background:var(--series-2)"></i>Actual</span></div>
+      </div>
+      <div id="calib"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="card-head">
+      <div><h2>Weekly backtest: which version of the strategy holds up?</h2>
+        <div class="muted" id="bt-sub">Average result per trade over the last ~59 sessions on your watchlist.</div></div>
+    </div>
+    <div id="bt-chart"></div>
+    <div class="tscroll" id="bt-table"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div><h2>Journal</h2><div class="muted">Every setup the strategy would have taken, newest first.</div></div>
+      <div class="controls">
+        <div class="seg" id="src">
+          <button aria-pressed="true" data-v="all">All</button><button aria-pressed="false" data-v="watchlist">Watchlist</button><button aria-pressed="false" data-v="scanner">Scanner picks</button>
+        </div>
+        <label class="chk"><input type="checkbox" id="showall"> Show days with no setup</label>
+      </div>
+    </div>
+    <div class="tscroll" id="journal"></div>
+  </section>
+
+  <p class="note">Simulated odds come from each stock's own last ~60 sessions and are not predictions. Free Yahoo data, 5-minute bars.
+    A stop is a plan, not a guarantee: real fills can be worse. Education and tooling, not financial advice.</p>
+</div>
+<div class="tip" id="tip"></div>
+</div>
+
+<script>
+const DATA = /*__DATA__*/null;
+const $ = (id) => document.getElementById(id);
+const tip = $("tip");
+const NS = "http://www.w3.org/2000/svg";
+const pct = (x, d = 0) => x == null ? "–" : (100 * x).toFixed(d) + "%";
+const sR = (x, d = 2) => x == null ? "–" : (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d) + "R";
+const money = (x) => x == null ? "–" : "$" + x.toFixed(2);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmtDate = (d) => { const t = new Date(d + "T12:00:00"); return t.toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
+
+function showTip(html, ev) {
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+const hideTip = () => { tip.style.opacity = 0; };
+function el(tag, attrs, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function svgBox(container, h) {
+  const w = Math.max(300, container.clientWidth || 500);
+  const s = el("svg", { width: w, height: h, viewBox: `0 0 ${w} ${h}`, role: "img" });
+  container.innerHTML = ""; container.appendChild(s);
+  return [s, w];
+}
+function niceTicks(lo, hi, n = 4) {
+  if (lo === hi) { lo -= 1; hi += 1; }
+  const step0 = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= step0);
+  const out = []; for (let v = Math.floor(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(6));
+  return out;
+}
+
+const J = (DATA && DATA.journal) || { entries: [], days: [] };
+const BT = DATA && DATA.backtest;
+$("built").textContent = DATA ? "Updated " + DATA.built : "No data yet";
+const trades = J.entries.filter((r) => r.status === "triggered");
+const sided = (r) => r.tm && (r.tm.p_target + r.tm.p_stop) > 0 ? r.tm.p_target / (r.tm.p_target + r.tm.p_stop) : null;
+
+// ---------- tiles
+(function tiles() {
+  const hitSide = trades.filter((r) => r.outcome !== "flat");
+  const actual = hitSide.length ? hitSide.filter((r) => r.outcome === "target").length / hitSide.length : null;
+  const preds = trades.map(sided).filter((x) => x != null);
+  const predicted = preds.length ? preds.reduce((a, b) => a + b, 0) / preds.length : null;
+  const tot = trades.reduce((a, r) => a + r.R, 0);
+  const T = [
+    ["Sessions logged", J.days.length, J.days.length ? `${fmtDate(J.days[0])} – ${fmtDate(J.days[J.days.length - 1])}` : "Runs after each close"],
+    ["Setups taken", trades.length, `of ${J.entries.length} stock-days checked`],
+    ["Target came first", pct(actual), predicted == null ? "Time Machine: –" : `Time Machine said ${pct(predicted)}`],
+    ["Total result", trades.length ? sR(tot) : "–", trades.length ? `${sR(tot / trades.length)} per trade on average` : "No trades yet"],
+  ];
+  $("tiles").innerHTML = T.map(([k, v, n]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
+})();
+
+// ---------- cumulative R line
+function drawCum() {
+  const box = $("cum");
+  if (!trades.length) { box.innerHTML = '<div class="empty">No trades logged yet. The first run fills this in.</div>'; return; }
+  const pts = []; let run = 0;
+  trades.forEach((r, i) => { run += r.R; pts.push({ i, v: run, r }); });
+  const H = 230, m = { l: 44, r: 14, t: 12, b: 26 };
+  const [s, W] = svgBox(box, H);
+  const lo = Math.min(0, ...pts.map((p) => p.v)), hi = Math.max(0, ...pts.map((p) => p.v));
+  const ticks = niceTicks(lo, hi);
+  const y0 = ticks[0], y1 = ticks[ticks.length - 1];
+  const X = (i) => m.l + (pts.length === 1 ? (W - m.l - m.r) / 2 : i * (W - m.l - m.r) / (pts.length - 1));
+  const Y = (v) => m.t + (y1 - v) * (H - m.t - m.b) / (y1 - y0);
+  ticks.forEach((t) => {
+    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }, s);
+    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s).textContent = (t > 0 ? "+" : "") + t + "R";
+  });
+  const ds = [...new Set(pts.map((p) => p.r.date))];
+  const every = Math.max(1, Math.ceil(ds.length / 6));
+  ds.forEach((d, k) => {
+    if (k % every) return;
+    const first = pts.find((p) => p.r.date === d);
+    const xx = X(first.i), anc = xx < m.l + 24 ? "start" : xx > W - m.r - 24 ? "end" : "middle";
+    el("text", { x: xx, y: H - 6, "text-anchor": anc }, s).textContent = fmtDate(d);
+  });
+  el("path", { d: pts.map((p, k) => (k ? "L" : "M") + X(p.i) + "," + Y(p.v)).join(""), fill: "none",
+    stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+  const last = pts[pts.length - 1];
+  el("circle", { cx: X(last.i), cy: Y(last.v), r: 4, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2 }, s);
+  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1, opacity: 0 }, s);
+  const dot = el("circle", { r: 4.5, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2, opacity: 0 }, s);
+  const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" }, s);
+  hit.addEventListener("mousemove", (ev) => {
+    const bx = s.getBoundingClientRect();
+    const px = ev.clientX - bx.left;
+    let best = pts[0]; pts.forEach((p) => { if (Math.abs(X(p.i) - px) < Math.abs(X(best.i) - px)) best = p; });
+    cross.setAttribute("x1", X(best.i)); cross.setAttribute("x2", X(best.i)); cross.setAttribute("opacity", 1);
+    dot.setAttribute("cx", X(best.i)); dot.setAttribute("cy", Y(best.v)); dot.setAttribute("opacity", 1);
+    const r = best.r;
+    showTip(`<b>${esc(r.symbol)}</b> <span class="tl">${fmtDate(r.date)}, in ${r.entry_time}</span><br>
+      This trade: <b>${sR(r.R)}</b> (${r.outcome === "flat" ? "closed at 3:55" : "hit the " + r.outcome})<br>
+      Running total: <b>${sR(best.v)}</b> after ${best.i + 1} trade${best.i ? "s" : ""}`, ev);
+  });
+  hit.addEventListener("mouseleave", () => { hideTip(); cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); });
+}
+
+// ---------- calibration grouped bars
+function drawCalib() {
+  const box = $("calib");
+  const rows = trades.filter((r) => sided(r) != null && r.outcome !== "flat");
+  if (!rows.length) { box.innerHTML = '<div class="empty">Needs a few trades that hit their stop or target.</div>'; return; }
+  const B = [
+    { k: "Leans stop", sub: "under 45%", test: (p) => p < 0.45 },
+    { k: "Coin flip", sub: "45–55%", test: (p) => p >= 0.45 && p <= 0.55 },
+    { k: "Leans target", sub: "over 55%", test: (p) => p > 0.55 },
+  ].map((b) => {
+    const rs = rows.filter((r) => b.test(sided(r)));
+    return Object.assign(b, { n: rs.length,
+      pred: rs.length ? rs.reduce((a, r) => a + sided(r), 0) / rs.length : null,
+      act: rs.length ? rs.filter((r) => r.outcome === "target").length / rs.length : null });
+  });
+  const H = 230, m = { l: 40, r: 8, t: 12, b: 40 };
+  const [s, W] = svgBox(box, H);
+  const Y = (v) => m.t + (1 - v) * (H - m.t - m.b);
+  [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
+    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)" }, s);
+    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s).textContent = t * 100 + "%";
+  });
+  const gw = (W - m.l - m.r) / B.length, bw = Math.min(34, gw * 0.28);
+  B.forEach((b, i) => {
+    const cx = m.l + gw * (i + 0.5);
+    el("text", { x: cx, y: H - 22, "text-anchor": "middle", style: "fill:var(--text-primary)" }, s).textContent = b.k;
+    el("text", { x: cx, y: H - 8, "text-anchor": "middle" }, s).textContent = `${b.sub} · ${b.n} trade${b.n === 1 ? "" : "s"}`;
+    [["pred", "var(--series-1)", "Predicted", -1], ["act", "var(--series-2)", "Actual", 1]].forEach(([key, col, name, side]) => {
+      const v = b[key]; if (v == null) return;
+      const x = cx + (side < 0 ? -bw - 1 : 1), y = Y(v), h = Math.max(0, Y(0) - y);
+      const r = Math.min(4, h / 2, bw / 2);
+      el("path", { d: `M${x},${Y(0)}V${y + r}Q${x},${y} ${x + r},${y}H${x + bw - r}Q${x + bw},${y} ${x + bw},${y + r}V${Y(0)}Z`, fill: col }, s);
+      const t = el("text", { x: x + bw / 2, y: y - 5, "text-anchor": "middle" }, s); t.textContent = pct(v);
+      const hb = el("rect", { x: x - 2, y: m.t, width: bw + 4, height: Y(0) - m.t, fill: "transparent" }, s);
+      hb.addEventListener("mousemove", (ev) => showTip(`<b>${b.k}</b> <span class="tl">(${b.sub} predicted)</span><br>${name}: <b>${pct(v, 1)}</b> target first<br><span class="tl">${b.n} trade${b.n === 1 ? "" : "s"} in this group</span>`, ev));
+      hb.addEventListener("mouseleave", hideTip);
+    });
+  });
+}
+
+// ---------- backtest
+function drawBacktest() {
+  const box = $("bt-chart"), tbl = $("bt-table");
+  if (!BT || !BT.overall) { box.innerHTML = '<div class="empty">The first weekly backtest runs Saturday morning (or run <code>./run.sh weekly</code>).</div>'; tbl.innerHTML = ""; return; }
+  const V = BT.variants;
+  const created = new Date(BT.created);
+  $("bt-sub").textContent = `Average result per trade on ${Object.keys(BT.symbols).join(", ")} · run ${created.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}.`;
+  const rows = V.map((v) => Object.assign({ v }, BT.overall[v.id]));
+  const vals = rows.map((r) => r.avg_R || 0);
+  const lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
+  const span = Math.max(0.05, hi - lo);
+  const H = rows.length * 38 + 30, m = { l: 210, r: 70, t: 6, b: 24 };
+  const [s, W] = svgBox(box, H);
+  const ticks = niceTicks(lo - span * 0.05, hi + span * 0.05, 4);
+  const x0 = ticks[0], x1 = ticks[ticks.length - 1];
+  const X = (v) => m.l + (v - x0) * (W - m.l - m.r) / (x1 - x0);
+  ticks.forEach((t) => {
+    el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s);
+    el("text", { x: X(t), y: H - 6, "text-anchor": "middle" }, s).textContent = (t > 0 ? "+" : "") + t + "R";
+  });
+  const bestId = rows.slice().sort((a, b) => (b.avg_R || -9) - (a.avg_R || -9))[0].v.id;
+  rows.forEach((r, i) => {
+    const y = m.t + i * 38 + 7, bh = 22, v = r.avg_R || 0;
+    const xa = X(Math.min(0, v)), xb = X(Math.max(0, v)), w = Math.max(1, xb - xa);
+    el("text", { x: m.l - 10, y: y + bh / 2 + 4, "text-anchor": "end", style: "fill:var(--text-primary)" + (r.v.id === bestId ? ";font-weight:600" : "") }, s).textContent = r.v.label;
+    const rr = Math.min(4, w / 2);
+    const d = v >= 0
+      ? `M${xa},${y}H${xb - rr}Q${xb},${y} ${xb},${y + rr}V${y + bh - rr}Q${xb},${y + bh} ${xb - rr},${y + bh}H${xa}Z`
+      : `M${xb},${y}H${xa + rr}Q${xa},${y} ${xa},${y + rr}V${y + bh - rr}Q${xa},${y + bh} ${xa + rr},${y + bh}H${xb}Z`;
+    el("path", { d, fill: "var(--series-1)", opacity: r.v.id === bestId ? 1 : 0.55 }, s);
+    el("text", { x: (v >= 0 ? xb + 6 : xa - 6), y: y + bh / 2 + 4, "text-anchor": v >= 0 ? "start" : "end", style: "fill:var(--text-primary)" }, s).textContent = sR(r.avg_R, 3);
+    const hb = el("rect", { x: m.l, y: y - 4, width: W - m.l - m.r, height: bh + 8, fill: "transparent" }, s);
+    hb.addEventListener("mousemove", (ev) => showTip(`<b>${esc(r.v.label)}</b><br>Fired ${r.fired} times: ${r.target} target, ${r.stop} stop, ${r.flat} closed at 3:55<br>Won ${pct(r.win_rate)} · average <b>${sR(r.avg_R, 3)}</b> · total ${sR(r.total_R)}`, ev));
+    hb.addEventListener("mouseleave", hideTip);
+  });
+  const syms = Object.keys(BT.symbols);
+  let h = `<table><thead><tr><th>Stock</th>${V.map((v) => `<th class="num">${esc(v.id)}<div class="muted">avg R · win %</div></th>`).join("")}<th class="num">Sessions</th></tr></thead><tbody>`;
+  syms.forEach((sym) => {
+    const S = BT.symbols[sym];
+    const best = V.map((v) => [v.id, S.variants[v.id].avg_R]).filter((x) => x[1] != null).sort((a, b) => b[1] - a[1])[0];
+    h += `<tr><td><b>${esc(sym)}</b></td>` + V.map((v) => {
+      const c = S.variants[v.id];
+      return `<td class="num${best && best[0] === v.id ? " best" : ""}">${sR(c.avg_R, 2)} <span class="muted">· ${pct(c.win_rate)} · ${c.fired}×</span></td>`;
+    }).join("") + `<td class="num muted">${S.sessions}</td></tr>`;
+  });
+  h += `</tbody></table><p class="note">Bold = best version for that stock. ${syms.length} stock${syms.length === 1 ? "" : "s"} × ~59 sessions is still a small sample: treat a small edge as noise until it holds up for several weeks.</p>`;
+  tbl.innerHTML = h;
+}
+
+// ---------- journal table
+let SRC = "all";
+function drawJournal() {
+  const showAll = $("showall").checked;
+  const rows = J.entries.filter((r) => (SRC === "all" || r.source === SRC) && (showAll || r.status === "triggered")).slice().reverse();
+  if (!rows.length) { $("journal").innerHTML = '<div class="empty">Nothing logged yet for this filter.</div>'; return; }
+  const RES = { target: ["Target", "var(--good)", "▲"], stop: ["Stop", "var(--critical)", "▼"], flat: ["Closed 3:55", "var(--neutral)", "■"] };
+  let h = `<table><thead><tr><th>Date</th><th>Stock</th><th>From</th><th class="num">Entry</th><th class="num">Stop</th><th class="num">Target</th>
+    <th class="num">TM: target / stop / open</th><th>Time Machine said</th><th>What happened</th><th class="num">Result</th></tr></thead><tbody>`;
+  rows.slice(0, 300).forEach((r) => {
+    if (r.status !== "triggered") {
+      h += `<tr class="muted"><td>${fmtDate(r.date)}</td><td>${esc(r.symbol)}</td><td>${r.source}</td><td colspan="7">No breakout before 3:30 PM ET</td></tr>`;
+      return;
+    }
+    const tm = r.tm, res = RES[r.outcome];
+    h += `<tr><td>${fmtDate(r.date)}</td><td><b>${esc(r.symbol)}</b></td><td>${r.source === "scanner" ? "Scanner" : "Watchlist"}</td>
+      <td class="num">${money(r.entry)} <span class="muted">${r.entry_time}</span></td><td class="num">${money(r.stop)}</td><td class="num">${money(r.target)}</td>
+      <td class="num">${tm ? `${pct(tm.p_target)} / ${pct(tm.p_stop)} / ${pct(tm.p_neither)}` : '<span class="muted">–</span>'}</td>
+      <td>${tm ? esc((tm.verdict || "").split(":")[0]) : `<span class="muted">${esc(r.tm_error || "–")}</span>`}</td>
+      <td><span class="res"><span style="color:${res[1]}">${res[2]}</span>${res[0]} <span class="muted">${r.exit_time}</span></span></td>
+      <td class="num"><b>${sR(r.R)}</b></td></tr>`;
+  });
+  h += "</tbody></table>";
+  $("journal").innerHTML = h;
+}
+$("src").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  SRC = b.dataset.v;
+  [...$("src").children].forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  drawJournal();
+});
+$("showall").addEventListener("change", drawJournal);
+
+function drawAll() { drawCum(); drawCalib(); drawBacktest(); }
+drawAll(); drawJournal();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawAll, 120); });
+</script>
+</body>
+</html>
