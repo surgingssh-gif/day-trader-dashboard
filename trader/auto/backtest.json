@@ -1,0 +1,6359 @@
+{
+ "created": "2026-11-02T19:05:03Z",
+ "variants": [
+  {
+   "id": "mid-1R",
+   "label": "Stop at range middle, 1R target",
+   "stop_rule": "or_mid",
+   "target_r": 1.0
+  },
+  {
+   "id": "mid-2R",
+   "label": "Stop at range middle, 2R target",
+   "stop_rule": "or_mid",
+   "target_r": 2.0
+  },
+  {
+   "id": "low-1R",
+   "label": "Stop at range low, 1R target",
+   "stop_rule": "or_low",
+   "target_r": 1.0
+  },
+  {
+   "id": "low-2R",
+   "label": "Stop at range low, 2R target",
+   "stop_rule": "or_low",
+   "target_r": 2.0
+  }
+ ],
+ "symbols": {
+  "AAPL": {
+   "sessions": 59,
+   "from": "2026-08-10",
+   "to": "2026-10-30",
+   "variants": {
+    "mid-1R": {
+     "sessions": 59,
+     "fired": 28,
+     "target": 16,
+     "stop": 11,
+     "flat": 1,
+     "win_rate": 0.5714,
+     "avg_R": 0.16,
+     "total_R": 4.48
+    },
+    "mid-2R": {
+     "sessions": 59,
+     "fired": 28,
+     "target": 7,
+     "stop": 11,
+     "flat": 10,
+     "win_rate": 0.5714,
+     "avg_R": 0.344,
+     "total_R": 9.64
+    },
+    "low-1R": {
+     "sessions": 59,
+     "fired": 28,
+     "target": 10,
+     "stop": 2,
+     "flat": 16,
+     "win_rate": 0.6429,
+     "avg_R": 0.279,
+     "total_R": 7.82
+    },
+    "low-2R": {
+     "sessions": 59,
+     "fired": 28,
+     "target": 0,
+     "stop": 3,
+     "flat": 25,
+     "win_rate": 0.5714,
+     "avg_R": 0.188,
+     "total_R": 5.26
+    }
+   }
+  },
+  "TSLA": {
+   "sessions": 59,
+   "from": "2026-08-10",
+   "to": "2026-10-30",
+   "variants": {
+    "mid-1R": {
+     "sessions": 59,
+     "fired": 35,
+     "target": 13,
+     "stop": 15,
+     "flat": 7,
+     "win_rate": 0.4857,
+     "avg_R": -0.056,
+     "total_R": -1.97
+    },
+    "mid-2R": {
+     "sessions": 59,
+     "fired": 35,
+     "target": 4,
+     "stop": 17,
+     "flat": 14,
+     "win_rate": 0.4286,
+     "avg_R": -0.066,
+     "total_R": -2.31
+    },
+    "low-1R": {
+     "sessions": 59,
+     "fired": 35,
+     "target": 6,
+     "stop": 5,
+     "flat": 24,
+     "win_rate": 0.5143,
+     "avg_R": 0.007,
+     "total_R": 0.24
+    },
+    "low-2R": {
+     "sessions": 59,
+     "fired": 35,
+     "target": 0,
+     "stop": 6,
+     "flat": 29,
+     "win_rate": 0.4857,
+     "avg_R": -0.056,
+     "total_R": -1.97
+    }
+   }
+  },
+  "NVDA": {
+   "sessions": 59,
+   "from": "2026-08-10",
+   "to": "2026-10-30",
+   "variants": {
+    "mid-1R": {
+     "sessions": 59,
+     "fired": 30,
+     "target": 11,
+     "stop": 13,
+     "flat": 6,
+     "win_rate": 0.4333,
+     "avg_R": -0.056,
+     "total_R": -1.67
+    },
+    "mid-2R": {
+     "sessions": 59,
+     "fired": 30,
+     "target": 2,
+     "stop": 15,
+     "flat": 13,
+     "win_rate": 0.3333,
+     "avg_R": -0.215,
+     "total_R": -6.46
+    },
+    "low-1R": {
+     "sessions": 59,
+     "fired": 30,
+     "target": 3,
+     "stop": 10,
+     "flat": 17,
+     "win_rate": 0.4,
+     "avg_R": -0.163,
+     "total_R": -4.89
+    },
+    "low-2R": {
+     "sessions": 59,
+     "fired": 30,
+     "target": 1,
+     "stop": 11,
+     "flat": 18,
+     "win_rate": 0.3667,
+     "avg_R": -0.202,
+     "total_R": -6.05
+    }
+   }
+  },
+  "AMD": {
+   "sessions": 59,
+   "from": "2026-08-10",
+   "to": "2026-10-30",
+   "variants": {
+    "mid-1R": {
+     "sessions": 59,
+     "fired": 38,
+     "target": 10,
+     "stop": 17,
+     "flat": 11,
+     "win_rate": 0.4737,
+     "avg_R": -0.1,
+     "total_R": -3.79
+    },
+    "mid-2R": {
+     "sessions": 59,
+     "fired": 38,
+     "target": 4,
+     "stop": 17,
+     "flat": 17,
+     "win_rate": 0.4474,
+     "avg_R": -0.015,
+     "total_R": -0.57
+    },
+    "low-1R": {
+     "sessions": 59,
+     "fired": 38,
+     "target": 4,
+     "stop": 10,
+     "flat": 24,
+     "win_rate": 0.4474,
+     "avg_R": -0.16,
+     "total_R": -6.08
+    },
+    "low-2R": {
+     "sessions": 59,
+     "fired": 38,
+     "target": 1,
+     "stop": 10,
+     "flat": 27,
+     "win_rate": 0.4474,
+     "avg_R": -0.165,
+     "total_R": -6.28
+    }
+   }
+  },
+  "SPY": {
+   "sessions": 59,
+   "from": "2026-08-10",
+   "to": "2026-10-30",
+   "variants": {
+    "mid-1R": {
+     "sessions": 59,
+     "fired": 37,
+     "target": 21,
+     "stop": 16,
+     "flat": 0,
+     "win_rate": 0.5676,
+     "avg_R": 0.135,
+     "total_R": 5.0
+    },
+    "mid-2R": {
+     "sessions": 59,
+     "fired": 37,
+     "target": 14,
+     "stop": 21,
+     "flat": 2,
+     "win_rate": 0.4324,
+     "avg_R": 0.206,
+     "total_R": 7.63
+    },
+    "low-1R": {
+     "sessions": 59,
+     "fired": 37,
+     "target": 19,
+     "stop": 15,
+     "flat": 3,
+     "win_rate": 0.5405,
+     "avg_R": 0.097,
+     "total_R": 3.6
+    },
+    "low-2R": {
+     "sessions": 59,
+     "fired": 37,
+     "target": 6,
+     "stop": 21,
+     "flat": 10,
+     "win_rate": 0.3784,
+     "avg_R": -0.108,
+     "total_R": -3.98
+    }
+   }
+  }
+ },
+ "trades": [
+  {
+   "date": "2026-08-10",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 307.33,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 304.84,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-18",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 309.01,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 312.95,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 312.99,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 312.03,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 312.99,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 319.47,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 320.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 328.13,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 316.31,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 323.71,
+   "entry_time": "11:30 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.515,
+   "entry": 334.7,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 334.24,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 335.62,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 335.71,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 337.35,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 337.34,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 333.38,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.7,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.95,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 337.89,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 333.59,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 345.51,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 341.85,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 346.56,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 345.55,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "AAPL",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.82,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 307.33,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 304.84,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-18",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.715,
+   "entry": 309.01,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 312.95,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 312.99,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.268,
+   "entry": 312.03,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.83,
+   "entry": 312.99,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.173,
+   "entry": 319.47,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.17,
+   "entry": 320.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.21,
+   "entry": 328.13,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 316.31,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 323.71,
+   "entry_time": "11:30 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.515,
+   "entry": 334.7,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 334.24,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.85,
+   "entry": 335.62,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 335.71,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 337.35,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 337.34,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 333.38,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.7,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.95,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 337.89,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 333.59,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 345.51,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.314,
+   "entry": 341.85,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 346.56,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.621,
+   "entry": 345.55,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "AAPL",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.82,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.131,
+   "entry": 307.33,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.132,
+   "entry": 304.84,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-18",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.488,
+   "entry": 309.01,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 312.95,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.715,
+   "entry": 312.99,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 312.03,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.527,
+   "entry": 312.99,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.116,
+   "entry": 319.47,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 320.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.122,
+   "entry": 328.13,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 316.31,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.267,
+   "entry": 323.71,
+   "entry_time": "11:30 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.271,
+   "entry": 334.7,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.072,
+   "entry": 334.24,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.43,
+   "entry": 335.62,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 335.71,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.203,
+   "entry": 337.35,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 337.34,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 333.38,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.261,
+   "entry": 333.7,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.95,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 337.89,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 333.59,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.469,
+   "entry": 345.51,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 341.85,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.506,
+   "entry": 346.56,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.362,
+   "entry": 345.55,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "AAPL",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.82,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.131,
+   "entry": 307.33,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.132,
+   "entry": 304.84,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-18",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.488,
+   "entry": 309.01,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.036,
+   "entry": 312.95,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.715,
+   "entry": 312.99,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.703,
+   "entry": 312.03,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.527,
+   "entry": 312.99,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.116,
+   "entry": 319.47,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.717,
+   "entry": 320.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.122,
+   "entry": 328.13,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 316.31,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.267,
+   "entry": 323.71,
+   "entry_time": "11:30 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.271,
+   "entry": 334.7,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.072,
+   "entry": 334.24,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.43,
+   "entry": 335.62,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.354,
+   "entry": 335.71,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.203,
+   "entry": 337.35,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.314,
+   "entry": 337.34,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.034,
+   "entry": 333.38,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.261,
+   "entry": 333.7,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 333.95,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.405,
+   "entry": 337.89,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.143,
+   "entry": 333.59,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.469,
+   "entry": 345.51,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.802,
+   "entry": 341.85,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.506,
+   "entry": 346.56,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.362,
+   "entry": 345.55,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "AAPL",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.82,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 329.45,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-11",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 334.86,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 332.46,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 342.69,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 342.34,
+   "entry_time": "10:30 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 354.36,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 352.49,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 351.63,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 359.42,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 363.96,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.654,
+   "entry": 366.3,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 359.99,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 372.92,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.57,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.024,
+   "entry": 379.35,
+   "entry_time": "1:55 PM"
+  },
+  {
+   "date": "2026-09-23",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 385.11,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 378.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.367,
+   "entry": 352.59,
+   "entry_time": "1:35 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 358.66,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.008,
+   "entry": 371.34,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 374.13,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.58,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 375.52,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 360.77,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.52,
+   "entry": 364.18,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 370.58,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.55,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 383.37,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.14,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.642,
+   "entry": 393.82,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.421,
+   "entry": 404.62,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 406.48,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "TSLA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 394.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.35,
+   "entry": 329.45,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-11",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 334.86,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 332.46,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 342.69,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 342.34,
+   "entry_time": "10:30 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 354.36,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 352.49,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.998,
+   "entry": 351.63,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.181,
+   "entry": 359.42,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.882,
+   "entry": 363.96,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.654,
+   "entry": 366.3,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 359.99,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 372.92,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.57,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.024,
+   "entry": 379.35,
+   "entry_time": "1:55 PM"
+  },
+  {
+   "date": "2026-09-23",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 385.11,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 378.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.367,
+   "entry": 352.59,
+   "entry_time": "1:35 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 358.66,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.008,
+   "entry": 371.34,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.827,
+   "entry": 374.13,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.58,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 375.52,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.456,
+   "entry": 360.77,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.52,
+   "entry": 364.18,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.966,
+   "entry": 370.58,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.55,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 383.37,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 377.14,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.642,
+   "entry": 393.82,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.421,
+   "entry": 404.62,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 406.48,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "TSLA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 394.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.177,
+   "entry": 329.45,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-11",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.449,
+   "entry": 334.86,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 332.46,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.931,
+   "entry": 342.69,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 342.34,
+   "entry_time": "10:30 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 354.36,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 352.49,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.57,
+   "entry": 351.63,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.758,
+   "entry": 359.42,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.019,
+   "entry": 377.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.526,
+   "entry": 363.96,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.362,
+   "entry": 366.3,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.363,
+   "entry": 359.99,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.61,
+   "entry": 372.92,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.62,
+   "entry": 377.57,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.012,
+   "entry": 379.35,
+   "entry_time": "1:55 PM"
+  },
+  {
+   "date": "2026-09-23",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 385.11,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 378.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.186,
+   "entry": 352.59,
+   "entry_time": "1:35 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 358.66,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.004,
+   "entry": 371.34,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.517,
+   "entry": 374.13,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.58,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.324,
+   "entry": 375.52,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.77,
+   "entry": 360.77,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.314,
+   "entry": 364.18,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 370.58,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.304,
+   "entry": 387.55,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.261,
+   "entry": 383.37,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.424,
+   "entry": 377.14,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.324,
+   "entry": 393.82,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.228,
+   "entry": 404.62,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.51,
+   "entry": 406.48,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "TSLA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 394.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.177,
+   "entry": 329.45,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-11",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.449,
+   "entry": 334.86,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.907,
+   "entry": 332.46,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 348.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.931,
+   "entry": 342.69,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.505,
+   "entry": 342.34,
+   "entry_time": "10:30 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.163,
+   "entry": 354.36,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 352.49,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.57,
+   "entry": 351.63,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.758,
+   "entry": 359.42,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.019,
+   "entry": 377.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.526,
+   "entry": 363.96,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.362,
+   "entry": 366.3,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.363,
+   "entry": 359.99,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.61,
+   "entry": 372.92,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.62,
+   "entry": 377.57,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.012,
+   "entry": 379.35,
+   "entry_time": "1:55 PM"
+  },
+  {
+   "date": "2026-09-23",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 385.11,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 378.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.186,
+   "entry": 352.59,
+   "entry_time": "1:35 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 358.66,
+   "entry_time": "10:50 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.004,
+   "entry": 371.34,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.517,
+   "entry": 374.13,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 387.58,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.324,
+   "entry": 375.52,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.77,
+   "entry": 360.77,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.314,
+   "entry": 364.18,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.49,
+   "entry": 370.58,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.304,
+   "entry": 387.55,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.261,
+   "entry": 383.37,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.424,
+   "entry": 377.14,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.324,
+   "entry": 393.82,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.228,
+   "entry": 404.62,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.51,
+   "entry": 406.48,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-10-30",
+   "symbol": "TSLA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.728,
+   "entry": 394.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 223.08,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 227.42,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 214.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 225.95,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 219.38,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 217.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 221.46,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 228.8,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 234.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 221.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.101,
+   "entry": 211.89,
+   "entry_time": "11:35 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 214.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.514,
+   "entry": 219.03,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 220.62,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 224.54,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.364,
+   "entry": 229.7,
+   "entry_time": "1:05 PM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.899,
+   "entry": 223.54,
+   "entry_time": "12:20 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 231.64,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 237.67,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 237.84,
+   "entry_time": "1:45 PM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 239.02,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 235.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 225.88,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 215.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-16",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 216.94,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.526,
+   "entry": 218.26,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.092,
+   "entry": 216.74,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 213.01,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 215.84,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "NVDA",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 218.71,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.205,
+   "entry": 223.08,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 227.42,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 214.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.012,
+   "entry": 225.95,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 219.38,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.563,
+   "entry": 217.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 221.46,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 228.8,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 234.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 221.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.101,
+   "entry": 211.89,
+   "entry_time": "11:35 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 214.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.514,
+   "entry": 219.03,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 220.62,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 224.54,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.364,
+   "entry": 229.7,
+   "entry_time": "1:05 PM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.899,
+   "entry": 223.54,
+   "entry_time": "12:20 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 231.64,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 237.67,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.037,
+   "entry": 237.84,
+   "entry_time": "1:45 PM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 239.02,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 235.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.328,
+   "entry": 225.88,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.097,
+   "entry": 215.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-16",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 216.94,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.526,
+   "entry": 218.26,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.092,
+   "entry": 216.74,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 213.01,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.089,
+   "entry": 215.84,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "NVDA",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 218.71,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.125,
+   "entry": 223.08,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 227.42,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 214.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.518,
+   "entry": 225.95,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.426,
+   "entry": 219.38,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.333,
+   "entry": 217.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 221.46,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.043,
+   "entry": 228.8,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 234.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 221.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.057,
+   "entry": 211.89,
+   "entry_time": "11:35 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 214.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.302,
+   "entry": 219.03,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.025,
+   "entry": 220.62,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 224.54,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.187,
+   "entry": 229.7,
+   "entry_time": "1:05 PM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.506,
+   "entry": 223.54,
+   "entry_time": "12:20 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 231.64,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 237.67,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.522,
+   "entry": 237.84,
+   "entry_time": "1:45 PM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 239.02,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 235.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.725,
+   "entry": 225.88,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.551,
+   "entry": 215.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-16",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 216.94,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.28,
+   "entry": 218.26,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.049,
+   "entry": 216.74,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.634,
+   "entry": 213.01,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.046,
+   "entry": 215.84,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "NVDA",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 218.71,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.125,
+   "entry": 223.08,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-17",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 227.42,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 214.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.518,
+   "entry": 225.95,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-08-31",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.426,
+   "entry": 219.38,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.333,
+   "entry": 217.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 221.46,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.043,
+   "entry": 228.8,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 234.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 221.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.057,
+   "entry": 211.89,
+   "entry_time": "11:35 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 214.67,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.302,
+   "entry": 219.03,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.025,
+   "entry": 220.62,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.839,
+   "entry": 224.54,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.187,
+   "entry": 229.7,
+   "entry_time": "1:05 PM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.506,
+   "entry": 223.54,
+   "entry_time": "12:20 PM"
+  },
+  {
+   "date": "2026-10-01",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 231.64,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 237.67,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.522,
+   "entry": 237.84,
+   "entry_time": "1:45 PM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 239.02,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 235.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.725,
+   "entry": 225.88,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.551,
+   "entry": 215.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-16",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 216.94,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.28,
+   "entry": 218.26,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.049,
+   "entry": 216.74,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.634,
+   "entry": 213.01,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.046,
+   "entry": 215.84,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "NVDA",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 218.71,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 479.28,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 489.69,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 496.0,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 498.55,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 478.42,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 488.77,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 477.08,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 460.8,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 462.16,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.291,
+   "entry": 454.01,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 468.72,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 497.1,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.125,
+   "entry": 519.59,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 513.32,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 491.97,
+   "entry_time": "11:45 AM"
+  },
+  {
+   "date": "2026-09-15",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 510.35,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 524.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 535.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 551.06,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.666,
+   "entry": 606.75,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.758,
+   "entry": 618.28,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.602,
+   "entry": 622.36,
+   "entry_time": "12:40 PM"
+  },
+  {
+   "date": "2026-09-29",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 621.4,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 641.84,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.104,
+   "entry": 632.02,
+   "entry_time": "11:55 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.053,
+   "entry": 650.19,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 640.49,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 588.49,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 549.97,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 553.85,
+   "entry_time": "11:40 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 535.61,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": -0.248,
+   "entry": 554.36,
+   "entry_time": "1:15 PM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 527.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 516.82,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.223,
+   "entry": 528.55,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.441,
+   "entry": 555.36,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "flat",
+   "R": 0.506,
+   "entry": 574.47,
+   "entry_time": "2:40 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "AMD",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 573.3,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 479.28,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 489.69,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 496.0,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.626,
+   "entry": 498.55,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 478.42,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 488.77,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 477.08,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 460.8,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 462.16,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.291,
+   "entry": 454.01,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.423,
+   "entry": 468.72,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 497.1,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.125,
+   "entry": 519.59,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.428,
+   "entry": 513.32,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.579,
+   "entry": 491.97,
+   "entry_time": "11:45 AM"
+  },
+  {
+   "date": "2026-09-15",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 510.35,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 524.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 535.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 551.06,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.666,
+   "entry": 606.75,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.758,
+   "entry": 618.28,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.602,
+   "entry": 622.36,
+   "entry_time": "12:40 PM"
+  },
+  {
+   "date": "2026-09-29",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 621.4,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 641.84,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.104,
+   "entry": 632.02,
+   "entry_time": "11:55 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.053,
+   "entry": 650.19,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 640.49,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 1.58,
+   "entry": 588.49,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 549.97,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 553.85,
+   "entry_time": "11:40 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 535.61,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.248,
+   "entry": 554.36,
+   "entry_time": "1:15 PM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 527.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": -0.416,
+   "entry": 516.82,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.223,
+   "entry": 528.55,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.441,
+   "entry": 555.36,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.506,
+   "entry": 574.47,
+   "entry_time": "2:40 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "AMD",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 573.3,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.852,
+   "entry": 479.28,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.758,
+   "entry": 489.69,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.831,
+   "entry": 496.0,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.906,
+   "entry": 498.55,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 478.42,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.673,
+   "entry": 488.77,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 477.08,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.365,
+   "entry": 460.8,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 462.16,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.15,
+   "entry": 454.01,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.729,
+   "entry": 468.72,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 497.1,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.071,
+   "entry": 519.59,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.222,
+   "entry": 513.32,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.293,
+   "entry": 491.97,
+   "entry_time": "11:45 AM"
+  },
+  {
+   "date": "2026-09-15",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.442,
+   "entry": 510.35,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 524.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 535.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 551.06,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.37,
+   "entry": 606.75,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.397,
+   "entry": 618.28,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.306,
+   "entry": 622.36,
+   "entry_time": "12:40 PM"
+  },
+  {
+   "date": "2026-09-29",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 621.4,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 641.84,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.053,
+   "entry": 632.02,
+   "entry_time": "11:55 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.027,
+   "entry": 650.19,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 640.49,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.835,
+   "entry": 588.49,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 549.97,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 553.85,
+   "entry_time": "11:40 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 535.61,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.125,
+   "entry": 554.36,
+   "entry_time": "1:15 PM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 527.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.217,
+   "entry": 516.82,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.131,
+   "entry": 528.55,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.225,
+   "entry": 555.36,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.267,
+   "entry": 574.47,
+   "entry_time": "2:40 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "AMD",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.643,
+   "entry": 573.3,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.852,
+   "entry": 479.28,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-12",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.758,
+   "entry": 489.69,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.831,
+   "entry": 496.0,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-14",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.906,
+   "entry": 498.55,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-08-25",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 478.42,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.673,
+   "entry": 488.77,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 477.08,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.365,
+   "entry": 460.8,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 462.16,
+   "entry_time": "10:35 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.15,
+   "entry": 454.01,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-09-04",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.729,
+   "entry": 468.72,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-08",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.721,
+   "entry": 497.1,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-09",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.071,
+   "entry": 519.59,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.222,
+   "entry": 513.32,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.293,
+   "entry": 491.97,
+   "entry_time": "11:45 AM"
+  },
+  {
+   "date": "2026-09-15",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.442,
+   "entry": 510.35,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 524.59,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-17",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 535.09,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-18",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 551.06,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.37,
+   "entry": 606.75,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-22",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.397,
+   "entry": 618.28,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.306,
+   "entry": 622.36,
+   "entry_time": "12:40 PM"
+  },
+  {
+   "date": "2026-09-29",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 621.4,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 641.84,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.053,
+   "entry": 632.02,
+   "entry_time": "11:55 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.027,
+   "entry": 650.19,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 640.49,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-10-13",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.835,
+   "entry": 588.49,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.787,
+   "entry": 549.97,
+   "entry_time": "11:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 553.85,
+   "entry_time": "11:40 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.294,
+   "entry": 535.61,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.125,
+   "entry": 554.36,
+   "entry_time": "1:15 PM"
+  },
+  {
+   "date": "2026-10-22",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 527.12,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.217,
+   "entry": 516.82,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.131,
+   "entry": 528.55,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.225,
+   "entry": 555.36,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.267,
+   "entry": 574.47,
+   "entry_time": "2:40 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "AMD",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.643,
+   "entry": 573.3,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 773.72,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 776.84,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 771.14,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-20",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 767.92,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 766.24,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 764.95,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 769.46,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 773.39,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 762.9,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 763.07,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 770.45,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.41,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.31,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.89,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.02,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 765.38,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 770.09,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-28",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.71,
+   "entry_time": "12:30 PM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.32,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 771.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 779.04,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 776.26,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 775.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 777.07,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-14",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 776.15,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.53,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.34,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 766.48,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 771.43,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.93,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 764.67,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 768.72,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 772.69,
+   "entry_time": "12:55 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "SPY",
+   "variant": "mid-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 769.77,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 773.72,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.435,
+   "entry": 776.84,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.14,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-20",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 767.92,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.24,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 764.95,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 769.46,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 773.39,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 762.9,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 763.07,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 770.45,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.41,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.31,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.89,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 767.02,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 765.38,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 770.09,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-28",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.71,
+   "entry_time": "12:30 PM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 767.32,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 771.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 779.04,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 776.26,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 775.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 777.07,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-14",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 776.15,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 767.53,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.34,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 766.48,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 771.43,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.93,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "flat",
+   "R": 0.195,
+   "entry": 764.67,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 768.72,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 772.69,
+   "entry_time": "12:55 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "SPY",
+   "variant": "mid-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 769.77,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 773.72,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": 0.247,
+   "entry": 776.84,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.14,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-20",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 767.92,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.209,
+   "entry": 766.24,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "flat",
+   "R": -0.438,
+   "entry": 764.95,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 769.46,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 773.39,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 762.9,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 763.07,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 770.45,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.41,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.31,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 759.89,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.02,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 765.38,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 770.09,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-28",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.71,
+   "entry_time": "12:30 PM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.32,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 771.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 779.04,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 776.26,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 775.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 777.07,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-14",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 776.15,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 767.53,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 768.34,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 766.48,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 771.43,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.93,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 764.67,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "target",
+   "R": 1.0,
+   "entry": 768.72,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 772.69,
+   "entry_time": "12:55 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "SPY",
+   "variant": "low-1R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 769.77,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-10",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 773.72,
+   "entry_time": "10:05 AM"
+  },
+  {
+   "date": "2026-08-13",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.247,
+   "entry": 776.84,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-08-19",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.14,
+   "entry_time": "10:40 AM"
+  },
+  {
+   "date": "2026-08-20",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 767.92,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-21",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.209,
+   "entry": 766.24,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-08-24",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": -0.438,
+   "entry": 764.95,
+   "entry_time": "12:05 PM"
+  },
+  {
+   "date": "2026-08-26",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.89,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-08-27",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.76,
+   "entry": 769.46,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-08-28",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 773.39,
+   "entry_time": "10:45 AM"
+  },
+  {
+   "date": "2026-09-01",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 762.9,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-09-02",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 763.07,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-03",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.065,
+   "entry": 770.45,
+   "entry_time": "11:05 AM"
+  },
+  {
+   "date": "2026-09-10",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.41,
+   "entry_time": "10:25 AM"
+  },
+  {
+   "date": "2026-09-11",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 766.31,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-14",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.29,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-16",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 759.89,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-21",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 767.02,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-09-24",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 765.38,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-09-25",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 770.09,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-09-28",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.71,
+   "entry_time": "12:30 PM"
+  },
+  {
+   "date": "2026-09-30",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 767.32,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-02",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 771.98,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-05",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 771.8,
+   "entry_time": "10:10 AM"
+  },
+  {
+   "date": "2026-10-06",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 779.04,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-07",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.577,
+   "entry": 776.26,
+   "entry_time": "11:50 AM"
+  },
+  {
+   "date": "2026-10-08",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 775.43,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-09",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.746,
+   "entry": 777.07,
+   "entry_time": "10:55 AM"
+  },
+  {
+   "date": "2026-10-14",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 776.15,
+   "entry_time": "9:50 AM"
+  },
+  {
+   "date": "2026-10-15",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 767.53,
+   "entry_time": "10:20 AM"
+  },
+  {
+   "date": "2026-10-19",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 768.34,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-20",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "target",
+   "R": 2.0,
+   "entry": 766.48,
+   "entry_time": "9:55 AM"
+  },
+  {
+   "date": "2026-10-21",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 1.298,
+   "entry": 771.43,
+   "entry_time": "11:15 AM"
+  },
+  {
+   "date": "2026-10-23",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 760.93,
+   "entry_time": "10:00 AM"
+  },
+  {
+   "date": "2026-10-26",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.118,
+   "entry": 764.67,
+   "entry_time": "10:15 AM"
+  },
+  {
+   "date": "2026-10-27",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "flat",
+   "R": 0.853,
+   "entry": 768.72,
+   "entry_time": "11:00 AM"
+  },
+  {
+   "date": "2026-10-28",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 772.69,
+   "entry_time": "12:55 PM"
+  },
+  {
+   "date": "2026-10-29",
+   "symbol": "SPY",
+   "variant": "low-2R",
+   "outcome": "stop",
+   "R": -1.0,
+   "entry": 769.77,
+   "entry_time": "10:05 AM"
+  }
+ ],
+ "overall": {
+  "mid-1R": {
+   "sessions": 295,
+   "fired": 168,
+   "target": 71,
+   "stop": 72,
+   "flat": 25,
+   "win_rate": 0.506,
+   "avg_R": 0.012,
+   "total_R": 2.05
+  },
+  "mid-2R": {
+   "sessions": 295,
+   "fired": 168,
+   "target": 31,
+   "stop": 81,
+   "flat": 56,
+   "win_rate": 0.4405,
+   "avg_R": 0.047,
+   "total_R": 7.92
+  },
+  "low-1R": {
+   "sessions": 295,
+   "fired": 168,
+   "target": 42,
+   "stop": 42,
+   "flat": 84,
+   "win_rate": 0.506,
+   "avg_R": 0.004,
+   "total_R": 0.68
+  },
+  "low-2R": {
+   "sessions": 295,
+   "fired": 168,
+   "target": 8,
+   "stop": 51,
+   "flat": 109,
+   "win_rate": 0.4464,
+   "avg_R": -0.078,
+   "total_R": -13.03
+  }
+ },
+ "scanner_picks_seen": []
+}
