@@ -1710,5 +1710,1002 @@
   "2026-10-30",
   "2026-11-02"
  ],
- "updated": "2026-11-03T03:03:52Z"
+ "updated": "2026-11-03T03:03:52Z",
+ "versions": {
+  "live-watchlist": {
+   "spec": {
+    "stop_rule": "or_mid",
+    "target_r": 1,
+    "symbols": "watchlist",
+    "min_entry": null
+   },
+   "trades": [
+    {
+     "date": "2026-10-19",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "11:25 AM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:15 AM",
+     "exit_time": "10:35 AM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "TSLA",
+     "R": 0.52,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "NVDA",
+     "R": -0.526,
+     "outcome": "flat",
+     "entry_time": "10:25 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:40 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "TSLA",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:00 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "AMD",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:20 AM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "NVDA",
+     "R": -0.092,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:00 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AAPL",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:55 AM",
+     "exit_time": "11:05 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "11:15 AM",
+     "exit_time": "11:40 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AMD",
+     "R": -0.248,
+     "outcome": "flat",
+     "entry_time": "1:15 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:40 AM"
+    },
+    {
+     "date": "2026-10-22",
+     "symbol": "TSLA",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:05 AM"
+    },
+    {
+     "date": "2026-10-22",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:10 AM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:00 AM",
+     "exit_time": "3:45 PM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:00 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "AMD",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:40 AM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:20 AM",
+     "exit_time": "12:20 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:15 AM",
+     "exit_time": "10:50 AM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "NVDA",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:45 AM",
+     "exit_time": "11:05 AM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:50 AM",
+     "exit_time": "12:15 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AMD",
+     "R": 0.223,
+     "outcome": "flat",
+     "entry_time": "11:05 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "TSLA",
+     "R": -0.642,
+     "outcome": "flat",
+     "entry_time": "9:55 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AAPL",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:35 AM",
+     "exit_time": "11:10 AM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "11:00 AM",
+     "exit_time": "11:25 AM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AMD",
+     "R": 0.441,
+     "outcome": "flat",
+     "entry_time": "11:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "TSLA",
+     "R": 0.421,
+     "outcome": "flat",
+     "entry_time": "11:20 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:50 AM",
+     "exit_time": "12:35 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "12:55 PM",
+     "exit_time": "1:20 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "AMD",
+     "R": 0.506,
+     "outcome": "flat",
+     "entry_time": "2:40 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:35 AM",
+     "exit_time": "3:40 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:15 AM",
+     "exit_time": "1:15 PM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:45 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "TSLA",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:05 AM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:25 AM",
+     "exit_time": "10:50 AM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:30 AM",
+     "exit_time": "1:45 PM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:10 AM"
+    }
+   ],
+   "days": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-11-02"
+   ],
+   "label": "Live rule (watchlist only)",
+   "since": "2026-11-03",
+   "baseline": true
+  },
+  "mid-2R": {
+   "spec": {
+    "stop_rule": "or_mid",
+    "target_r": 2,
+    "symbols": "watchlist",
+    "min_entry": null
+   },
+   "trades": [
+    {
+     "date": "2026-10-19",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "11:25 AM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:15 AM",
+     "exit_time": "10:35 AM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "TSLA",
+     "R": 0.52,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "NVDA",
+     "R": -0.526,
+     "outcome": "flat",
+     "entry_time": "10:25 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:40 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "TSLA",
+     "R": 0.966,
+     "outcome": "flat",
+     "entry_time": "10:00 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "AMD",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:30 AM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "NVDA",
+     "R": -0.092,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AAPL",
+     "R": 1.314,
+     "outcome": "flat",
+     "entry_time": "10:55 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "11:15 AM",
+     "exit_time": "12:40 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AMD",
+     "R": -0.248,
+     "outcome": "flat",
+     "entry_time": "1:15 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:40 AM"
+    },
+    {
+     "date": "2026-10-22",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "9:50 AM",
+     "exit_time": "1:10 PM"
+    },
+    {
+     "date": "2026-10-22",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:10 AM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:00 AM",
+     "exit_time": "3:45 PM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:00 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "AMD",
+     "R": -0.416,
+     "outcome": "flat",
+     "entry_time": "10:05 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:20 AM",
+     "exit_time": "12:20 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "SPY",
+     "R": 0.195,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "NVDA",
+     "R": 0.089,
+     "outcome": "flat",
+     "entry_time": "10:45 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:50 AM",
+     "exit_time": "12:15 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AMD",
+     "R": 0.223,
+     "outcome": "flat",
+     "entry_time": "11:05 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "TSLA",
+     "R": -0.642,
+     "outcome": "flat",
+     "entry_time": "9:55 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AAPL",
+     "R": 0.621,
+     "outcome": "flat",
+     "entry_time": "10:35 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "11:00 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AMD",
+     "R": 0.441,
+     "outcome": "flat",
+     "entry_time": "11:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "TSLA",
+     "R": 0.421,
+     "outcome": "flat",
+     "entry_time": "11:20 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:50 AM",
+     "exit_time": "12:35 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "12:55 PM",
+     "exit_time": "1:20 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "AMD",
+     "R": 0.506,
+     "outcome": "flat",
+     "entry_time": "2:40 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:35 AM",
+     "exit_time": "3:40 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:15 AM",
+     "exit_time": "1:15 PM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:45 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "TSLA",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:45 AM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:25 AM",
+     "exit_time": "10:50 AM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:30 AM",
+     "exit_time": "1:45 PM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:20 AM"
+    }
+   ],
+   "days": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-11-02"
+   ],
+   "label": "2R target",
+   "since": "2026-11-03",
+   "baseline": false
+  },
+  "after-1030": {
+   "spec": {
+    "stop_rule": "or_mid",
+    "target_r": 1,
+    "symbols": "watchlist",
+    "min_entry": "10:30"
+   },
+   "trades": [
+    {
+     "date": "2026-10-19",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:40 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AAPL",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:55 AM",
+     "exit_time": "11:05 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "11:15 AM",
+     "exit_time": "11:40 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AMD",
+     "R": -0.248,
+     "outcome": "flat",
+     "entry_time": "1:15 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:20 AM",
+     "exit_time": "12:20 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "NVDA",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:45 AM",
+     "exit_time": "11:05 AM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:50 AM",
+     "exit_time": "12:15 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AMD",
+     "R": 0.223,
+     "outcome": "flat",
+     "entry_time": "11:05 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AAPL",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "10:35 AM",
+     "exit_time": "11:10 AM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "SPY",
+     "R": 1.0,
+     "outcome": "target",
+     "entry_time": "11:00 AM",
+     "exit_time": "11:25 AM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AMD",
+     "R": 0.441,
+     "outcome": "flat",
+     "entry_time": "11:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "TSLA",
+     "R": 0.421,
+     "outcome": "flat",
+     "entry_time": "11:20 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "NVDA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:50 AM",
+     "exit_time": "12:35 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "12:55 PM",
+     "exit_time": "1:20 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "AMD",
+     "R": 0.506,
+     "outcome": "flat",
+     "entry_time": "2:40 PM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:35 AM",
+     "exit_time": "3:40 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "AMD",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "11:15 AM",
+     "exit_time": "1:15 PM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:45 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "TSLA",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:30 AM",
+     "exit_time": "1:45 PM"
+    }
+   ],
+   "days": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-11-02"
+   ],
+   "label": "Only breakouts after 10:30",
+   "since": "2026-11-03",
+   "baseline": false
+  },
+  "aapl-spy-2R": {
+   "spec": {
+    "stop_rule": "or_mid",
+    "target_r": 2,
+    "symbols": [
+     "AAPL",
+     "SPY"
+    ],
+    "min_entry": null
+   },
+   "trades": [
+    {
+     "date": "2026-10-19",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "11:25 AM"
+    },
+    {
+     "date": "2026-10-19",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:15 AM",
+     "exit_time": "10:35 AM"
+    },
+    {
+     "date": "2026-10-20",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "9:55 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "AAPL",
+     "R": 1.314,
+     "outcome": "flat",
+     "entry_time": "10:55 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-21",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "11:15 AM",
+     "exit_time": "12:40 PM"
+    },
+    {
+     "date": "2026-10-23",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:00 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "SPY",
+     "R": 0.195,
+     "outcome": "flat",
+     "entry_time": "10:15 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-26",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:50 AM",
+     "exit_time": "12:15 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "AAPL",
+     "R": 0.621,
+     "outcome": "flat",
+     "entry_time": "10:35 AM",
+     "exit_time": "3:55 PM"
+    },
+    {
+     "date": "2026-10-27",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "11:00 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-10-28",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "12:55 PM",
+     "exit_time": "1:20 PM"
+    },
+    {
+     "date": "2026-10-29",
+     "symbol": "SPY",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:05 AM",
+     "exit_time": "10:15 AM"
+    },
+    {
+     "date": "2026-10-30",
+     "symbol": "AAPL",
+     "R": -1.0,
+     "outcome": "stop",
+     "entry_time": "10:45 AM",
+     "exit_time": "12:05 PM"
+    },
+    {
+     "date": "2026-11-02",
+     "symbol": "SPY",
+     "R": 2.0,
+     "outcome": "target",
+     "entry_time": "9:50 AM",
+     "exit_time": "10:20 AM"
+    }
+   ],
+   "days": [
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-11-02"
+   ],
+   "label": "AAPL + SPY only, 2R target",
+   "since": "2026-11-03",
+   "baseline": false
+  }
+ }
 }
