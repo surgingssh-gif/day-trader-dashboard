@@ -59,7 +59,7 @@ def log(msg):
 
 def load_config():
     cfg = {"watchlist": ["AAPL", "TSLA", "NVDA", "AMD", "SPY"], "scanner_picks": 5,
-           "stop_rule": "or_mid", "target_r": 1.0, "plugin_dir": ""}
+           "stop_rule": "or_mid", "target_r": 1.0, "risk_dollars": 50, "plugin_dir": ""}
     if os.path.exists(CONFIG):
         with open(CONFIG) as fh:
             cfg.update(json.load(fh))
@@ -337,9 +337,17 @@ def summarize(trades, sessions):
 
 
 def build_dashboard():
+    cfg = load_config()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    nxt = now.replace(hour=21, minute=30, second=0, microsecond=0)   # the workflow's weekday schedule
+    while nxt <= now or nxt.weekday() >= 5:
+        nxt += datetime.timedelta(days=1)
     data = {"journal": read_json(JOURNAL, {"entries": [], "days": []}),
             "backtest": read_json(BACKTEST, None),
-            "built": datetime.datetime.now().strftime("%a %b %-d, %Y at %-I:%M %p")}
+            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars")},
+            "built": datetime.datetime.now().strftime("%a %b %-d, %-I:%M %p"),
+            "built_iso": now.isoformat(),
+            "next_run": nxt.astimezone().strftime("%a %b %-d, %-I:%M %p")}
     with open(TEMPLATE) as fh:
         html = fh.read()
     blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")

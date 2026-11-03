@@ -3,385 +3,765 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Day-trader paper journal</title>
+<title>Trading Journal · Opening-Range Breakout</title>
 <style>
 .viz-root {
   color-scheme: light;
-  --page: #f4f3f0;
-  --surface-1: #fcfcfb;
-  --border: #e4e2dc;
-  --grid: #ecebe6;
-  --axis: #b9b7ae;
-  --text-primary: #0b0b0b;
-  --text-secondary: #52514e;
-  --text-muted: #7a7972;
-  --series-1: #2a78d6;
-  --series-2: #eb6834;
-  --good: #0ca30c;
-  --critical: #d03b3b;
-  --neutral: #8a8980;
+  --page: #f6f6f4; --surface-1: #ffffff; --surface-2: #f9f9f7; --wash: #f0efec;
+  --border: rgba(11,11,11,0.09); --grid: #ebeae4; --axis: #c3c2b7;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #898781;
+  --series-1: #2a78d6; --series-1-soft: rgba(42,120,214,0.10);
+  --pos: #2a78d6; --neg: #e34948; --mid: #f0efec;
+  --good: #0ca30c; --good-text: #006300; --critical: #d03b3b; --critical-text: #c02f2f; --neutral: #898781;
+  --dd: rgba(227,73,72,0.10);
+  --shadow: 0 1px 2px rgba(11,11,11,0.04);
 }
 @media (prefers-color-scheme: dark) {
   :root:where(:not([data-theme="light"])) .viz-root {
     color-scheme: dark;
-    --page: #111110;
-    --surface-1: #1a1a19;
-    --border: #2e2e2c;
-    --grid: #262624;
-    --axis: #4a4a46;
-    --text-primary: #f0efec;
-    --text-secondary: #c3c2b7;
-    --text-muted: #8f8e86;
-    --series-1: #3987e5;
-    --series-2: #d95926;
+    --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #151514; --wash: #262624;
+    --border: rgba(255,255,255,0.09); --grid: #2c2c2a; --axis: #383835;
+    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+    --series-1: #3987e5; --series-1-soft: rgba(57,135,229,0.14);
+    --pos: #3987e5; --neg: #e66767; --mid: #383835;
+    --good-text: #0ca30c; --critical-text: #e66767; --dd: rgba(230,103,103,0.13); --shadow: none;
   }
 }
 :root[data-theme="dark"] .viz-root {
   color-scheme: dark;
-  --page: #111110; --surface-1: #1a1a19; --border: #2e2e2c; --grid: #262624; --axis: #4a4a46;
-  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
-  --series-1: #3987e5; --series-2: #d95926;
+  --page: #0d0d0d; --surface-1: #1a1a19; --surface-2: #151514; --wash: #262624;
+  --border: rgba(255,255,255,0.09); --grid: #2c2c2a; --axis: #383835;
+  --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #898781;
+  --series-1: #3987e5; --series-1-soft: rgba(57,135,229,0.14);
+  --pos: #3987e5; --neg: #e66767; --mid: #383835;
+  --good-text: #0ca30c; --critical-text: #e66767; --dd: rgba(230,103,103,0.13); --shadow: none;
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
 .viz-root { background: var(--page); color: var(--text-primary); min-height: 100vh;
-  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; padding: 28px 20px 60px; }
-.wrap { max-width: 1120px; margin: 0 auto; }
-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
-h2 { font-size: 16px; margin: 0 0 2px; }
-.sub { color: var(--text-secondary); margin: 0; }
-.muted { color: var(--text-muted); font-size: 12.5px; }
-.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-secondary);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button { font: inherit; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+/* top bar */
+.topbar { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--page) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--border); }
+.topbar .wrap { display: flex; align-items: center; gap: 24px; height: 56px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -0.01em; white-space: nowrap; }
+.brand .mark { width: 26px; height: 26px; border-radius: 7px; background: var(--text-primary); display: grid; place-items: center; }
+.brand .mark svg { display: block; }
+nav.sections { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+nav.sections a { text-decoration: none; color: var(--text-secondary); padding: 6px 10px; border-radius: 7px; font-size: 13.5px; white-space: nowrap; }
+nav.sections a:hover { background: var(--wash); color: var(--text-primary); }
+.top-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;
   border: 1px solid var(--border); background: var(--surface-1); border-radius: 999px; padding: 4px 10px; }
-.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 18px 14px; margin-bottom: 16px; }
-.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-.tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
-.tile .k { color: var(--text-secondary); font-size: 12.5px; }
-.tile .v { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 2px 0; font-variant-numeric: tabular-nums; }
-.tile .n { color: var(--text-muted); font-size: 12px; }
-.grid2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; }
-.grid2 > .card { margin-bottom: 0; }
-.row-gap { margin-bottom: 16px; }
-svg text { fill: var(--text-secondary); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.pill .live { width: 7px; height: 7px; border-radius: 50%; background: var(--good); }
+.seg { display: inline-flex; background: var(--wash); border-radius: 8px; padding: 2px; }
+.seg button { background: transparent; color: var(--text-secondary); border: 0; padding: 4px 10px; font-size: 12.5px; border-radius: 6px; cursor: pointer; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--surface-1); color: var(--text-primary); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+
+/* page */
+main { padding: 28px 0 64px; }
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; margin-bottom: 18px; }
+.eyebrow { font-size: 12px; font-weight: 600; color: var(--text-muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+h1 { font-size: 26px; line-height: 1.2; margin: 0; letter-spacing: -0.02em; font-weight: 650; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font-size: 12.5px; color: var(--text-secondary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
+.chip b { color: var(--text-primary); font-weight: 600; }
+
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+.pad { padding: 20px 22px; }
+.section { margin-top: 36px; scroll-margin-top: 72px; }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+h2 { font-size: 18px; margin: 0; letter-spacing: -0.01em; font-weight: 650; }
+h3 { font-size: 14.5px; margin: 0; font-weight: 600; }
+.desc { color: var(--text-secondary); font-size: 13px; margin: 3px 0 0; max-width: 70ch; }
+.muted { color: var(--text-muted); }
+.small { font-size: 12.5px; }
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+
+/* verdict */
+.verdict { display: grid; grid-template-columns: 1.5fr 1fr; gap: 0; overflow: hidden; }
+.verdict .left { padding: 22px 24px; border-right: 1px solid var(--border); }
+.verdict .right { padding: 22px 24px; background: var(--surface-2); display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+.status { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; padding: 3px 10px 3px 8px; border-radius: 999px; background: var(--wash); color: var(--text-primary); }
+.status .ic { font-size: 11px; line-height: 1; }
+.verdict .headline { font-size: 21px; font-weight: 650; letter-spacing: -0.015em; margin: 10px 0 6px; line-height: 1.3; }
+.verdict p { margin: 0; color: var(--text-secondary); max-width: 62ch; }
+.progress { height: 8px; background: var(--wash); border-radius: 999px; overflow: hidden; }
+.progress > div { height: 100%; background: var(--series-1); border-radius: 999px; }
+.prog-row { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-secondary); margin-bottom: 6px; }
+.prog-row b { color: var(--text-primary); }
+
+/* kpis */
+.kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 12px; }
+.kpi { padding: 16px 18px; }
+.kpi .k { color: var(--text-secondary); font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.kpi .v { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; margin: 6px 0 2px; white-space: nowrap; }
+.kpi .n { color: var(--text-muted); font-size: 12px; }
+.info { display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--axis); color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: help; }
+.pos-t { color: var(--good-text); }
+.neg-t { color: var(--critical-text); }
+
+.grid { display: grid; gap: 12px; }
+.g-21 { grid-template-columns: 2fr 1fr; }
+.g-11 { grid-template-columns: 1fr 1fr; }
+.chart { width: 100%; }
+svg text { fill: var(--text-muted); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+svg .lbl { fill: var(--text-secondary); }
+svg .strong { fill: var(--text-primary); font-weight: 600; }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-secondary); }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
-th { color: var(--text-muted); font-weight: 500; font-size: 12px; }
-td.num, th.num { text-align: right; }
+.legend i.line { height: 2px; border-radius: 1px; vertical-align: 3px; width: 14px; }
+
+/* outcome bar */
+.obar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; gap: 2px; margin: 6px 0 14px; }
+.obar > div { display: flex; align-items: center; padding: 0 10px; color: #fff; font-size: 12.5px; font-weight: 600; white-space: nowrap; min-width: 0; overflow: hidden; }
+.orows { display: grid; gap: 8px; }
+.orow { display: grid; grid-template-columns: 18px 1fr auto auto; gap: 10px; align-items: center; font-size: 13px; }
+.orow .sw { width: 10px; height: 10px; border-radius: 3px; }
+.orow .num { font-variant-numeric: tabular-nums; text-align: right; min-width: 64px; }
+
+/* tables */
 .tscroll { overflow-x: auto; }
-.res { display: inline-flex; align-items: center; gap: 5px; }
-.res .dot { width: 8px; height: 8px; border-radius: 50%; }
-.controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-.seg button { background: transparent; color: var(--text-secondary); border: 0; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer; }
-.seg button + button { border-left: 1px solid var(--border); }
-.seg button[aria-pressed="true"] { background: var(--grid); color: var(--text-primary); font-weight: 600; }
-label.chk { font-size: 12.5px; color: var(--text-secondary); display: inline-flex; gap: 6px; align-items: center; }
-.empty { color: var(--text-muted); padding: 26px 8px; text-align: center; }
-.tip { font: 12.5px/1.45 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif; position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
-  border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,.12); opacity: 0; transition: opacity .08s; z-index: 10; max-width: 260px; }
-.tip b { font-weight: 600; }
-.tip .tl { color: var(--text-secondary); }
-.note { color: var(--text-muted); font-size: 12.5px; margin-top: 8px; }
-.best { font-weight: 600; }
-@media (max-width: 860px) { .tiles { grid-template-columns: repeat(2, 1fr); } .grid2 { grid-template-columns: 1fr; } }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+thead th { color: var(--text-muted); font-weight: 500; font-size: 12px; background: var(--surface-2); position: sticky; top: 0; }
+thead th:first-child { border-top-left-radius: 0; }
+th.num, td.num { text-align: right; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable:hover { color: var(--text-primary); }
+th .arr { opacity: .6; margin-left: 3px; }
+tbody tr:hover td { background: var(--surface-2); }
+tbody tr:last-child td { border-bottom: 0; }
+td.sym { font-weight: 600; }
+.tag { display: inline-block; font-size: 11.5px; padding: 1px 7px; border-radius: 5px; background: var(--wash); color: var(--text-secondary); }
+.res { display: inline-flex; align-items: center; gap: 6px; }
+.res .ic { font-size: 10px; }
+.rbar { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.rbar .track { width: 64px; height: 6px; position: relative; }
+.rbar .track::before { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--axis); }
+.rbar .fill { position: absolute; top: 0; height: 6px; border-radius: 3px; }
+.odds { display: inline-flex; width: 92px; height: 8px; border-radius: 4px; overflow: hidden; gap: 1px; vertical-align: middle; }
+.odds > span { display: block; height: 100%; }
+.spark { display: block; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+select { font: inherit; font-size: 12.5px; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 5px 8px; }
+.tfoot { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-top: 1px solid var(--grid); font-size: 12.5px; color: var(--text-muted); }
+.btn { background: var(--surface-1); border: 1px solid var(--border); color: var(--text-primary); border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 12.5px; }
+.btn:hover { background: var(--wash); }
+
+/* heatmap */
+.heat { display: grid; gap: 3px; }
+.heat .h { font-size: 12px; color: var(--text-muted); display: flex; align-items: flex-end; padding: 0 4px 4px; line-height: 1.3; }
+.heat .rowlab { font-weight: 600; font-size: 13px; display: flex; align-items: center; padding-right: 8px; }
+.heat .cell { border-radius: 6px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; cursor: default; }
+.heat .cell b { font-size: 13.5px; font-weight: 650; }
+.heat .cell span { font-size: 11px; opacity: .8; }
+.heat .total { font-weight: 650; }
+.scale { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+.scale .ramp { width: 160px; height: 8px; border-radius: 4px; }
+
+.callout { display: flex; gap: 12px; padding: 12px 14px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); margin-top: 14px; }
+.callout b { color: var(--text-primary); }
+
+details.glossary { padding: 0; }
+details.glossary summary { cursor: pointer; padding: 16px 22px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; }
+details.glossary summary::-webkit-details-marker { display: none; }
+details.glossary[open] summary { border-bottom: 1px solid var(--border); }
+.gl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 28px; padding: 18px 22px 22px; }
+.gl dt { font-weight: 600; margin-bottom: 2px; }
+.gl dd { margin: 0; color: var(--text-secondary); font-size: 13px; }
+footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-align: center; }
+
+.empty { color: var(--text-muted); padding: 32px 8px; text-align: center; font-size: 13px; }
+.tip { position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 10px; padding: 9px 11px; font: 12.5px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; box-shadow: 0 6px 24px rgba(0,0,0,.14);
+  opacity: 0; transition: opacity .08s; z-index: 50; max-width: 280px; }
+.tip .t { font-weight: 600; margin-bottom: 2px; }
+.tip .r { display: flex; justify-content: space-between; gap: 16px; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.tip .r b { color: var(--text-primary); font-weight: 600; }
+
+@media (max-width: 1080px) { .kpis { grid-template-columns: repeat(3, 1fr); } .gl { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 860px) {
+  .g-21, .g-11, .verdict { grid-template-columns: 1fr; } .verdict .left { border-right: 0; border-bottom: 1px solid var(--border); }
+  .hero { grid-template-columns: 1fr; } nav.sections { display: none; } .gl { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) { .kpis { grid-template-columns: 1fr 1fr; } .wrap { padding: 0 14px; } .top-right .pill.when { display: none; } h1 { font-size: 22px; } }
 </style>
 </head>
 <body>
 <div class="viz-root">
-<div class="wrap">
-  <header>
-    <div>
-      <h1>Day-trader paper journal</h1>
-      <p class="sub">Opening-range breakout, checked every trading day. Nothing here places an order.</p>
+  <div class="topbar"><div class="wrap">
+    <div class="brand"><span class="mark"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 10 L5 6 L8 8.5 L13 3" fill="none" stroke="var(--surface-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Trading Journal</div>
+    <nav class="sections">
+      <a href="#overview">Overview</a><a href="#stocks">Stocks</a><a href="#timemachine">Time Machine</a><a href="#backtest">Backtest</a><a href="#trades">Trades</a><a href="#guide">Guide</a>
+    </nav>
+    <div class="top-right">
+      <span class="pill when" id="when"></span>
+      <div class="seg" id="units" role="group" aria-label="Units"><button data-u="usd" aria-pressed="true">$</button><button data-u="r" aria-pressed="false">R</button></div>
     </div>
-    <span class="badge" id="built"></span>
-  </header>
+  </div></div>
 
-  <div class="tiles" id="tiles"></div>
-
-  <div class="grid2 row-gap">
-    <section class="card">
-      <div class="card-head">
-        <div><h2>Running total, in R</h2>
-          <div class="muted">1R = what you'd lose at the stop. Above zero means the setup is paying for its losers.</div></div>
+  <main class="wrap">
+    <div class="hero" id="overview">
+      <div>
+        <div class="eyebrow">Paper trading · no real orders</div>
+        <h1>Opening-range breakout</h1>
+        <div class="chips" id="chips"></div>
       </div>
-      <div id="cum"></div>
-    </section>
-    <section class="card">
-      <div class="card-head">
-        <div><h2>Was the Time Machine right?</h2>
-          <div class="muted">Of trades that hit the stop or the target, how often the target came first.</div></div>
-        <div class="legend"><span><i style="background:var(--series-1)"></i>Predicted</span><span><i style="background:var(--series-2)"></i>Actual</span></div>
-      </div>
-      <div id="calib"></div>
-    </section>
-  </div>
-
-  <section class="card">
-    <div class="card-head">
-      <div><h2>Weekly backtest: which version of the strategy holds up?</h2>
-        <div class="muted" id="bt-sub">Average result per trade over the last ~59 sessions on your watchlist.</div></div>
     </div>
-    <div id="bt-chart"></div>
-    <div class="tscroll" id="bt-table"></div>
-  </section>
 
-  <section class="card">
-    <div class="card-head">
-      <div><h2>Journal</h2><div class="muted">Every setup the strategy would have taken, newest first.</div></div>
-      <div class="controls">
-        <div class="seg" id="src">
-          <button aria-pressed="true" data-v="all">All</button><button aria-pressed="false" data-v="watchlist">Watchlist</button><button aria-pressed="false" data-v="scanner">Scanner picks</button>
+    <div class="card verdict" id="verdict"></div>
+    <div class="kpis" id="kpis"></div>
+
+    <div class="grid g-21" style="margin-top:12px">
+      <div class="card pad">
+        <div class="card-head">
+          <div><h3>Running profit</h3><div class="desc">Every trade added up in order. The shaded area is how far it fell below its best point.</div></div>
+          <div class="legend"><span><i class="line" style="background:var(--series-1)"></i>Running total</span><span><i style="background:var(--dd)"></i>Below peak</span></div>
         </div>
-        <label class="chk"><input type="checkbox" id="showall"> Show days with no setup</label>
+        <div class="chart" id="equity"></div>
+        <h3 style="margin-top:14px">Result by day</h3>
+        <div class="chart" id="daily"></div>
+      </div>
+      <div class="grid" style="align-content:start">
+        <div class="card pad">
+          <div class="card-head"><div><h3>How trades ended</h3><div class="desc">Every trade ends one of three ways.</div></div></div>
+          <div id="outcomes"></div>
+        </div>
+        <div class="card pad">
+          <div class="card-head"><div><h3>When the entry triggered</h3><div class="desc">Average result per trade by entry time (New York).</div></div></div>
+          <div class="chart" id="bytime"></div>
+        </div>
       </div>
     </div>
-    <div class="tscroll" id="journal"></div>
-  </section>
 
-  <p class="note">Simulated odds come from each stock's own last ~60 sessions and are not predictions. Free Yahoo data, 5-minute bars.
-    A stop is a plan, not a guarantee: real fills can be worse. Education and tooling, not financial advice.</p>
-</div>
-<div class="tip" id="tip"></div>
+    <section class="section" id="stocks">
+      <div class="section-head"><div><h2>By stock</h2><p class="desc">Live journal results per stock, next to what the 59-day backtest says for the same rule.</p></div></div>
+      <div class="card"><div class="tscroll" id="stocktable"></div></div>
+    </section>
+
+    <section class="section" id="timemachine">
+      <div class="section-head"><div><h2>Is the Time Machine accurate?</h2><p class="desc">Before each trade, the Time Machine replays the day 10,000 times and estimates the odds. Here's how those odds compared with what happened.</p></div></div>
+      <div class="grid g-11">
+        <div class="card pad">
+          <div class="card-head"><div><h3>Predicted vs actual: target hit first</h3><div class="desc">Only trades that reached the stop or the target. Trades are grouped by what was predicted.</div></div>
+            <div class="legend"><span><i style="background:var(--series-1)"></i>Predicted</span><span><i style="background:var(--text-secondary)"></i>Actual</span></div></div>
+          <div class="chart" id="calib"></div>
+        </div>
+        <div class="card pad" id="tmstats"></div>
+      </div>
+    </section>
+
+    <section class="section" id="backtest">
+      <div class="section-head"><div><h2>Backtest: which version works best?</h2><p class="desc" id="bt-desc">Four versions of the strategy replayed on every trading day in the last ~59 sessions. Updated every Saturday.</p></div></div>
+      <div class="grid g-21">
+        <div class="card pad">
+          <div class="card-head"><div><h3>Average result per trade</h3><div class="desc">Blue made money on average, red lost. Each cell: average, win rate, number of trades. "Middle stop" puts the stop at the middle of the opening range, "low stop" at its bottom; 1R / 2R is how far the target sits.</div></div></div>
+          <div id="heat"></div>
+        </div>
+        <div class="card pad" id="btsummary"></div>
+      </div>
+    </section>
+
+    <section class="section" id="trades">
+      <div class="section-head">
+        <div><h2>Trade log</h2><p class="desc">Every setup the strategy took. Click a column to sort.</p></div>
+        <div class="filters">
+          <select id="f-sym" aria-label="Stock"></select>
+          <div class="seg" id="f-src"><button data-v="all" aria-pressed="true">All</button><button data-v="watchlist" aria-pressed="false">Watchlist</button><button data-v="scanner" aria-pressed="false">Scanner</button></div>
+          <div class="seg" id="f-out"><button data-v="all" aria-pressed="true">Any result</button><button data-v="target" aria-pressed="false">Target</button><button data-v="stop" aria-pressed="false">Stop</button><button data-v="flat" aria-pressed="false">Closed</button></div>
+        </div>
+      </div>
+      <div class="card"><div class="tscroll" id="tradetable"></div><div class="tfoot" id="tradefoot"></div></div>
+    </section>
+
+    <section class="section" id="guide">
+      <details class="card glossary" open>
+        <summary>How to read this dashboard <span class="muted">▾</span></summary>
+        <dl class="gl">
+          <div><dt>The strategy</dt><dd>At 9:45 AM New York time, note the high and low of the first 15 minutes (the opening range). Buy when a 5-minute candle closes above the high. Entries stop at 3:30 PM.</dd></div>
+          <div><dt>Stop and target</dt><dd>Set before the entry. The stop sits at the middle of the opening range; the target is the same distance above the entry. Anything still open is closed at 3:55 PM.</dd></div>
+          <div><dt>R (risk unit)</dt><dd>1R is what you lose if the stop is hit. +1R means you made as much as you risked. Dollar figures assume <b id="g-risk"></b> risked per trade.</dd></div>
+          <div><dt>Profit factor</dt><dd>Money won on winning trades divided by money lost on losing ones. Above 1.0 makes money; 1.3+ over many trades is a solid edge.</dd></div>
+          <div><dt>Drawdown</dt><dd>The biggest drop from a high point in the running total. It shows the worst losing stretch you'd have had to sit through.</dd></div>
+          <div><dt>Time Machine</dt><dd>Replays the rest of the day 10,000 times using the stock's own last ~60 sessions, never the day itself, so the odds are made before the outcome is known.</dd></div>
+          <div><dt>Watchlist vs scanner</dt><dd>Watchlist stocks are checked every day. Scanner picks are the day's 5 most-traded stocks that broke out by 10:15 AM.</dd></div>
+          <div><dt>How many trades is enough?</dt><dd>Results swing a lot by luck. Under 30 trades means very little; around 100 starts to show whether an edge is real.</dd></div>
+          <div><dt>What this isn't</dt><dd>Paper results from free, sometimes delayed 5-minute data. Real fills, fees and slippage are worse. Not financial advice.</dd></div>
+        </dl>
+      </details>
+    </section>
+    <footer id="foot"></footer>
+  </main>
+  <div class="tip" id="tip"></div>
 </div>
 
 <script>
 const DATA = /*__DATA__*/null;
 const $ = (id) => document.getElementById(id);
-const tip = $("tip");
 const NS = "http://www.w3.org/2000/svg";
-const pct = (x, d = 0) => x == null ? "–" : (100 * x).toFixed(d) + "%";
-const sR = (x, d = 2) => x == null ? "–" : (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d) + "R";
-const money = (x) => x == null ? "–" : "$" + x.toFixed(2);
-const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const fmtDate = (d) => { const t = new Date(d + "T12:00:00"); return t.toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
+const J = (DATA && DATA.journal) || { entries: [], days: [] };
+const BT = DATA && DATA.backtest;
+const CFG = Object.assign({ risk_dollars: 50, stop_rule: "or_mid", target_r: 1, watchlist: [], scanner_picks: 5 }, (DATA && DATA.config) || {});
+const RISK = +CFG.risk_dollars || 50;
+let UNIT = "usd";
+try { UNIT = localStorage.getItem("tj-unit") || "usd"; } catch (e) {}
 
+const TR = J.entries.filter((r) => r.status === "triggered");
+const DAYS = J.days || [];
+
+// ---------- formatting
+const sign = (x) => (x > 0 ? "+" : x < 0 ? "−" : "");
+const fR = (x, d = 2) => x == null || isNaN(x) ? "–" : sign(x) + Math.abs(x).toFixed(d) + "R";
+const fUSD = (x, d) => { if (x == null || isNaN(x)) return "–"; const a = Math.abs(x); const dd = d != null ? d : a >= 100 ? 0 : 2; return sign(x) + "$" + a.toLocaleString(undefined, { minimumFractionDigits: dd, maximumFractionDigits: dd }); };
+const fV = (r, d) => UNIT === "usd" ? fUSD(r * RISK, d) : fR(r, d == null ? 2 : d);
+const cls = (x) => x > 0.0001 ? "pos-t" : x < -0.0001 ? "neg-t" : "";
+const pct = (x, d = 0) => x == null || isNaN(x) ? "–" : (100 * x).toFixed(d) + "%";
+const px = (x) => x == null ? "–" : "$" + x.toFixed(2);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const dt = (d) => new Date(d + "T12:00:00");
+const fDate = (d, o) => dt(d).toLocaleDateString(undefined, o || { month: "short", day: "numeric" });
+const tmin = (t) => { const m = /(\d+):(\d+)\s*(AM|PM)/.exec(t || ""); if (!m) return null; let h = +m[1] % 12; if (m[3] === "PM") h += 12; return h * 60 + +m[2]; };
+const ruleName = (s) => s === "or_low" ? "range low" : "range middle";
+
+// ---------- stats
+function stats(rows) {
+  const n = rows.length;
+  const s = { n, target: 0, stop: 0, flat: 0, wins: 0, gw: 0, gl: 0, tot: 0, maxdd: 0, best: null, worst: null };
+  let run = 0, peak = 0;
+  rows.forEach((r) => {
+    s[r.outcome] = (s[r.outcome] || 0) + 1;
+    if (r.R > 0) { s.wins++; s.gw += r.R; } else s.gl += -r.R;
+    s.tot += r.R; run += r.R; peak = Math.max(peak, run); s.maxdd = Math.max(s.maxdd, peak - run);
+    if (!s.best || r.R > s.best.R) s.best = r;
+    if (!s.worst || r.R < s.worst.R) s.worst = r;
+  });
+  s.avg = n ? s.tot / n : null;
+  s.win = n ? s.wins / n : null;
+  s.pf = s.gl > 0 ? s.gw / s.gl : (s.gw > 0 ? Infinity : null);
+  s.avgWin = s.wins ? s.gw / s.wins : null;
+  s.avgLoss = n - s.wins ? s.gl / (n - s.wins) : null;
+  return s;
+}
+const ALL = stats(TR);
+
+// ---------- tooltip
+const tip = $("tip");
 function showTip(html, ev) {
   tip.innerHTML = html; tip.style.opacity = 1;
   const w = tip.offsetWidth, h = tip.offsetHeight;
   let x = ev.clientX + 14, y = ev.clientY + 14;
   if (x + w > innerWidth - 8) x = ev.clientX - w - 14;
   if (y + h > innerHeight - 8) y = ev.clientY - h - 14;
-  tip.style.left = x + "px"; tip.style.top = y + "px";
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
 }
 const hideTip = () => { tip.style.opacity = 0; };
-function el(tag, attrs, parent) {
+const trow = (k, v) => `<div class="r"><span>${k}</span><b>${v}</b></div>`;
+function bindTip(node, html) { node.addEventListener("mousemove", (e) => showTip(typeof html === "function" ? html() : html, e)); node.addEventListener("mouseleave", hideTip); }
+
+// ---------- svg helpers
+function el(tag, attrs, parent, text) {
   const n = document.createElementNS(NS, tag);
   for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text != null) n.textContent = text;
   if (parent) parent.appendChild(n);
   return n;
 }
 function svgBox(container, h) {
-  const w = Math.max(300, container.clientWidth || 500);
-  const s = el("svg", { width: w, height: h, viewBox: `0 0 ${w} ${h}`, role: "img" });
+  const w = Math.max(260, Math.floor(container.clientWidth || 500));
+  const s = el("svg", { width: w, height: h, viewBox: `0 0 ${w} ${h}` });
   container.innerHTML = ""; container.appendChild(s);
   return [s, w];
 }
-function niceTicks(lo, hi, n = 4) {
+function ticks(lo, hi, n = 4) {
   if (lo === hi) { lo -= 1; hi += 1; }
-  const step0 = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= step0);
-  const out = []; for (let v = Math.floor(lo / step) * step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(6));
+  const raw = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((s) => s >= raw);
+  const out = []; for (let v = Math.floor(lo / step + 1e-9) * step; v <= hi + step * 1e-6; v += step) out.push(+v.toFixed(8));
+  if (out[out.length - 1] < hi - 1e-9) out.push(+(out[out.length - 1] + step).toFixed(8));
   return out;
 }
+const axisV = (r) => UNIT === "usd" ? fUSD(r * RISK, 0) : (r > 0 ? "+" : r < 0 ? "−" : "") + Math.abs(+r.toFixed(2)) + "R";
+function barPath(x, y, w, h, up) {     // rounded on the data end only
+  const r = Math.max(0, Math.min(4, w / 2, Math.abs(h) / 2));
+  if (h <= 0) return "";
+  return up ? `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`
+            : `M${x},${y}V${y + h - r}Q${x},${y + h} ${x + r},${y + h}H${x + w - r}Q${x + w},${y + h} ${x + w},${y + h - r}V${y}Z`;
+}
 
-const J = (DATA && DATA.journal) || { entries: [], days: [] };
-const BT = DATA && DATA.backtest;
-$("built").textContent = DATA ? "Updated " + DATA.built : "No data yet";
-const trades = J.entries.filter((r) => r.status === "triggered");
-const sided = (r) => r.tm && (r.tm.p_target + r.tm.p_stop) > 0 ? r.tm.p_target / (r.tm.p_target + r.tm.p_stop) : null;
+// ---------- header bits
+function header() {
+  $("when").innerHTML = DATA ? `<span class="live"></span>Updated ${esc(DATA.built)} · next ${esc(DATA.next_run || "")}` : "No data yet";
+  const wl = CFG.watchlist || [];
+  $("chips").innerHTML = [
+    `<b>${wl.length}</b> stocks: ${esc(wl.join(", "))}`,
+    `+ <b>${CFG.scanner_picks}</b> scanner picks a day`,
+    `Stop at <b>${ruleName(CFG.stop_rule)}</b>`,
+    `Target <b>${CFG.target_r}R</b>`,
+    `Out by <b>3:55 PM ET</b>`,
+    `<b>$${RISK}</b> risked per trade`,
+  ].map((c) => `<span class="chip">${c}</span>`).join("");
+  $("g-risk").textContent = "$" + RISK;
+  $("foot").textContent = "Paper results from free Yahoo Finance 5-minute data. Simulated odds are not predictions. Education and tooling, not financial advice.";
+}
 
-// ---------- tiles
-(function tiles() {
-  const hitSide = trades.filter((r) => r.outcome !== "flat");
-  const actual = hitSide.length ? hitSide.filter((r) => r.outcome === "target").length / hitSide.length : null;
-  const preds = trades.map(sided).filter((x) => x != null);
-  const predicted = preds.length ? preds.reduce((a, b) => a + b, 0) / preds.length : null;
-  const tot = trades.reduce((a, r) => a + r.R, 0);
-  const T = [
-    ["Sessions logged", J.days.length, J.days.length ? `${fmtDate(J.days[0])} – ${fmtDate(J.days[J.days.length - 1])}` : "Runs after each close"],
-    ["Setups taken", trades.length, `of ${J.entries.length} stock-days checked`],
-    ["Target came first", pct(actual), predicted == null ? "Time Machine: –" : `Time Machine said ${pct(predicted)}`],
-    ["Total result", trades.length ? sR(tot) : "–", trades.length ? `${sR(tot / trades.length)} per trade on average` : "No trades yet"],
+// ---------- verdict
+function verdict() {
+  const n = ALL.n, avg = ALL.avg;
+  const btRule = (CFG.stop_rule === "or_low" ? "low-" : "mid-") + CFG.target_r + "R";
+  const bt = BT && BT.overall && BT.overall[btRule];
+  let tone, label, head;
+  if (!n) { tone = "neutral"; label = "Waiting for data"; head = "No trades yet. The first results appear after the next market close."; }
+  else if (n < 30) { tone = "neutral"; label = "Too early to tell"; head = `${n} trades so far: not enough to tell luck from skill.`; }
+  else if (n >= 100 && avg >= 0.1) { tone = "good"; label = "Edge showing"; head = `Making ${fV(avg)} per trade over ${n} trades. That's a real edge if it keeps holding.`; }
+  else if (avg <= -0.05) { tone = "bad"; label = "Losing so far"; head = `Losing ${fV(Math.abs(avg))} per trade on average over ${n} trades.`; }
+  else if (avg >= 0.05) { tone = "neutral"; label = "Promising, not proven"; head = `Up ${fV(avg)} per trade over ${n} trades. Promising, but too few trades to trust yet.`; }
+  else { tone = "neutral"; label = "No edge so far"; head = `Roughly break-even: ${fV(avg)} per trade over ${n} trades.`; }
+  const ic = tone === "good" ? ["▲", "var(--good)"] : tone === "bad" ? ["▼", "var(--critical)"] : ["●", "var(--neutral)"];
+  const target = 100, prog = Math.min(1, n / target);
+  let body = "";
+  if (n) body = `Net ${fV(ALL.tot)} from ${ALL.wins} winners and ${n - ALL.wins} losers since ${fDate(DAYS[0] || TR[0].date)}. `;
+  if (bt && bt.fired) body += `For comparison, the same rule averaged <b class="${cls(bt.avg_R)}">${fV(bt.avg_R)}</b> per trade over ${bt.fired} backtested trades.`;
+  $("verdict").innerHTML = `
+    <div class="left">
+      <span class="status"><span class="ic" style="color:${ic[1]}">${ic[0]}</span>${label}</span>
+      <div class="headline">${head}</div>
+      <p>${body}</p>
+    </div>
+    <div class="right">
+      <div><div class="prog-row"><span>Sample size</span><span><b>${n}</b> of ${target} trades</span></div>
+        <div class="progress"><div style="width:${(prog * 100).toFixed(1)}%"></div></div>
+        <div class="small muted" style="margin-top:6px">${n >= target ? "Enough trades to judge the edge." : `About ${Math.ceil((target - n) / Math.max(1, n / Math.max(1, DAYS.length)))} more trading days at the current pace.`}</div></div>
+      <div><div class="prog-row"><span>Days logged</span><span><b>${DAYS.length}</b>${DAYS.length ? ` · ${fDate(DAYS[0])} – ${fDate(DAYS[DAYS.length - 1])}` : ""}</span></div></div>
+    </div>`;
+}
+
+// ---------- kpis
+function kpis() {
+  const s = ALL, n = s.n;
+  const pf = s.pf == null ? "–" : s.pf === Infinity ? "∞" : s.pf.toFixed(2);
+  const bySym = {};
+  TR.forEach((r) => { (bySym[r.symbol] = bySym[r.symbol] || []).push(r); });
+  const symStats = Object.entries(bySym).map(([k, v]) => [k, stats(v)]).filter(([, v]) => v.n >= 2).sort((a, b) => b[1].tot - a[1].tot);
+  const best = symStats[0];
+  const K = [
+    ["Net profit", `<span class="${cls(s.tot)}">${n ? fV(s.tot) : "–"}</span>`, n ? `${UNIT === "usd" ? fR(s.tot) : fUSD(s.tot * RISK)} · ${n} trades` : "No trades yet", "Total result of every trade in the journal."],
+    ["Win rate", pct(s.win), n ? `${s.wins} won · ${n - s.wins} lost` : "–", "Share of trades that finished with a profit, including ones closed at 3:55 PM above the entry."],
+    ["Average per trade", `<span class="${cls(s.avg || 0)}">${n ? fV(s.avg) : "–"}</span>`, n ? `Avg win ${fV(s.avgWin || 0)} · loss ${fV(-(s.avgLoss || 0))}` : "–", "The single best number for judging an edge: what one trade makes on average."],
+    ["Profit factor", pf, "Money won ÷ money lost", "Above 1.0 makes money. 1.3 or more over 100+ trades is a solid edge."],
+    ["Worst drawdown", n ? `<span class="${s.maxdd > 0 ? "neg-t" : ""}">${fV(-s.maxdd)}</span>` : "–", "Biggest drop from a high point", "The worst losing stretch so far: how far the running total fell from its best point."],
+    ["Best stock", best ? esc(best[0]) : "–", best ? `<span class="${cls(best[1].tot)}">${fV(best[1].tot)}</span> over ${best[1].n} trades` : "Needs 2+ trades per stock", "The stock with the highest total result in the journal (2 or more trades)."],
   ];
-  $("tiles").innerHTML = T.map(([k, v, n]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="n">${n}</div></div>`).join("");
-})();
+  $("kpis").innerHTML = K.map(([k, v, sub, help]) => `<div class="card kpi"><div class="k">${k}<span class="info" data-help="${esc(help)}">i</span></div><div class="v">${v}</div><div class="n">${sub}</div></div>`).join("");
+  $("kpis").querySelectorAll(".info").forEach((n) => bindTip(n, `<div>${n.dataset.help}</div>`));
+}
 
-// ---------- cumulative R line
-function drawCum() {
-  const box = $("cum");
-  if (!trades.length) { box.innerHTML = '<div class="empty">No trades logged yet. The first run fills this in.</div>'; return; }
-  const pts = []; let run = 0;
-  trades.forEach((r, i) => { run += r.R; pts.push({ i, v: run, r }); });
-  const H = 230, m = { l: 44, r: 14, t: 12, b: 26 };
+// ---------- equity curve
+function equity() {
+  const box = $("equity");
+  if (!TR.length) { box.innerHTML = '<div class="empty">No trades yet.</div>'; return; }
+  const pts = []; let run = 0, peak = 0;
+  TR.forEach((r, i) => { run += r.R; peak = Math.max(peak, run); pts.push({ i: i + 1, v: run, pk: peak, r }); });
+  pts.unshift({ i: 0, v: 0, pk: 0, r: null });
+  const H = 240, m = { l: 56, r: 16, t: 14, b: 26 };
   const [s, W] = svgBox(box, H);
   const lo = Math.min(0, ...pts.map((p) => p.v)), hi = Math.max(0, ...pts.map((p) => p.v));
-  const ticks = niceTicks(lo, hi);
-  const y0 = ticks[0], y1 = ticks[ticks.length - 1];
-  const X = (i) => m.l + (pts.length === 1 ? (W - m.l - m.r) / 2 : i * (W - m.l - m.r) / (pts.length - 1));
+  const tk = ticks(lo, hi, 4), y0 = tk[0], y1 = tk[tk.length - 1];
+  const X = (i) => m.l + i * (W - m.l - m.r) / (pts.length - 1);
   const Y = (v) => m.t + (y1 - v) * (H - m.t - m.b) / (y1 - y0);
-  ticks.forEach((t) => {
-    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)", "stroke-width": 1 }, s);
-    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s).textContent = (t > 0 ? "+" : "") + t + "R";
+  tk.forEach((t) => {
+    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s);
+    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s, axisV(t));
   });
-  const ds = [...new Set(pts.map((p) => p.r.date))];
-  const every = Math.max(1, Math.ceil(ds.length / 6));
-  ds.forEach((d, k) => {
+  // drawdown band between the running peak and the curve
+  let dd = "";
+  pts.forEach((p, k) => { dd += (k ? "L" : "M") + X(p.i) + "," + Y(p.pk); });
+  for (let k = pts.length - 1; k >= 0; k--) dd += "L" + X(pts[k].i) + "," + Y(pts[k].v);
+  el("path", { d: dd + "Z", fill: "var(--dd)" }, s);
+  el("path", { d: pts.map((p, k) => (k ? "L" : "M") + X(p.i) + "," + Y(p.v)).join(""), fill: "none", stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+  // date ticks at the first trade of each day
+  const firsts = []; let last = null;
+  pts.forEach((p) => { if (p.r && p.r.date !== last) { firsts.push(p); last = p.r.date; } });
+  const every = Math.max(1, Math.ceil(firsts.length / Math.max(2, Math.floor((W - m.l) / 70))));
+  firsts.forEach((p, k) => {
     if (k % every) return;
-    const first = pts.find((p) => p.r.date === d);
-    const xx = X(first.i), anc = xx < m.l + 24 ? "start" : xx > W - m.r - 24 ? "end" : "middle";
-    el("text", { x: xx, y: H - 6, "text-anchor": anc }, s).textContent = fmtDate(d);
+    const x = X(p.i), anc = x < m.l + 20 ? "start" : x > W - m.r - 20 ? "end" : "middle";
+    el("text", { x, y: H - 6, "text-anchor": anc }, s, fDate(p.r.date));
   });
-  el("path", { d: pts.map((p, k) => (k ? "L" : "M") + X(p.i) + "," + Y(p.v)).join(""), fill: "none",
-    stroke: "var(--series-1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
-  const last = pts[pts.length - 1];
-  el("circle", { cx: X(last.i), cy: Y(last.v), r: 4, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2 }, s);
-  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", "stroke-width": 1, opacity: 0 }, s);
+  const end = pts[pts.length - 1];
+  el("circle", { cx: X(end.i), cy: Y(end.v), r: 4, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2 }, s);
+  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--axis)", opacity: 0 }, s);
   const dot = el("circle", { r: 4.5, fill: "var(--series-1)", stroke: "var(--surface-1)", "stroke-width": 2, opacity: 0 }, s);
-  const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" }, s);
+  const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H - m.b, fill: "transparent" }, s);
   hit.addEventListener("mousemove", (ev) => {
-    const bx = s.getBoundingClientRect();
-    const px = ev.clientX - bx.left;
-    let best = pts[0]; pts.forEach((p) => { if (Math.abs(X(p.i) - px) < Math.abs(X(best.i) - px)) best = p; });
-    cross.setAttribute("x1", X(best.i)); cross.setAttribute("x2", X(best.i)); cross.setAttribute("opacity", 1);
-    dot.setAttribute("cx", X(best.i)); dot.setAttribute("cy", Y(best.v)); dot.setAttribute("opacity", 1);
-    const r = best.r;
-    showTip(`<b>${esc(r.symbol)}</b> <span class="tl">${fmtDate(r.date)}, in ${r.entry_time}</span><br>
-      This trade: <b>${sR(r.R)}</b> (${r.outcome === "flat" ? "closed at 3:55" : "hit the " + r.outcome})<br>
-      Running total: <b>${sR(best.v)}</b> after ${best.i + 1} trade${best.i ? "s" : ""}`, ev);
+    const bx = s.getBoundingClientRect(), mx = ev.clientX - bx.left;
+    const k = Math.max(1, Math.min(pts.length - 1, Math.round((mx - m.l) / ((W - m.l - m.r) / (pts.length - 1)))));
+    const p = pts[k];
+    cross.setAttribute("x1", X(p.i)); cross.setAttribute("x2", X(p.i)); cross.setAttribute("opacity", 1);
+    dot.setAttribute("cx", X(p.i)); dot.setAttribute("cy", Y(p.v)); dot.setAttribute("opacity", 1);
+    showTip(`<div class="t">Trade ${p.i}: ${esc(p.r.symbol)}</div><div class="small muted">${fDate(p.r.date, { weekday: "short", month: "short", day: "numeric" })}, entry ${p.r.entry_time}</div>
+      ${trow("This trade", `<span class="${cls(p.r.R)}">${fV(p.r.R)}</span>`)}${trow("Running total", fV(p.v))}${p.pk - p.v > 0.001 ? trow("Below peak", fV(-(p.pk - p.v))) : ""}`, ev);
   });
   hit.addEventListener("mouseleave", () => { hideTip(); cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); });
 }
 
-// ---------- calibration grouped bars
-function drawCalib() {
-  const box = $("calib");
-  const rows = trades.filter((r) => sided(r) != null && r.outcome !== "flat");
-  if (!rows.length) { box.innerHTML = '<div class="empty">Needs a few trades that hit their stop or target.</div>'; return; }
-  const B = [
-    { k: "Leans stop", sub: "under 45%", test: (p) => p < 0.45 },
-    { k: "Coin flip", sub: "45–55%", test: (p) => p >= 0.45 && p <= 0.55 },
-    { k: "Leans target", sub: "over 55%", test: (p) => p > 0.55 },
-  ].map((b) => {
-    const rs = rows.filter((r) => b.test(sided(r)));
-    return Object.assign(b, { n: rs.length,
-      pred: rs.length ? rs.reduce((a, r) => a + sided(r), 0) / rs.length : null,
-      act: rs.length ? rs.filter((r) => r.outcome === "target").length / rs.length : null });
-  });
-  const H = 230, m = { l: 40, r: 8, t: 12, b: 40 };
+// ---------- daily bars
+function daily() {
+  const box = $("daily");
+  const byDay = {};
+  TR.forEach((r) => { const d = byDay[r.date] = byDay[r.date] || { R: 0, n: 0, w: 0 }; d.R += r.R; d.n++; if (r.R > 0) d.w++; });
+  const days = DAYS.filter((d) => byDay[d] || true).map((d) => ({ d, v: byDay[d] ? byDay[d].R : 0, n: byDay[d] ? byDay[d].n : 0, w: byDay[d] ? byDay[d].w : 0 }));
+  if (!days.length) { box.innerHTML = '<div class="empty">No days logged yet.</div>'; return; }
+  const H = 130, m = { l: 56, r: 16, t: 10, b: 24 };
   const [s, W] = svgBox(box, H);
-  const Y = (v) => m.t + (1 - v) * (H - m.t - m.b);
-  [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
-    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)" }, s);
-    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s).textContent = t * 100 + "%";
+  const lo = Math.min(0, ...days.map((d) => d.v)), hi = Math.max(0, ...days.map((d) => d.v));
+  const tk = ticks(lo, hi, 2), y0 = tk[0], y1 = tk[tk.length - 1];
+  const Y = (v) => m.t + (y1 - v) * (H - m.t - m.b) / (y1 - y0);
+  tk.forEach((t) => {
+    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s);
+    el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s, axisV(t));
   });
-  const gw = (W - m.l - m.r) / B.length, bw = Math.min(34, gw * 0.28);
+  const slot = (W - m.l - m.r) / days.length, bw = Math.max(3, Math.min(28, slot - 2));
+  const every = Math.max(1, Math.ceil(days.length / Math.max(2, Math.floor((W - m.l) / 70))));
+  days.forEach((d, i) => {
+    const x = m.l + slot * i + (slot - bw) / 2, up = d.v >= 0;
+    const y = up ? Y(d.v) : Y(0), h = Math.abs(Y(d.v) - Y(0));
+    if (h > 0.5) el("path", { d: barPath(x, y, bw, h, up), fill: up ? "var(--pos)" : "var(--neg)" }, s);
+    if (i % every === 0) el("text", { x: x + bw / 2, y: H - 6, "text-anchor": "middle" }, s, fDate(d.d));
+    const hb = el("rect", { x: m.l + slot * i, y: m.t, width: slot, height: H - m.t - m.b, fill: "transparent" }, s);
+    bindTip(hb, () => `<div class="t">${fDate(d.d, { weekday: "long", month: "short", day: "numeric" })}</div>${d.n ? trow("Result", `<span class="${cls(d.v)}">${fV(d.v)}</span>`) + trow("Trades", `${d.n} (${d.w} won)`) : '<div class="muted">No setups triggered</div>'}`);
+  });
+}
+
+// ---------- outcomes
+function outcomes() {
+  const box = $("outcomes"), n = ALL.n;
+  if (!n) { box.innerHTML = '<div class="empty">No trades yet.</div>'; return; }
+  const sub = (k) => TR.filter((r) => r.outcome === k);
+  const O = [
+    ["target", "Hit the target", "var(--good)", "▲"],
+    ["stop", "Hit the stop", "var(--critical)", "▼"],
+    ["flat", "Closed at 3:55 PM", "var(--neutral)", "■"],
+  ].map(([k, label, col, ic]) => { const rs = sub(k); return { k, label, col, ic, n: rs.length, tot: rs.reduce((a, r) => a + r.R, 0) }; });
+  box.innerHTML = `<div class="obar">${O.filter((o) => o.n).map((o) => `<div style="flex:${o.n};background:${o.col}" title="${o.label}">${o.n / n >= 0.12 ? pct(o.n / n) : ""}</div>`).join("")}</div>
+    <div class="orows">${O.map((o) => `<div class="orow"><span class="ic" style="color:${o.col};font-size:10px">${o.ic}</span><span>${o.label}</span>
+      <span class="num muted">${o.n} · ${pct(o.n / n)}</span><span class="num ${cls(o.tot)}">${fV(o.tot)}</span></div>`).join("")}</div>`;
+}
+
+// ---------- by entry time
+function byTime() {
+  const box = $("bytime");
+  const B = [["9:50–10:30", 590, 630], ["10:30–11:30", 630, 690], ["11:30–1:00", 690, 780], ["After 1:00", 780, 9999]]
+    .map(([k, a, b]) => { const rs = TR.filter((r) => { const t = tmin(r.entry_time); return t >= a && t < b; }); return { k, n: rs.length, s: stats(rs) }; });
+  if (!TR.length) { box.innerHTML = '<div class="empty">No trades yet.</div>'; return; }
+  const H = B.length * 40 + 8, m = { l: 92, r: 96 };
+  const [s, W] = svgBox(box, H);
+  const vals = B.map((b) => b.s.avg || 0), mx = Math.max(0.05, ...vals.map(Math.abs));
+  const zero = m.l + (W - m.l - m.r) / 2, half = (W - m.l - m.r) / 2;
+  el("line", { x1: zero, x2: zero, y1: 0, y2: H, stroke: "var(--axis)" }, s);
   B.forEach((b, i) => {
-    const cx = m.l + gw * (i + 0.5);
-    el("text", { x: cx, y: H - 22, "text-anchor": "middle", style: "fill:var(--text-primary)" }, s).textContent = b.k;
-    el("text", { x: cx, y: H - 8, "text-anchor": "middle" }, s).textContent = `${b.sub} · ${b.n} trade${b.n === 1 ? "" : "s"}`;
-    [["pred", "var(--series-1)", "Predicted", -1], ["act", "var(--series-2)", "Actual", 1]].forEach(([key, col, name, side]) => {
-      const v = b[key]; if (v == null) return;
-      const x = cx + (side < 0 ? -bw - 1 : 1), y = Y(v), h = Math.max(0, Y(0) - y);
-      const r = Math.min(4, h / 2, bw / 2);
-      el("path", { d: `M${x},${Y(0)}V${y + r}Q${x},${y} ${x + r},${y}H${x + bw - r}Q${x + bw},${y} ${x + bw},${y + r}V${Y(0)}Z`, fill: col }, s);
-      const t = el("text", { x: x + bw / 2, y: y - 5, "text-anchor": "middle" }, s); t.textContent = pct(v);
-      const hb = el("rect", { x: x - 2, y: m.t, width: bw + 4, height: Y(0) - m.t, fill: "transparent" }, s);
-      hb.addEventListener("mousemove", (ev) => showTip(`<b>${b.k}</b> <span class="tl">(${b.sub} predicted)</span><br>${name}: <b>${pct(v, 1)}</b> target first<br><span class="tl">${b.n} trade${b.n === 1 ? "" : "s"} in this group</span>`, ev));
-      hb.addEventListener("mouseleave", hideTip);
-    });
+    const y = i * 40 + 8, v = b.s.avg || 0, w = Math.abs(v) / mx * half, up = v >= 0;
+    el("text", { x: 0, y: y + 15, class: "lbl" }, s, b.k);
+    if (b.n && w > 0.5) {
+      const r = Math.min(4, w / 2, 9);
+      const x = up ? zero : zero - w;
+      const d = up ? `M${x},${y + 4}H${x + w - r}Q${x + w},${y + 4} ${x + w},${y + 4 + r}V${y + 22 - r}Q${x + w},${y + 22} ${x + w - r},${y + 22}H${x}Z`
+                   : `M${x + w},${y + 4}H${x + r}Q${x},${y + 4} ${x},${y + 4 + r}V${y + 22 - r}Q${x},${y + 22} ${x + r},${y + 22}H${x + w}Z`;
+      el("path", { d, fill: up ? "var(--pos)" : "var(--neg)" }, s);
+    }
+    el("text", { x: W, y: y + 12, "text-anchor": "end", class: "strong" }, s, b.n ? fV(v) : "–");
+    el("text", { x: W, y: y + 26, "text-anchor": "end" }, s, `${b.n} trade${b.n === 1 ? "" : "s"}${b.n ? " · " + pct(b.s.win) + " won" : ""}`);
+    const hb = el("rect", { x: 0, y, width: W, height: 34, fill: "transparent" }, s);
+    bindTip(hb, () => `<div class="t">Entries ${b.k}</div>${trow("Average", fV(v))}${trow("Trades", b.n)}${trow("Won", pct(b.s.win))}${trow("Total", fV(b.s.tot))}`);
   });
+}
+
+// ---------- stocks table
+function sparkline(rows) {
+  const W = 96, H = 26; let run = 0; const ys = [0];
+  rows.forEach((r) => { run += r.R; ys.push(run); });
+  const lo = Math.min(...ys), hi = Math.max(...ys), span = hi - lo || 1;
+  const X = (i) => 2 + i * (W - 4) / Math.max(1, ys.length - 1), Y = (v) => 3 + (hi - v) * (H - 6) / span;
+  const zero = Y(0);
+  return `<svg class="spark" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><line x1="2" x2="${W - 2}" y1="${zero}" y2="${zero}" stroke="var(--axis)" stroke-dasharray="2 2"/>
+    <path d="${ys.map((v, i) => (i ? "L" : "M") + X(i).toFixed(1) + "," + Y(v).toFixed(1)).join("")}" fill="none" stroke="var(--series-1)" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+}
+function rbar(v, max) {
+  const w = Math.min(1, Math.abs(v) / (max || 1)) * 32;
+  return `<span class="rbar"><span class="${cls(v)}">${fV(v)}</span><span class="track"><span class="fill" style="${v >= 0 ? "left:32px" : `left:${32 - w}px`};width:${w}px;background:${v >= 0 ? "var(--pos)" : "var(--neg)"}"></span></span></span>`;
+}
+function stockTable() {
+  const box = $("stocktable");
+  const wl = CFG.watchlist || [];
+  const groups = wl.map((s) => ({ key: s, label: s, rows: TR.filter((r) => r.symbol === s && r.source !== "scanner"), checked: J.entries.filter((r) => r.symbol === s && r.source !== "scanner").length }));
+  const sc = TR.filter((r) => r.source === "scanner");
+  groups.push({ key: "__scanner", label: "Scanner picks", rows: sc, checked: J.entries.filter((r) => r.source === "scanner").length, sub: [...new Set(sc.map((r) => r.symbol))].length + " different stocks" });
+  const btRule = (CFG.stop_rule === "or_low" ? "low-" : "mid-") + CFG.target_r + "R";
+  const maxAvg = Math.max(0.05, ...groups.map((g) => Math.abs(stats(g.rows).avg || 0)));
+  let h = `<table><thead><tr><th>Stock</th><th class="num">Trades</th><th class="num">Win rate</th><th class="num">Avg per trade</th><th class="num">Net</th><th class="num">Profit factor</th><th>Trend</th><th class="num">Backtest avg <span class="info" data-help="Same rule over the last ~59 sessions in the weekly backtest.">i</span></th><th class="num">Best backtest version</th></tr></thead><tbody>`;
+  groups.forEach((g) => {
+    const s = stats(g.rows);
+    const bts = BT && BT.symbols && BT.symbols[g.key];
+    const btv = bts && bts.variants[btRule];
+    let bestV = null;
+    if (bts) BT.variants.forEach((v) => { const c = bts.variants[v.id]; if (c && c.avg_R != null && (!bestV || c.avg_R > bestV.c.avg_R)) bestV = { v, c }; });
+    const pf = s.pf == null ? "–" : s.pf === Infinity ? "∞" : s.pf.toFixed(2);
+    h += `<tr><td class="sym">${esc(g.label)}${g.sub ? `<div class="small muted" style="font-weight:400">${g.sub}</div>` : ""}</td>
+      <td class="num">${s.n}<span class="muted"> / ${g.checked} days</span></td><td class="num">${pct(s.win)}</td>
+      <td class="num">${s.n ? rbar(s.avg, maxAvg) : "–"}</td><td class="num ${cls(s.tot)}">${s.n ? fV(s.tot) : "–"}</td><td class="num">${pf}</td>
+      <td>${s.n ? sparkline(g.rows) : '<span class="muted">–</span>'}</td>
+      <td class="num ${btv ? cls(btv.avg_R) : ""}">${btv ? fV(btv.avg_R) + `<span class="muted"> · ${btv.fired}×</span>` : '<span class="muted">–</span>'}</td>
+      <td class="num">${bestV ? `<span class="tag">${esc(bestV.v.id)}</span> <span class="${cls(bestV.c.avg_R)}">${fV(bestV.c.avg_R)}</span>` : '<span class="muted">–</span>'}</td></tr>`;
+  });
+  box.innerHTML = h + "</tbody></table>";
+  box.querySelectorAll(".info").forEach((n) => bindTip(n, `<div>${n.dataset.help}</div>`));
+}
+
+// ---------- time machine accuracy
+const sided = (r) => r.tm && (r.tm.p_target + r.tm.p_stop) > 0 ? r.tm.p_target / (r.tm.p_target + r.tm.p_stop) : null;
+function timeMachine() {
+  const rows = TR.filter((r) => sided(r) != null && r.outcome !== "flat");
+  const box = $("calib");
+  const B = [["Leans stop", "under 45%", (p) => p < 0.45], ["Coin flip", "45–55%", (p) => p >= 0.45 && p <= 0.55], ["Leans target", "over 55%", (p) => p > 0.55]]
+    .map(([k, sub, t]) => { const rs = rows.filter((r) => t(sided(r))); return { k, sub, n: rs.length, pred: rs.length ? rs.reduce((a, r) => a + sided(r), 0) / rs.length : null, act: rs.length ? rs.filter((r) => r.outcome === "target").length / rs.length : null }; });
+  if (!rows.length) box.innerHTML = '<div class="empty">Needs trades that reached their stop or target.</div>';
+  else {
+    const H = 220, m = { l: 40, r: 8, t: 18, b: 40 };
+    const [s, W] = svgBox(box, H);
+    const Y = (v) => m.t + (1 - v) * (H - m.t - m.b);
+    [0, 0.25, 0.5, 0.75, 1].forEach((t) => {
+      el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)", "stroke-dasharray": t === 0.5 ? "3 3" : "" }, s);
+      el("text", { x: m.l - 8, y: Y(t) + 4, "text-anchor": "end" }, s, t * 100 + "%");
+    });
+    const gw = (W - m.l - m.r) / B.length, bw = Math.min(40, gw * 0.3);
+    B.forEach((b, i) => {
+      const cx = m.l + gw * (i + 0.5);
+      el("text", { x: cx, y: H - 22, "text-anchor": "middle", class: "lbl" }, s, b.k);
+      el("text", { x: cx, y: H - 8, "text-anchor": "middle" }, s, `${b.sub} · ${b.n} trade${b.n === 1 ? "" : "s"}`);
+      [["pred", "var(--series-1)", "Predicted", -1], ["act", "var(--text-secondary)", "Actual", 1]].forEach(([key, col, name, side]) => {
+        const v = b[key]; if (v == null) return;
+        const x = cx + (side < 0 ? -bw - 1 : 1), y = Y(v), h = Y(0) - y;
+        el("path", { d: barPath(x, y, bw, h, true), fill: col }, s);
+        el("text", { x: x + bw / 2, y: y - 5, "text-anchor": "middle", class: "lbl" }, s, pct(v));
+        const hb = el("rect", { x: x - 1, y: m.t, width: bw + 2, height: Y(0) - m.t, fill: "transparent" }, s);
+        bindTip(hb, `<div class="t">${b.k} (${b.sub})</div>${trow(name, pct(v, 1))}${trow("Trades", b.n)}`);
+      });
+    });
+  }
+  const preds = rows.map(sided), pAvg = preds.length ? preds.reduce((a, b) => a + b, 0) / preds.length : null;
+  const aAvg = rows.length ? rows.filter((r) => r.outcome === "target").length / rows.length : null;
+  const gap = pAvg != null ? aAvg - pAvg : null;
+  const flatPred = TR.filter((r) => r.tm).reduce((a, r) => a + r.tm.p_neither, 0) / Math.max(1, TR.filter((r) => r.tm).length);
+  const flatAct = TR.length ? TR.filter((r) => r.outcome === "flat").length / TR.length : null;
+  const read = gap == null ? "Not enough trades yet." : Math.abs(gap) < 0.05 ? "Its odds have been close to reality so far." : gap > 0 ? "Reality has been kinder than its odds so far." : "It has been too optimistic so far.";
+  $("tmstats").innerHTML = `<div class="card-head"><div><h3>Scorecard</h3><div class="desc">${read} ${rows.length < 50 ? "Under 50 trades, gaps of 10 points or more can still be luck." : ""}</div></div></div>
+    <table><tbody>
+      <tr><td>Predicted: target before stop</td><td class="num"><b>${pct(pAvg, 1)}</b></td></tr>
+      <tr><td>Actual: target before stop</td><td class="num"><b>${pct(aAvg, 1)}</b></td></tr>
+      <tr><td>Gap</td><td class="num ${gap == null ? "" : cls(gap)}">${gap == null ? "–" : sign(gap) + Math.abs(100 * gap).toFixed(1) + " pts"}</td></tr>
+      <tr><td>Predicted: still open at 3:55</td><td class="num">${pct(TR.length ? flatPred : null, 1)}</td></tr>
+      <tr><td>Actual: still open at 3:55</td><td class="num">${pct(flatAct, 1)}</td></tr>
+      <tr><td>Trades scored</td><td class="num">${rows.length}</td></tr>
+    </tbody></table>`;
 }
 
 // ---------- backtest
-function drawBacktest() {
-  const box = $("bt-chart"), tbl = $("bt-table");
-  if (!BT || !BT.overall) { box.innerHTML = '<div class="empty">The first weekly backtest runs Saturday morning (or run <code>./run.sh weekly</code>).</div>'; tbl.innerHTML = ""; return; }
-  const V = BT.variants;
-  const created = new Date(BT.created);
-  $("bt-sub").textContent = `Average result per trade on ${Object.keys(BT.symbols).join(", ")} · run ${created.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}.`;
-  const rows = V.map((v) => Object.assign({ v }, BT.overall[v.id]));
-  const vals = rows.map((r) => r.avg_R || 0);
-  const lo = Math.min(0, ...vals), hi = Math.max(0, ...vals);
-  const span = Math.max(0.05, hi - lo);
-  const H = rows.length * 38 + 30, m = { l: 210, r: 70, t: 6, b: 24 };
-  const [s, W] = svgBox(box, H);
-  const ticks = niceTicks(lo - span * 0.05, hi + span * 0.05, 4);
-  const x0 = ticks[0], x1 = ticks[ticks.length - 1];
-  const X = (v) => m.l + (v - x0) * (W - m.l - m.r) / (x1 - x0);
-  ticks.forEach((t) => {
-    el("line", { x1: X(t), x2: X(t), y1: m.t, y2: H - m.b, stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s);
-    el("text", { x: X(t), y: H - 6, "text-anchor": "middle" }, s).textContent = (t > 0 ? "+" : "") + t + "R";
+function heatColor(v, max) {
+  if (v == null) return ["var(--wash)", "var(--text-muted)"];
+  const t = Math.max(-1, Math.min(1, v / max)), a = Math.abs(t);
+  const c = t >= 0 ? getComputedStyle(document.querySelector(".viz-root")).getPropertyValue("--pos").trim() : getComputedStyle(document.querySelector(".viz-root")).getPropertyValue("--neg").trim();
+  const mid = getComputedStyle(document.querySelector(".viz-root")).getPropertyValue("--mid").trim();
+  const mix = `color-mix(in oklab, ${c} ${Math.round(12 + a * 88)}%, ${mid})`;
+  return [mix, a > 0.55 ? "#ffffff" : "var(--text-primary)"];
+}
+function backtest() {
+  const box = $("heat"), side = $("btsummary");
+  if (!BT || !BT.overall) { box.innerHTML = '<div class="empty">The first weekly backtest runs Saturday morning.</div>'; side.innerHTML = ""; return; }
+  const V = BT.variants, syms = Object.keys(BT.symbols);
+  const any = Object.values(BT.symbols)[0];
+  $("bt-desc").textContent = `Four versions of the strategy replayed on every trading day from ${fDate(any.from)} to ${fDate(any.to)} (${any.sessions} sessions). Updated every Saturday; last run ${new Date(BT.created).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}.`;
+  const vals = []; syms.forEach((s) => V.forEach((v) => { const c = BT.symbols[s].variants[v.id]; if (c.avg_R != null) vals.push(c.avg_R); }));
+  const max = Math.max(0.1, ...vals.map(Math.abs));
+  const cur = (CFG.stop_rule === "or_low" ? "low-" : "mid-") + CFG.target_r + "R";
+  const head = (v) => `<div class="h" style="flex-direction:column;align-items:flex-start;justify-content:flex-end"><span style="color:var(--text-secondary);font-weight:600">${v.stop_rule === "or_low" ? "Low stop" : "Middle stop"} · ${v.target_r}R</span>${v.id === cur ? '<span class="tag" style="margin-top:3px">your live rule</span>' : ""}</div>`;
+  let h = `<div class="heat" style="grid-template-columns: 110px repeat(${V.length}, 1fr)"><div class="h"></div>${V.map(head).join("")}`;
+  const cell = (c, title) => { const [bg, fg] = heatColor(c.avg_R, max); return `<div class="cell" style="background:${bg};color:${fg}" data-t="${esc(title)}" data-c='${JSON.stringify(c)}'><b>${c.fired ? fV(c.avg_R) : "–"}</b><span>${c.fired ? pct(c.win_rate) + " · " + c.fired + "×" : "no trades"}</span></div>`; };
+  syms.forEach((s) => { h += `<div class="rowlab">${esc(s)}</div>` + V.map((v) => cell(BT.symbols[s].variants[v.id], `${s} · ${v.label}`)).join(""); });
+  h += `<div class="rowlab total">All stocks</div>` + V.map((v) => cell(BT.overall[v.id], `All stocks · ${v.label}`)).join("") + "</div>";
+  const mx = UNIT === "usd" ? fUSD(max * RISK, 0) : max.toFixed(2) + "R";
+  h += `<div class="scale"><span>${sign(-1)}${mx.replace(/^[+−]/, "")}</span><span class="ramp" style="background:linear-gradient(90deg, var(--neg), var(--mid), var(--pos))"></span><span>+${mx.replace(/^[+−]/, "")}</span><span style="margin-left:6px">average per trade</span></div>`;
+  box.innerHTML = h;
+  box.querySelectorAll(".cell").forEach((n) => {
+    const c = JSON.parse(n.dataset.c);
+    bindTip(n, () => `<div class="t">${n.dataset.t}</div>${trow("Average per trade", fV(c.avg_R))}${trow("Total", fV(c.total_R))}${trow("Trades", c.fired)}${trow("Won", pct(c.win_rate))}${trow("Target / stop / closed", `${c.target} / ${c.stop} / ${c.flat}`)}`);
   });
-  const bestId = rows.slice().sort((a, b) => (b.avg_R || -9) - (a.avg_R || -9))[0].v.id;
-  rows.forEach((r, i) => {
-    const y = m.t + i * 38 + 7, bh = 22, v = r.avg_R || 0;
-    const xa = X(Math.min(0, v)), xb = X(Math.max(0, v)), w = Math.max(1, xb - xa);
-    el("text", { x: m.l - 10, y: y + bh / 2 + 4, "text-anchor": "end", style: "fill:var(--text-primary)" + (r.v.id === bestId ? ";font-weight:600" : "") }, s).textContent = r.v.label;
-    const rr = Math.min(4, w / 2);
-    const d = v >= 0
-      ? `M${xa},${y}H${xb - rr}Q${xb},${y} ${xb},${y + rr}V${y + bh - rr}Q${xb},${y + bh} ${xb - rr},${y + bh}H${xa}Z`
-      : `M${xb},${y}H${xa + rr}Q${xa},${y} ${xa},${y + rr}V${y + bh - rr}Q${xa},${y + bh} ${xa + rr},${y + bh}H${xb}Z`;
-    el("path", { d, fill: "var(--series-1)", opacity: r.v.id === bestId ? 1 : 0.55 }, s);
-    el("text", { x: (v >= 0 ? xb + 6 : xa - 6), y: y + bh / 2 + 4, "text-anchor": v >= 0 ? "start" : "end", style: "fill:var(--text-primary)" }, s).textContent = sR(r.avg_R, 3);
-    const hb = el("rect", { x: m.l, y: y - 4, width: W - m.l - m.r, height: bh + 8, fill: "transparent" }, s);
-    hb.addEventListener("mousemove", (ev) => showTip(`<b>${esc(r.v.label)}</b><br>Fired ${r.fired} times: ${r.target} target, ${r.stop} stop, ${r.flat} closed at 3:55<br>Won ${pct(r.win_rate)} · average <b>${sR(r.avg_R, 3)}</b> · total ${sR(r.total_R)}`, ev));
-    hb.addEventListener("mouseleave", hideTip);
-  });
-  const syms = Object.keys(BT.symbols);
-  let h = `<table><thead><tr><th>Stock</th>${V.map((v) => `<th class="num">${esc(v.id)}<div class="muted">avg R · win %</div></th>`).join("")}<th class="num">Sessions</th></tr></thead><tbody>`;
-  syms.forEach((sym) => {
-    const S = BT.symbols[sym];
-    const best = V.map((v) => [v.id, S.variants[v.id].avg_R]).filter((x) => x[1] != null).sort((a, b) => b[1] - a[1])[0];
-    h += `<tr><td><b>${esc(sym)}</b></td>` + V.map((v) => {
-      const c = S.variants[v.id];
-      return `<td class="num${best && best[0] === v.id ? " best" : ""}">${sR(c.avg_R, 2)} <span class="muted">· ${pct(c.win_rate)} · ${c.fired}×</span></td>`;
-    }).join("") + `<td class="num muted">${S.sessions}</td></tr>`;
-  });
-  h += `</tbody></table><p class="note">Bold = best version for that stock. ${syms.length} stock${syms.length === 1 ? "" : "s"} × ~59 sessions is still a small sample: treat a small edge as noise until it holds up for several weeks.</p>`;
-  tbl.innerHTML = h;
+  const ranked = V.map((v) => ({ v, c: BT.overall[v.id] })).sort((a, b) => (b.c.avg_R || -9) - (a.c.avg_R || -9));
+  const best = ranked[0], live = ranked.find((x) => x.v.id === cur);
+  side.innerHTML = `<div class="card-head"><div><h3>Ranking, all stocks</h3><div class="desc">Best average result per trade first.</div></div></div>
+    <table><thead><tr><th>Version</th><th class="num">Avg</th><th class="num">Won</th><th class="num">Total</th></tr></thead><tbody>
+    ${ranked.map((x, i) => `<tr><td>${i + 1}. ${esc(x.v.label)}${x.v.id === cur ? ' <span class="tag">live</span>' : ""}</td><td class="num ${cls(x.c.avg_R)}">${fV(x.c.avg_R)}</td><td class="num">${pct(x.c.win_rate)}</td><td class="num ${cls(x.c.total_R)}">${fV(x.c.total_R)}</td></tr>`).join("")}
+    </tbody></table>
+    <div class="callout"><div>${best.v.id === cur ? `<b>Your live rule is the best version</b> in this backtest.` : `<b>${esc(best.v.label)}</b> did best here (${fV(best.c.avg_R)} vs ${fV(live ? live.c.avg_R : null)} for your live rule).`}
+      ${Math.abs(best.c.avg_R || 0) < 0.1 ? " The gap is small enough to be luck: no version shows a clear edge yet." : " To switch, change stop_rule and target_r in config.json."}</div></div>`;
 }
 
-// ---------- journal table
-let SRC = "all";
-function drawJournal() {
-  const showAll = $("showall").checked;
-  const rows = J.entries.filter((r) => (SRC === "all" || r.source === SRC) && (showAll || r.status === "triggered")).slice().reverse();
-  if (!rows.length) { $("journal").innerHTML = '<div class="empty">Nothing logged yet for this filter.</div>'; return; }
-  const RES = { target: ["Target", "var(--good)", "▲"], stop: ["Stop", "var(--critical)", "▼"], flat: ["Closed 3:55", "var(--neutral)", "■"] };
-  let h = `<table><thead><tr><th>Date</th><th>Stock</th><th>From</th><th class="num">Entry</th><th class="num">Stop</th><th class="num">Target</th>
-    <th class="num">TM: target / stop / open</th><th>Time Machine said</th><th>What happened</th><th class="num">Result</th></tr></thead><tbody>`;
-  rows.slice(0, 300).forEach((r) => {
-    if (r.status !== "triggered") {
-      h += `<tr class="muted"><td>${fmtDate(r.date)}</td><td>${esc(r.symbol)}</td><td>${r.source}</td><td colspan="7">No breakout before 3:30 PM ET</td></tr>`;
-      return;
-    }
-    const tm = r.tm, res = RES[r.outcome];
-    h += `<tr><td>${fmtDate(r.date)}</td><td><b>${esc(r.symbol)}</b></td><td>${r.source === "scanner" ? "Scanner" : "Watchlist"}</td>
-      <td class="num">${money(r.entry)} <span class="muted">${r.entry_time}</span></td><td class="num">${money(r.stop)}</td><td class="num">${money(r.target)}</td>
-      <td class="num">${tm ? `${pct(tm.p_target)} / ${pct(tm.p_stop)} / ${pct(tm.p_neither)}` : '<span class="muted">–</span>'}</td>
-      <td>${tm ? esc((tm.verdict || "").split(":")[0]) : `<span class="muted">${esc(r.tm_error || "–")}</span>`}</td>
-      <td><span class="res"><span style="color:${res[1]}">${res[2]}</span>${res[0]} <span class="muted">${r.exit_time}</span></span></td>
-      <td class="num"><b>${sR(r.R)}</b></td></tr>`;
+// ---------- trade log
+let SORT = { k: "date", dir: -1 }, FSYM = "all", FSRC = "all", FOUT = "all", LIMIT = 50;
+const COLS = [
+  ["date", "Date", (r) => r.date + (r.entry_time ? String(tmin(r.entry_time)).padStart(4, "0") : "")],
+  ["symbol", "Stock", (r) => r.symbol], ["source", "Source", (r) => r.source],
+  ["entry", "Entry", (r) => r.entry, 1], ["stop", "Stop", (r) => r.stop, 1], ["target", "Target", (r) => r.target, 1],
+  ["shares", "Shares", (r) => Math.floor(RISK / r.risk), 1],
+  ["odds", "Odds: target / stop / open", (r) => sided(r) == null ? -1 : sided(r)],
+  ["outcome", "Result", (r) => r.outcome], ["R", UNIT === "usd" ? "Profit" : "R", (r) => r.R, 1],
+];
+function tradeTable() {
+  const syms = [...new Set(TR.map((r) => r.symbol))].sort();
+  const sel = $("f-sym");
+  if (!sel.options.length) sel.innerHTML = `<option value="all">All stocks</option>` + syms.map((s) => `<option>${esc(s)}</option>`).join("");
+  let rows = TR.filter((r) => (FSYM === "all" || r.symbol === FSYM) && (FSRC === "all" || r.source === FSRC) && (FOUT === "all" || r.outcome === FOUT));
+  const col = COLS.find((c) => c[0] === SORT.k);
+  rows = rows.slice().sort((a, b) => { const x = col[2](a), y = col[2](b); return (x > y ? 1 : x < y ? -1 : 0) * SORT.dir; });
+  const RES = { target: ["Target", "var(--good)", "▲"], stop: ["Stop", "var(--critical)", "▼"], flat: ["Closed", "var(--neutral)", "■"] };
+  COLS[9][1] = UNIT === "usd" ? "Profit" : "R";
+  let h = `<table><thead><tr>${COLS.map(([k, label, , num]) => `<th class="sortable${num ? " num" : ""}" data-k="${k}">${label}${SORT.k === k ? `<span class="arr">${SORT.dir > 0 ? "↑" : "↓"}</span>` : ""}</th>`).join("")}</tr></thead><tbody>`;
+  if (!rows.length) h += `<tr><td colspan="${COLS.length}" class="empty">No trades match these filters.</td></tr>`;
+  rows.slice(0, LIMIT).forEach((r) => {
+    const res = RES[r.outcome], tm = r.tm;
+    h += `<tr><td>${fDate(r.date, { weekday: "short", month: "short", day: "numeric" })}<div class="small muted">${r.entry_time} → ${r.exit_time}</div></td>
+      <td class="sym">${esc(r.symbol)}</td><td><span class="tag">${r.source === "scanner" ? "Scanner" : "Watchlist"}</span></td>
+      <td class="num">${px(r.entry)}</td><td class="num">${px(r.stop)}</td><td class="num">${px(r.target)}</td>
+      <td class="num">${Math.floor(RISK / r.risk)}<div class="small muted">${px(r.risk)}/sh risk</div></td>
+      <td>${tm ? `<span class="odds" data-r="${esc(JSON.stringify({ t: tm.p_target, s: tm.p_stop, n: tm.p_neither, v: tm.verdict }))}"><span style="flex:${tm.p_target};background:var(--good)"></span><span style="flex:${tm.p_stop};background:var(--critical)"></span><span style="flex:${tm.p_neither};background:var(--axis)"></span></span>
+        <span class="small muted" style="margin-left:6px">${pct(tm.p_target)} / ${pct(tm.p_stop)} / ${pct(tm.p_neither)}</span>` : '<span class="muted">–</span>'}</td>
+      <td><span class="res"><span class="ic" style="color:${res[1]}">${res[2]}</span>${res[0]}<span class="muted">at ${px(r.exit)}</span></span></td>
+      <td class="num"><b class="${cls(r.R)}">${fV(r.R)}</b></td></tr>`;
   });
-  h += "</tbody></table>";
-  $("journal").innerHTML = h;
+  $("tradetable").innerHTML = h + "</tbody></table>";
+  const s = stats(rows);
+  $("tradefoot").innerHTML = `<span>Showing ${Math.min(LIMIT, rows.length)} of ${rows.length} trades${rows.length ? ` · net <b class="${cls(s.tot)}">${fV(s.tot)}</b> · ${pct(s.win)} won` : ""}</span>${rows.length > LIMIT ? '<button class="btn" id="more">Show 50 more</button>' : ""}`;
+  const more = $("more"); if (more) more.onclick = () => { LIMIT += 50; tradeTable(); };
+  $("tradetable").querySelectorAll("th.sortable").forEach((th) => th.onclick = () => { const k = th.dataset.k; SORT = { k, dir: SORT.k === k ? -SORT.dir : (k === "date" || k === "R" ? -1 : 1) }; tradeTable(); });
+  $("tradetable").querySelectorAll(".odds").forEach((n) => { const o = JSON.parse(n.dataset.r); bindTip(n, `<div class="t">Time Machine odds</div>${trow("Target first", pct(o.t, 1))}${trow("Stop first", pct(o.s, 1))}${trow("Still open at 3:55", pct(o.n, 1))}<div class="small muted" style="margin-top:4px">${esc(o.v || "")}</div>`); });
 }
-$("src").addEventListener("click", (e) => {
-  const b = e.target.closest("button"); if (!b) return;
-  SRC = b.dataset.v;
-  [...$("src").children].forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
-  drawJournal();
-});
-$("showall").addEventListener("change", drawJournal);
+function segBind(id, set) {
+  $(id).addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; [...$(id).children].forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false")); set(b.dataset.v || b.dataset.u); });
+}
+segBind("f-src", (v) => { FSRC = v; LIMIT = 50; tradeTable(); });
+segBind("f-out", (v) => { FOUT = v; LIMIT = 50; tradeTable(); });
+$("f-sym").addEventListener("change", (e) => { FSYM = e.target.value; LIMIT = 50; tradeTable(); });
+segBind("units", (u) => { UNIT = u; try { localStorage.setItem("tj-unit", u); } catch (e) {} renderAll(); });
+[...$("units").children].forEach((b) => b.setAttribute("aria-pressed", b.dataset.u === UNIT ? "true" : "false"));
 
-function drawAll() { drawCum(); drawCalib(); drawBacktest(); }
-drawAll(); drawJournal();
-let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawAll, 120); });
+function renderCharts() { equity(); daily(); byTime(); timeMachine(); }
+function renderAll() { header(); verdict(); kpis(); outcomes(); stockTable(); backtest(); tradeTable(); renderCharts(); }
+renderAll();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderCharts, 120); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => backtest());
 </script>
 </body>
 </html>

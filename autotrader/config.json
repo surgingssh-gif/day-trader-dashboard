@@ -1,7 +1,14 @@
 {
-  "watchlist": ["AAPL", "TSLA", "NVDA", "AMD", "SPY"],
+  "watchlist": [
+    "AAPL",
+    "TSLA",
+    "NVDA",
+    "AMD",
+    "SPY"
+  ],
   "scanner_picks": 5,
   "stop_rule": "or_mid",
   "target_r": 1.0,
+  "risk_dollars": 50,
   "plugin_dir": ""
 }
