@@ -330,6 +330,11 @@ footer { margin-top: 48px; color: var(--text-muted); font-size: 12px; text-align
       </div>
       <div class="card" style="margin-top:12px"><div class="tscroll" id="sip-table"></div><div class="tfoot" id="sip-foot"></div></div>
       <div class="card" style="margin-top:12px">
+        <div class="card-head" style="padding:26px 24px 0"><div><h3>Reality checks</h3><div class="desc">Would the result survive real-world limits? Each column re-runs the same trades under one harsher assumption. Average result per trade.</div></div></div>
+        <div class="tscroll" id="sip-reality" style="margin-top:6px"></div>
+        <div class="tfoot" id="sip-reality-foot" style="display:block;line-height:1.6"></div>
+      </div>
+      <div class="card" style="margin-top:12px">
         <div class="card-head" style="padding:18px 22px 0"><div><h3 id="sip-picks-title">Latest picks</h3><div class="desc">The day's 20 stocks in play, ranked by relative volume, with how the first version traded each.</div></div>
           <select id="sip-day" aria-label="Day"></select></div>
         <div class="tscroll" id="sip-picks" style="margin-top:12px"></div>
@@ -1246,7 +1251,66 @@ function sipSection() {
   const sel = $("sip-day");
   if (!sel.options.length) { sel.innerHTML = pdays.map((d) => `<option value="${d}">${fDate(d, { weekday: "short", month: "short", day: "numeric" })}${d >= since ? " · fair test" : ""}</option>`).join(""); sel.onchange = sipPicks; }
   sipPicks();
+  sipReality();
 }
+
+function sipReality() {
+  const box = $("sip-reality"), foot = $("sip-reality-foot");
+  if (!SIP || !SIP.trades || !SIP.trades.length) { box.innerHTML = ""; foot.innerHTML = ""; return; }
+  const ACC = Object.assign({ size: 5000, type: "cash" }, CFG.account || {});
+  const avg = (a) => a.length ? a.reduce((p, q) => p + q, 0) / a.length : null;
+  const median = (a) => { if (!a.length) return null; const b = a.slice().sort((p, q) => p - q); return b[Math.floor(b.length / 2)]; };
+  const cell = (v, n, sub) => v == null ? '<td class="num muted">–</td>' : `<td class="num"><b class="${cls(v)}">${fV(v)}</b>${sub ? `<div class="small muted">${sub}</div>` : ""}</td>`;
+  const results = [];
+  let h = `<table><thead><tr><th>Version</th><th class="num">As tested<div class="small muted" style="font-weight:400">2¢ slippage</div></th><th class="num">Worse fills<div class="small muted" style="font-weight:400">5¢ slippage</div></th>
+    <th class="num">No blocked shorts<div class="small muted" style="font-weight:400">short-sale rule</div></th><th class="num">Without best 5<div class="small muted" style="font-weight:400">luck check</div></th>
+    <th class="num">$${(ACC.size / 1000).toFixed(0)}k cash account<div class="small muted" style="font-weight:400">sized to fit</div></th><th class="num">Money needed<div class="small muted" style="font-weight:400">per day, full plan</div></th><th>Passes</th></tr></thead><tbody>`;
+  (SIP.variants || []).forEach((v, i) => {
+    const T = SIP.trades.filter((t) => t.variant === v.id);
+    if (!T.length) return;
+    const base = avg(T.map((t) => t.R));
+    const c5 = avg(T.map((t) => t.R_5c != null ? t.R_5c : t.R));
+    const blocked = T.filter((t) => t.ssr), ok = T.filter((t) => !t.ssr);
+    const noSsr = avg(ok.map((t) => t.R));
+    const srt = T.map((t) => t.R).sort((p, q) => q - p);
+    const noTop = T.length > 5 ? srt.slice(5).reduce((p, q) => p + q, 0) / (T.length - 5) : null;
+    // cash account: each day's purchases must fit in the account (sale proceeds settle next day)
+    const byDay = {}; T.forEach((t) => (byDay[t.date] = byDay[t.date] || []).push(t));
+    let taken = 0, dollars = 0, planned = 0; const need = [];
+    Object.values(byDay).forEach((rows) => {
+      rows.sort((p, q) => (p.entry_slot - q.entry_slot) || (p.rank - q.rank));
+      let budget = ACC.size, dayNeed = 0;
+      rows.forEach((t) => {
+        if (!t.risk || !t.entry) return;
+        const full = Math.floor(RISK / t.risk);
+        dayNeed += full * t.entry; planned++;
+        const sh = Math.min(full, Math.floor(budget / t.entry));
+        if (sh < 1) return;
+        budget -= sh * t.entry; taken++; dollars += t.R * t.risk * sh;
+      });
+      need.push(dayNeed);
+    });
+    const acctAvgR = taken ? dollars / taken / RISK : null;
+    const checks = [c5, noSsr, noTop, acctAvgR];
+    const passed = checks.filter((x) => x != null && x > 0).length;
+    results.push({ v, base, c5, noSsr, noTop, acctAvgR, passed, taken, planned, dollars, blocked: blocked.length, n: T.length, needMed: median(need), needMax: Math.max(...need) });
+    h += `<tr><td class="sym"><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c${(i % 7) + 1});margin-right:8px"></i>${esc(v.short || v.label)}</td>
+      ${cell(base, T.length, T.length + " trades")}${cell(c5)}${cell(noSsr, ok.length, blocked.length + " shorts removed")}${cell(noTop)}
+      ${cell(acctAvgR, taken, `${taken} of ${planned} trades · ${fUSD(dollars, 0)}`)}
+      <td class="num">${fUSD(median(need), 0).replace(/^[+−]/, "")}<div class="small muted">up to ${fUSD(Math.max(...need), 0).replace(/^[+−]/, "")}</div></td>
+      <td><span class="status" style="font-weight:600"><span class="ic" style="color:${passed === 4 ? "var(--good)" : passed >= 2 ? "var(--neutral)" : "var(--critical)"}">${passed === 4 ? "▲" : passed >= 2 ? "●" : "▼"}</span>${passed} of 4</span></td></tr>`;
+  });
+  box.innerHTML = h + "</tbody></table>";
+  const best = results.slice().sort((p, q) => (q.base || -9) - (p.base || -9))[0];
+  if (!best) { foot.innerHTML = ""; return; }
+  const parts = [];
+  parts.push(best.c5 > 0 ? `still positive with worse fills (${fV(best.c5)})` : `<b class="neg-t">turns negative with worse fills</b> (${fV(best.c5)})`);
+  parts.push(best.blocked === 0 ? `none of its shorts hit the short-sale rule` : best.noSsr > 0 ? `survives without the ${best.blocked} shorts the short-sale rule would block (${fV(best.noSsr)})` : `<b class="neg-t">depends on ${best.blocked} shorts the short-sale rule would likely block</b> (${fV(best.noSsr)} without them)`);
+  parts.push(best.noTop > 0 ? `holds up without its 5 best trades (${fV(best.noTop)})` : `<b class="neg-t">loses money without its 5 best trades</b> (${fV(best.noTop)})`);
+  parts.push(best.acctAvgR > 0 ? `works in a $${(Object.assign({ size: 5000 }, CFG.account || {}).size / 1000).toFixed(0)}k cash account, taking ${best.taken} of ${best.planned} trades` : `<b class="neg-t">doesn't work in a small cash account</b>: only ${best.taken} of ${best.planned} trades fit, averaging ${fV(best.acctAvgR)}`);
+  foot.innerHTML = `<b style="color:var(--text-primary)">${esc(best.v.short || best.v.label)}</b> (the best version as tested): ${parts.join("; ")}. The full plan needs about <b style="color:var(--text-primary)">${fUSD(best.needMed, 0).replace(/^[+−]/, "")}</b> of buying power on a typical day. Shorting also needs a margin account, and hard-to-borrow stocks can't be shorted at all; this check can't see borrow availability.`;
+}
+
 function sipPicks() {
   const d = $("sip-day").value; if (!d) return;
   const picks = SIP.picks[d] || [], v0 = (SIP.variants || [])[0];

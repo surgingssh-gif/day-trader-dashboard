@@ -49,5 +49,9 @@
       "since": "2026-11-03"
     }
   ],
+  "account": {
+    "size": 5000,
+    "type": "cash"
+  },
   "plugin_dir": ""
 }

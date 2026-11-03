@@ -28,6 +28,8 @@ import time
 LAST_ENTRY_SLOT = 71   # entries close by 3:30 PM ET
 FLAT_SLOT = 76         # flat by 3:55 PM ET
 LOOKBACK = 14          # sessions for the relative-volume and ATR baselines
+STRESS_SLIP = 0.05     # the "what if slippage is worse" check: 5 cents a share each way
+MEASURE = 2            # bump when what is measured changes, so stored days are recomputed
 
 DEFAULT = {
     "enabled": True,
@@ -121,7 +123,9 @@ def features(full):
             pc = dl[j - 1]["c"]
             trs.append(max(dl[j]["h"] - dl[j]["l"], abs(dl[j]["h"] - pc), abs(dl[j]["l"] - pc)))
         out[dates[i]] = {"rvol": v0[i] / statistics.mean(base), "atr": statistics.mean(trs),
-                         "open": full[dates[i]][0]["o"], "v0": v0[i]}
+                         "open": full[dates[i]][0]["o"], "v0": v0[i], "prev_close": dl[i - 1]["c"],
+                         # short-sale rule carries over: yesterday's low was 10%+ under the close before it
+                         "prev_ssr": dl[i - 1]["l"] <= 0.9 * dl[i - 2]["c"]}
     return out
 
 
@@ -194,6 +198,7 @@ def simulate(D, v, atr, slip):
     R = tr if outcome == "target" else -1.0 if outcome == "stop" else (xp - e) * side / risk
     cost = 2 * slip / risk
     return {"side": "long" if side > 0 else "short", "entry": e, "stop": s, "target": t, "risk": round(risk, 3),
+            "entry_slot": k, "exit_slot": xt, "R_5c": round(R - 2 * STRESS_SLIP / risk, 3),
             "entry_time": clock12(570 + 5 * (k if stop_order else k + 1)), "exit_time": clock12(570 + 5 * (xt + 1)), "exit": round(xp, 2),
             "outcome": outcome, "R_gross": round(R, 3), "cost_R": round(cost, 3), "R": round(R - cost, 3)}
 
@@ -216,7 +221,7 @@ def run(tm, cfg, plugin, project, data_dir, parse_full, slip, offline_dir=None, 
     store_path = os.path.join(sdir, "sip.json")
     store = json.load(open(store_path)) if os.path.exists(store_path) else {"days": [], "picks": {}, "trades": [], "spec": None}
     spec = {"variants": sc["variants"], "slip": slip, "picks_per_day": sc["picks_per_day"], "min_price": sc["min_price"],
-            "min_atr": sc["min_atr"], "min_rvol": sc["min_rvol"]}
+            "min_atr": sc["min_atr"], "min_rvol": sc["min_rvol"], "measure": MEASURE}
     if store.get("spec") != spec:                    # rules changed: recompute everything from the saved days
         log("rules changed: recomputing")
         store = {"days": [], "picks": {}, "trades": [], "spec": spec}
@@ -273,10 +278,14 @@ def run(tm, cfg, plugin, project, data_dir, parse_full, slip, offline_dir=None, 
                     "day_change": round((D[-1]["c"] / D[0]["o"] - 1) * 100, 2)}
             store["picks"][d].append(pick)
             snap.append({"symbol": s, "rvol": pick["rvol"], "atr": pick["atr"], "bars": fulls[s][d]})
+            ssr_slot = next((j for j, b in enumerate(D) if b["l"] <= 0.9 * x["prev_close"]), None)
             for v in sc["variants"]:
                 t = simulate(D, v, x["atr"], slip)
                 if t:
-                    t.update(date=d, symbol=s, variant=v["id"], rvol=pick["rvol"])
+                    # short-sale rule: after a 10% drop a stock can only be shorted on an uptick, so a
+                    # stop order selling into the fall would not fill the way the backtest assumes
+                    t["ssr"] = t["side"] == "short" and (x["prev_ssr"] or (ssr_slot is not None and ssr_slot <= t["entry_slot"]))
+                    t.update(date=d, symbol=s, variant=v["id"], rvol=pick["rvol"], rank=len(store["picks"][d]))
                     store["trades"].append(t)
         os.makedirs(os.path.join(sdir, "days"), exist_ok=True)
         with gzip.open(os.path.join(sdir, "days", "%s.json.gz" % d), "wt") as fh:

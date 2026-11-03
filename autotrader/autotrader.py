@@ -453,7 +453,8 @@ def slim_sip(st):
     """Only what the dashboard draws: keeps the page light."""
     if not st:
         return None
-    keep = ("date", "symbol", "variant", "side", "R", "R_gross", "outcome", "entry_time", "exit_time", "rvol", "entry", "exit")
+    keep = ("date", "symbol", "variant", "side", "R", "R_gross", "R_5c", "outcome", "entry_time", "exit_time", "rvol", "entry", "exit",
+            "risk", "ssr", "entry_slot", "exit_slot", "rank")
     last = sorted(st.get("picks", {}))[-15:]
     return {"since": st.get("since"), "variants": st.get("variants"), "days": st.get("days"), "universe": st.get("universe"),
             "fetched": st.get("fetched"), "updated": st.get("updated"), "slip": st.get("slip"),
@@ -470,7 +471,7 @@ def build_dashboard():
     data = {"journal": read_json(JOURNAL, {"entries": [], "days": []}),
             "backtest": read_json(BACKTEST, None),
             "sip": slim_sip(read_json(os.path.join(DATA, "sip", "sip.json"), None)),
-            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars", "versions", "slippage_per_share", "sip")},
+            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars", "versions", "slippage_per_share", "sip", "account")},
             "built": datetime.datetime.now().strftime("%a %b %-d, %-I:%M %p"),
             "built_iso": now.isoformat(),
             "next_run": nxt.astimezone().strftime("%a %b %-d, %-I:%M %p")}
