@@ -16,7 +16,7 @@
    "outcome": "stop",
    "exit": 342.43,
    "exit_time": "11:25 AM",
-   "R": -1.0,
+   "R": -1.013,
    "status": "triggered",
    "tm": {
     "p_target": 0.3826,
@@ -34,7 +34,9 @@
      "close": 2,
      "avg_R": 0.229
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.013
   },
   {
    "date": "2026-10-19",
@@ -52,7 +54,7 @@
    "outcome": "stop",
    "exit": 549.4,
    "exit_time": "12:05 PM",
-   "R": -1.0,
+   "R": -1.009,
    "status": "triggered",
    "tm": {
     "p_target": 0.4707,
@@ -70,7 +72,9 @@
      "close": 8,
      "avg_R": -0.127
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.009
   },
   {
    "date": "2026-10-19",
@@ -88,7 +92,7 @@
    "outcome": "flat",
    "exit": 217.26,
    "exit_time": "3:55 PM",
-   "R": -0.526,
+   "R": -0.547,
    "status": "triggered",
    "tm": {
     "p_target": 0.322,
@@ -106,7 +110,9 @@
      "close": 4,
      "avg_R": -0.002
     }
-   }
+   },
+   "R_gross": -0.526,
+   "cost_R": 0.021
   },
   {
    "date": "2026-10-19",
@@ -124,7 +130,7 @@
    "outcome": "stop",
    "exit": 767.43,
    "exit_time": "10:35 AM",
-   "R": -1.0,
+   "R": -1.044,
    "status": "triggered",
    "tm": {
     "p_target": 0.5057,
@@ -142,7 +148,9 @@
      "close": 0,
      "avg_R": 0.172
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.044
   },
   {
    "date": "2026-10-19",
@@ -160,7 +168,7 @@
    "outcome": "flat",
    "exit": 367.23,
    "exit_time": "3:55 PM",
-   "R": 0.52,
+   "R": 0.513,
    "status": "triggered",
    "tm": {
     "p_target": 0.2522,
@@ -178,7 +186,9 @@
      "close": 4,
      "avg_R": -0.087
     }
-   }
+   },
+   "R_gross": 0.52,
+   "cost_R": 0.007
   },
   {
    "date": "2026-10-20",
@@ -203,7 +213,7 @@
    "outcome": "target",
    "exit": 541.28,
    "exit_time": "10:20 AM",
-   "R": 1.0,
+   "R": 0.993,
    "status": "triggered",
    "tm": {
     "p_target": 0.505,
@@ -221,7 +231,9 @@
      "close": 8,
      "avg_R": -0.155
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.007
   },
   {
    "date": "2026-10-20",
@@ -239,7 +251,7 @@
    "outcome": "flat",
    "exit": 216.54,
    "exit_time": "3:55 PM",
-   "R": -0.092,
+   "R": -0.111,
    "status": "triggered",
    "tm": {
     "p_target": 0.3023,
@@ -257,7 +269,9 @@
      "close": 5,
      "avg_R": -0.022
     }
-   }
+   },
+   "R_gross": -0.092,
+   "cost_R": 0.019
   },
   {
    "date": "2026-10-20",
@@ -275,7 +289,7 @@
    "outcome": "target",
    "exit": 767.71,
    "exit_time": "10:00 AM",
-   "R": 1.0,
+   "R": 0.967,
    "status": "triggered",
    "tm": {
     "p_target": 0.4932,
@@ -293,7 +307,9 @@
      "close": 0,
      "avg_R": 0.133
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.033
   },
   {
    "date": "2026-10-20",
@@ -311,7 +327,7 @@
    "outcome": "target",
    "exit": 374.1,
    "exit_time": "10:15 AM",
-   "R": 1.0,
+   "R": 0.989,
    "status": "triggered",
    "tm": {
     "p_target": 0.5043,
@@ -329,7 +345,9 @@
      "close": 5,
      "avg_R": -0.065
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.011
   },
   {
    "date": "2026-10-21",
@@ -347,7 +365,7 @@
    "outcome": "target",
    "exit": 343.7,
    "exit_time": "11:05 AM",
-   "R": 1.0,
+   "R": 0.978,
    "status": "triggered",
    "tm": {
     "p_target": 0.465,
@@ -365,7 +383,9 @@
      "close": 2,
      "avg_R": 0.18
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.022
   },
   {
    "date": "2026-10-21",
@@ -383,7 +403,7 @@
    "outcome": "flat",
    "exit": 552.72,
    "exit_time": "3:55 PM",
-   "R": -0.248,
+   "R": -0.254,
    "status": "triggered",
    "tm": {
     "p_target": 0.1877,
@@ -401,7 +421,9 @@
      "close": 8,
      "avg_R": -0.119
     }
-   }
+   },
+   "R_gross": -0.248,
+   "cost_R": 0.006
   },
   {
    "date": "2026-10-21",
@@ -426,7 +448,7 @@
    "outcome": "target",
    "exit": 772.39,
    "exit_time": "11:40 AM",
-   "R": 1.0,
+   "R": 0.958,
    "status": "triggered",
    "tm": {
     "p_target": 0.509,
@@ -444,7 +466,9 @@
      "close": 0,
      "avg_R": 0.161
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.042
   },
   {
    "date": "2026-10-21",
@@ -462,7 +486,7 @@
    "outcome": "stop",
    "exit": 383.59,
    "exit_time": "10:40 AM",
-   "R": -1.0,
+   "R": -1.01,
    "status": "triggered",
    "tm": {
     "p_target": 0.556,
@@ -480,7 +504,9 @@
      "close": 5,
      "avg_R": -0.027
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.01
   },
   {
    "date": "2026-10-22",
@@ -505,7 +531,7 @@
    "outcome": "stop",
    "exit": 523.04,
    "exit_time": "10:10 AM",
-   "R": -1.0,
+   "R": -1.01,
    "status": "triggered",
    "tm": {
     "p_target": 0.5086,
@@ -523,7 +549,9 @@
      "close": 9,
      "avg_R": -0.123
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.01
   },
   {
    "date": "2026-10-22",
@@ -555,7 +583,7 @@
    "outcome": "target",
    "exit": 388.82,
    "exit_time": "10:05 AM",
-   "R": 1.0,
+   "R": 0.993,
    "status": "triggered",
    "tm": {
     "p_target": 0.428,
@@ -573,7 +601,9 @@
      "close": 5,
      "avg_R": -0.06
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.007
   },
   {
    "date": "2026-10-23",
@@ -598,7 +628,7 @@
    "outcome": "target",
    "exit": 521.24,
    "exit_time": "10:40 AM",
-   "R": 1.0,
+   "R": 0.991,
    "status": "triggered",
    "tm": {
     "p_target": 0.5286,
@@ -616,7 +646,9 @@
      "close": 9,
      "avg_R": -0.149
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.009
   },
   {
    "date": "2026-10-23",
@@ -634,7 +666,7 @@
    "outcome": "stop",
    "exit": 211.38,
    "exit_time": "3:45 PM",
-   "R": -1.0,
+   "R": -1.025,
    "status": "triggered",
    "tm": {
     "p_target": 0.4095,
@@ -652,7 +684,9 @@
      "close": 6,
      "avg_R": -0.025
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.025
   },
   {
    "date": "2026-10-23",
@@ -670,7 +704,7 @@
    "outcome": "stop",
    "exit": 759.95,
    "exit_time": "10:15 AM",
-   "R": -1.0,
+   "R": -1.041,
    "status": "triggered",
    "tm": {
     "p_target": 0.4836,
@@ -688,7 +722,9 @@
      "close": 0,
      "avg_R": 0.188
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.041
   },
   {
    "date": "2026-10-23",
@@ -706,7 +742,7 @@
    "outcome": "stop",
    "exit": 371.85,
    "exit_time": "12:20 PM",
-   "R": -1.0,
+   "R": -1.008,
    "status": "triggered",
    "tm": {
     "p_target": 0.1913,
@@ -724,7 +760,9 @@
      "close": 5,
      "avg_R": -0.025
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.008
   },
   {
    "date": "2026-10-26",
@@ -742,7 +780,7 @@
    "outcome": "stop",
    "exit": 344.13,
    "exit_time": "12:15 PM",
-   "R": -1.0,
+   "R": -1.016,
    "status": "triggered",
    "tm": {
     "p_target": 0.3944,
@@ -760,7 +798,9 @@
      "close": 3,
      "avg_R": 0.208
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.016
   },
   {
    "date": "2026-10-26",
@@ -778,7 +818,7 @@
    "outcome": "flat",
    "exit": 529.79,
    "exit_time": "3:55 PM",
-   "R": 0.223,
+   "R": 0.216,
    "status": "triggered",
    "tm": {
     "p_target": 0.4203,
@@ -796,7 +836,9 @@
      "close": 9,
      "avg_R": -0.116
     }
-   }
+   },
+   "R_gross": 0.223,
+   "cost_R": 0.007
   },
   {
    "date": "2026-10-26",
@@ -814,7 +856,7 @@
    "outcome": "target",
    "exit": 217.52,
    "exit_time": "11:05 AM",
-   "R": 1.0,
+   "R": 0.976,
    "status": "triggered",
    "tm": {
     "p_target": 0.3286,
@@ -832,7 +874,9 @@
      "close": 6,
      "avg_R": -0.06
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.024
   },
   {
    "date": "2026-10-26",
@@ -850,7 +894,7 @@
    "outcome": "target",
    "exit": 766.52,
    "exit_time": "10:50 AM",
-   "R": 1.0,
+   "R": 0.978,
    "status": "triggered",
    "tm": {
     "p_target": 0.486,
@@ -868,7 +912,9 @@
      "close": 0,
      "avg_R": 0.152
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.022
   },
   {
    "date": "2026-10-26",
@@ -886,7 +932,7 @@
    "outcome": "flat",
    "exit": 390.59,
    "exit_time": "3:55 PM",
-   "R": -0.642,
+   "R": -0.65,
    "status": "triggered",
    "tm": {
     "p_target": 0.451,
@@ -904,7 +950,9 @@
      "close": 5,
      "avg_R": -0.056
     }
-   }
+   },
+   "R_gross": -0.642,
+   "cost_R": 0.008
   },
   {
    "date": "2026-10-27",
@@ -922,7 +970,7 @@
    "outcome": "target",
    "exit": 347.16,
    "exit_time": "11:10 AM",
-   "R": 1.0,
+   "R": 0.975,
    "status": "triggered",
    "tm": {
     "p_target": 0.5431,
@@ -940,7 +988,9 @@
      "close": 3,
      "avg_R": 0.165
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.025
   },
   {
    "date": "2026-10-27",
@@ -958,7 +1008,7 @@
    "outcome": "flat",
    "exit": 559.16,
    "exit_time": "3:55 PM",
-   "R": 0.441,
+   "R": 0.436,
    "status": "triggered",
    "tm": {
     "p_target": 0.2445,
@@ -976,7 +1026,9 @@
      "close": 10,
      "avg_R": -0.106
     }
-   }
+   },
+   "R_gross": 0.441,
+   "cost_R": 0.005
   },
   {
    "date": "2026-10-27",
@@ -994,7 +1046,7 @@
    "outcome": "stop",
    "exit": 217.94,
    "exit_time": "12:35 PM",
-   "R": -1.0,
+   "R": -1.052,
    "status": "triggered",
    "tm": {
     "p_target": 0.4693,
@@ -1012,7 +1064,9 @@
      "close": 6,
      "avg_R": -0.023
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.052
   },
   {
    "date": "2026-10-27",
@@ -1030,7 +1084,7 @@
    "outcome": "target",
    "exit": 769.72,
    "exit_time": "11:25 AM",
-   "R": 1.0,
+   "R": 0.96,
    "status": "triggered",
    "tm": {
     "p_target": 0.4957,
@@ -1048,7 +1102,9 @@
      "close": 0,
      "avg_R": 0.176
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.04
   },
   {
    "date": "2026-10-27",
@@ -1066,7 +1122,7 @@
    "outcome": "flat",
    "exit": 406.76,
    "exit_time": "3:55 PM",
-   "R": 0.421,
+   "R": 0.413,
    "status": "triggered",
    "tm": {
     "p_target": 0.2308,
@@ -1084,7 +1140,9 @@
      "close": 6,
      "avg_R": -0.075
     }
-   }
+   },
+   "R_gross": 0.421,
+   "cost_R": 0.008
   },
   {
    "date": "2026-10-28",
@@ -1109,7 +1167,7 @@
    "outcome": "flat",
    "exit": 576.86,
    "exit_time": "3:55 PM",
-   "R": 0.506,
+   "R": 0.498,
    "status": "triggered",
    "tm": {
     "p_target": 0.2519,
@@ -1127,7 +1185,9 @@
      "close": 11,
      "avg_R": -0.092
     }
-   }
+   },
+   "R_gross": 0.506,
+   "cost_R": 0.008
   },
   {
    "date": "2026-10-28",
@@ -1152,7 +1212,7 @@
    "outcome": "stop",
    "exit": 771.05,
    "exit_time": "1:20 PM",
-   "R": -1.0,
+   "R": -1.024,
    "status": "triggered",
    "tm": {
     "p_target": 0.3254,
@@ -1170,7 +1230,9 @@
      "close": 0,
      "avg_R": 0.2
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.024
   },
   {
    "date": "2026-10-28",
@@ -1202,7 +1264,7 @@
    "outcome": "stop",
    "exit": 566.65,
    "exit_time": "1:15 PM",
-   "R": -1.0,
+   "R": -1.006,
    "status": "triggered",
    "tm": {
     "p_target": 0.3853,
@@ -1220,7 +1282,9 @@
      "close": 12,
      "avg_R": -0.076
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.006
   },
   {
    "date": "2026-10-29",
@@ -1245,7 +1309,7 @@
    "outcome": "stop",
    "exit": 768.21,
    "exit_time": "10:15 AM",
-   "R": -1.0,
+   "R": -1.026,
    "status": "triggered",
    "tm": {
     "p_target": 0.5408,
@@ -1263,7 +1327,9 @@
      "close": 0,
      "avg_R": 0.167
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.026
   },
   {
    "date": "2026-10-29",
@@ -1281,7 +1347,7 @@
    "outcome": "stop",
    "exit": 403.46,
    "exit_time": "3:40 PM",
-   "R": -1.0,
+   "R": -1.013,
    "status": "triggered",
    "tm": {
     "p_target": 0.4887,
@@ -1299,7 +1365,9 @@
      "close": 7,
      "avg_R": -0.06
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.013
   },
   {
    "date": "2026-10-30",
@@ -1317,7 +1385,7 @@
    "outcome": "stop",
    "exit": 346.48,
    "exit_time": "12:05 PM",
-   "R": -1.0,
+   "R": -1.017,
    "status": "triggered",
    "tm": {
     "p_target": 0.4332,
@@ -1335,7 +1403,9 @@
      "close": 3,
      "avg_R": 0.194
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.017
   },
   {
    "date": "2026-10-30",
@@ -1374,7 +1444,7 @@
    "outcome": "target",
    "exit": 397.76,
    "exit_time": "10:05 AM",
-   "R": 1.0,
+   "R": 0.989,
    "status": "triggered",
    "tm": {
     "p_target": 0.5374,
@@ -1392,7 +1462,9 @@
      "close": 7,
      "avg_R": -0.087
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.011
   },
   {
    "date": "2026-11-02",
@@ -1417,7 +1489,7 @@
    "outcome": "flat",
    "exit": 171.16,
    "exit_time": "3:55 PM",
-   "R": 0.107,
+   "R": 0.092,
    "status": "triggered",
    "tm": {
     "p_target": 0.2542,
@@ -1435,7 +1507,9 @@
      "close": 12,
      "avg_R": 0.1
     }
-   }
+   },
+   "R_gross": 0.107,
+   "cost_R": 0.015
   },
   {
    "date": "2026-11-02",
@@ -1453,7 +1527,7 @@
    "outcome": "target",
    "exit": 430.28,
    "exit_time": "10:20 AM",
-   "R": 1.0,
+   "R": 0.987,
    "status": "triggered",
    "tm": {
     "p_target": 0.4757,
@@ -1471,7 +1545,9 @@
      "close": 7,
      "avg_R": 0.057
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.013
   },
   {
    "date": "2026-11-02",
@@ -1489,7 +1565,7 @@
    "outcome": "target",
    "exit": 258.72,
    "exit_time": "11:10 AM",
-   "R": 1.0,
+   "R": 0.988,
    "status": "triggered",
    "tm": {
     "p_target": 0.4177,
@@ -1507,7 +1583,9 @@
      "close": 8,
      "avg_R": 0.149
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.012
   },
   {
    "date": "2026-11-02",
@@ -1532,7 +1610,7 @@
    "outcome": "target",
    "exit": 246.36,
    "exit_time": "10:15 AM",
-   "R": 1.0,
+   "R": 0.965,
    "status": "triggered",
    "tm": {
     "p_target": 0.4805,
@@ -1550,7 +1628,9 @@
      "close": 6,
      "avg_R": -0.066
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.035
   },
   {
    "date": "2026-11-02",
@@ -1568,7 +1648,7 @@
    "outcome": "stop",
    "exit": 246.33,
    "exit_time": "3:35 PM",
-   "R": -1.0,
+   "R": -1.01,
    "status": "triggered",
    "tm": {
     "p_target": 0.148,
@@ -1586,7 +1666,9 @@
      "close": 7,
      "avg_R": -0.234
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.01
   },
   {
    "date": "2026-11-02",
@@ -1604,7 +1686,7 @@
    "outcome": "stop",
    "exit": 207.87,
    "exit_time": "10:50 AM",
-   "R": -1.0,
+   "R": -1.022,
    "status": "triggered",
    "tm": {
     "p_target": 0.3535,
@@ -1622,7 +1704,9 @@
      "close": 6,
      "avg_R": -0.056
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.022
   },
   {
    "date": "2026-11-02",
@@ -1640,7 +1724,7 @@
    "outcome": "target",
    "exit": 761.28,
    "exit_time": "10:10 AM",
-   "R": 1.0,
+   "R": 0.958,
    "status": "triggered",
    "tm": {
     "p_target": 0.469,
@@ -1658,7 +1742,9 @@
      "close": 0,
      "avg_R": 0.135
     }
-   }
+   },
+   "R_gross": 1.0,
+   "cost_R": 0.042
   },
   {
    "date": "2026-11-02",
@@ -1676,7 +1762,7 @@
    "outcome": "stop",
    "exit": 406.97,
    "exit_time": "1:45 PM",
-   "R": -1.0,
+   "R": -1.01,
    "status": "triggered",
    "tm": {
     "p_target": 0.4612,
@@ -1694,7 +1780,9 @@
      "close": 7,
      "avg_R": -0.056
     }
-   }
+   },
+   "R_gross": -1.0,
+   "cost_R": 0.01
   }
  ],
  "days": [
@@ -1717,13 +1805,14 @@
     "stop_rule": "or_mid",
     "target_r": 1,
     "symbols": "watchlist",
-    "min_entry": null
+    "min_entry": null,
+    "slippage_per_share": 0.02
    },
    "trades": [
     {
      "date": "2026-10-19",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "11:25 AM"
@@ -1731,7 +1820,7 @@
     {
      "date": "2026-10-19",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.044,
      "outcome": "stop",
      "entry_time": "10:15 AM",
      "exit_time": "10:35 AM"
@@ -1739,7 +1828,7 @@
     {
      "date": "2026-10-19",
      "symbol": "TSLA",
-     "R": 0.52,
+     "R": 0.514,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -1747,7 +1836,7 @@
     {
      "date": "2026-10-19",
      "symbol": "NVDA",
-     "R": -0.526,
+     "R": -0.547,
      "outcome": "flat",
      "entry_time": "10:25 AM",
      "exit_time": "3:55 PM"
@@ -1755,7 +1844,7 @@
     {
      "date": "2026-10-19",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.009,
      "outcome": "stop",
      "entry_time": "11:40 AM",
      "exit_time": "12:05 PM"
@@ -1763,7 +1852,7 @@
     {
      "date": "2026-10-20",
      "symbol": "TSLA",
-     "R": 1.0,
+     "R": 0.989,
      "outcome": "target",
      "entry_time": "10:00 AM",
      "exit_time": "10:15 AM"
@@ -1771,7 +1860,7 @@
     {
      "date": "2026-10-20",
      "symbol": "AMD",
-     "R": 1.0,
+     "R": 0.993,
      "outcome": "target",
      "entry_time": "10:05 AM",
      "exit_time": "10:20 AM"
@@ -1779,7 +1868,7 @@
     {
      "date": "2026-10-20",
      "symbol": "NVDA",
-     "R": -0.092,
+     "R": -0.11,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -1787,7 +1876,7 @@
     {
      "date": "2026-10-20",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.967,
      "outcome": "target",
      "entry_time": "9:55 AM",
      "exit_time": "10:00 AM"
@@ -1795,7 +1884,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AAPL",
-     "R": 1.0,
+     "R": 0.978,
      "outcome": "target",
      "entry_time": "10:55 AM",
      "exit_time": "11:05 AM"
@@ -1803,7 +1892,7 @@
     {
      "date": "2026-10-21",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.958,
      "outcome": "target",
      "entry_time": "11:15 AM",
      "exit_time": "11:40 AM"
@@ -1811,7 +1900,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AMD",
-     "R": -0.248,
+     "R": -0.254,
      "outcome": "flat",
      "entry_time": "1:15 PM",
      "exit_time": "3:55 PM"
@@ -1819,7 +1908,7 @@
     {
      "date": "2026-10-21",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "9:50 AM",
      "exit_time": "10:40 AM"
@@ -1827,7 +1916,7 @@
     {
      "date": "2026-10-22",
      "symbol": "TSLA",
-     "R": 1.0,
+     "R": 0.993,
      "outcome": "target",
      "entry_time": "9:50 AM",
      "exit_time": "10:05 AM"
@@ -1835,7 +1924,7 @@
     {
      "date": "2026-10-22",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "9:55 AM",
      "exit_time": "10:10 AM"
@@ -1843,7 +1932,7 @@
     {
      "date": "2026-10-23",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.025,
      "outcome": "stop",
      "entry_time": "10:00 AM",
      "exit_time": "3:45 PM"
@@ -1851,7 +1940,7 @@
     {
      "date": "2026-10-23",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.041,
      "outcome": "stop",
      "entry_time": "10:00 AM",
      "exit_time": "10:15 AM"
@@ -1859,7 +1948,7 @@
     {
      "date": "2026-10-23",
      "symbol": "AMD",
-     "R": 1.0,
+     "R": 0.991,
      "outcome": "target",
      "entry_time": "10:05 AM",
      "exit_time": "10:40 AM"
@@ -1867,7 +1956,7 @@
     {
      "date": "2026-10-23",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.008,
      "outcome": "stop",
      "entry_time": "11:20 AM",
      "exit_time": "12:20 PM"
@@ -1875,7 +1964,7 @@
     {
      "date": "2026-10-26",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.978,
      "outcome": "target",
      "entry_time": "10:15 AM",
      "exit_time": "10:50 AM"
@@ -1883,7 +1972,7 @@
     {
      "date": "2026-10-26",
      "symbol": "NVDA",
-     "R": 1.0,
+     "R": 0.976,
      "outcome": "target",
      "entry_time": "10:45 AM",
      "exit_time": "11:05 AM"
@@ -1891,7 +1980,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.016,
      "outcome": "stop",
      "entry_time": "10:50 AM",
      "exit_time": "12:15 PM"
@@ -1899,7 +1988,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AMD",
-     "R": 0.223,
+     "R": 0.216,
      "outcome": "flat",
      "entry_time": "11:05 AM",
      "exit_time": "3:55 PM"
@@ -1907,7 +1996,7 @@
     {
      "date": "2026-10-26",
      "symbol": "TSLA",
-     "R": -0.642,
+     "R": -0.65,
      "outcome": "flat",
      "entry_time": "9:55 AM",
      "exit_time": "3:55 PM"
@@ -1915,7 +2004,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AAPL",
-     "R": 1.0,
+     "R": 0.975,
      "outcome": "target",
      "entry_time": "10:35 AM",
      "exit_time": "11:10 AM"
@@ -1923,7 +2012,7 @@
     {
      "date": "2026-10-27",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.96,
      "outcome": "target",
      "entry_time": "11:00 AM",
      "exit_time": "11:25 AM"
@@ -1931,7 +2020,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AMD",
-     "R": 0.441,
+     "R": 0.437,
      "outcome": "flat",
      "entry_time": "11:15 AM",
      "exit_time": "3:55 PM"
@@ -1939,7 +2028,7 @@
     {
      "date": "2026-10-27",
      "symbol": "TSLA",
-     "R": 0.421,
+     "R": 0.413,
      "outcome": "flat",
      "entry_time": "11:20 AM",
      "exit_time": "3:55 PM"
@@ -1947,7 +2036,7 @@
     {
      "date": "2026-10-27",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.052,
      "outcome": "stop",
      "entry_time": "11:50 AM",
      "exit_time": "12:35 PM"
@@ -1955,7 +2044,7 @@
     {
      "date": "2026-10-28",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.024,
      "outcome": "stop",
      "entry_time": "12:55 PM",
      "exit_time": "1:20 PM"
@@ -1963,7 +2052,7 @@
     {
      "date": "2026-10-28",
      "symbol": "AMD",
-     "R": 0.506,
+     "R": 0.498,
      "outcome": "flat",
      "entry_time": "2:40 PM",
      "exit_time": "3:55 PM"
@@ -1971,7 +2060,7 @@
     {
      "date": "2026-10-29",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.026,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "10:15 AM"
@@ -1979,7 +2068,7 @@
     {
      "date": "2026-10-29",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:35 AM",
      "exit_time": "3:40 PM"
@@ -1987,7 +2076,7 @@
     {
      "date": "2026-10-29",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.006,
      "outcome": "stop",
      "entry_time": "11:15 AM",
      "exit_time": "1:15 PM"
@@ -1995,7 +2084,7 @@
     {
      "date": "2026-10-30",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.017,
      "outcome": "stop",
      "entry_time": "10:45 AM",
      "exit_time": "12:05 PM"
@@ -2003,7 +2092,7 @@
     {
      "date": "2026-10-30",
      "symbol": "TSLA",
-     "R": 1.0,
+     "R": 0.989,
      "outcome": "target",
      "entry_time": "9:55 AM",
      "exit_time": "10:05 AM"
@@ -2011,7 +2100,7 @@
     {
      "date": "2026-11-02",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.022,
      "outcome": "stop",
      "entry_time": "10:25 AM",
      "exit_time": "10:50 AM"
@@ -2019,7 +2108,7 @@
     {
      "date": "2026-11-02",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "10:30 AM",
      "exit_time": "1:45 PM"
@@ -2027,7 +2116,7 @@
     {
      "date": "2026-11-02",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.958,
      "outcome": "target",
      "entry_time": "9:50 AM",
      "exit_time": "10:10 AM"
@@ -2055,13 +2144,14 @@
     "stop_rule": "or_mid",
     "target_r": 2,
     "symbols": "watchlist",
-    "min_entry": null
+    "min_entry": null,
+    "slippage_per_share": 0.02
    },
    "trades": [
     {
      "date": "2026-10-19",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "11:25 AM"
@@ -2069,7 +2159,7 @@
     {
      "date": "2026-10-19",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.044,
      "outcome": "stop",
      "entry_time": "10:15 AM",
      "exit_time": "10:35 AM"
@@ -2077,7 +2167,7 @@
     {
      "date": "2026-10-19",
      "symbol": "TSLA",
-     "R": 0.52,
+     "R": 0.514,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -2085,7 +2175,7 @@
     {
      "date": "2026-10-19",
      "symbol": "NVDA",
-     "R": -0.526,
+     "R": -0.547,
      "outcome": "flat",
      "entry_time": "10:25 AM",
      "exit_time": "3:55 PM"
@@ -2093,7 +2183,7 @@
     {
      "date": "2026-10-19",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.009,
      "outcome": "stop",
      "entry_time": "11:40 AM",
      "exit_time": "12:05 PM"
@@ -2101,7 +2191,7 @@
     {
      "date": "2026-10-20",
      "symbol": "TSLA",
-     "R": 0.966,
+     "R": 0.955,
      "outcome": "flat",
      "entry_time": "10:00 AM",
      "exit_time": "3:55 PM"
@@ -2109,7 +2199,7 @@
     {
      "date": "2026-10-20",
      "symbol": "AMD",
-     "R": 2.0,
+     "R": 1.993,
      "outcome": "target",
      "entry_time": "10:05 AM",
      "exit_time": "10:30 AM"
@@ -2117,7 +2207,7 @@
     {
      "date": "2026-10-20",
      "symbol": "NVDA",
-     "R": -0.092,
+     "R": -0.11,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -2125,7 +2215,7 @@
     {
      "date": "2026-10-20",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.967,
      "outcome": "target",
      "entry_time": "9:55 AM",
      "exit_time": "10:15 AM"
@@ -2133,7 +2223,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AAPL",
-     "R": 1.314,
+     "R": 1.299,
      "outcome": "flat",
      "entry_time": "10:55 AM",
      "exit_time": "3:55 PM"
@@ -2141,7 +2231,7 @@
     {
      "date": "2026-10-21",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.958,
      "outcome": "target",
      "entry_time": "11:15 AM",
      "exit_time": "12:40 PM"
@@ -2149,7 +2239,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AMD",
-     "R": -0.248,
+     "R": -0.254,
      "outcome": "flat",
      "entry_time": "1:15 PM",
      "exit_time": "3:55 PM"
@@ -2157,7 +2247,7 @@
     {
      "date": "2026-10-21",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "9:50 AM",
      "exit_time": "10:40 AM"
@@ -2165,7 +2255,7 @@
     {
      "date": "2026-10-22",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.007,
      "outcome": "stop",
      "entry_time": "9:50 AM",
      "exit_time": "1:10 PM"
@@ -2173,7 +2263,7 @@
     {
      "date": "2026-10-22",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "9:55 AM",
      "exit_time": "10:10 AM"
@@ -2181,7 +2271,7 @@
     {
      "date": "2026-10-23",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.025,
      "outcome": "stop",
      "entry_time": "10:00 AM",
      "exit_time": "3:45 PM"
@@ -2189,7 +2279,7 @@
     {
      "date": "2026-10-23",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.041,
      "outcome": "stop",
      "entry_time": "10:00 AM",
      "exit_time": "10:15 AM"
@@ -2197,7 +2287,7 @@
     {
      "date": "2026-10-23",
      "symbol": "AMD",
-     "R": -0.416,
+     "R": -0.425,
      "outcome": "flat",
      "entry_time": "10:05 AM",
      "exit_time": "3:55 PM"
@@ -2205,7 +2295,7 @@
     {
      "date": "2026-10-23",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.008,
      "outcome": "stop",
      "entry_time": "11:20 AM",
      "exit_time": "12:20 PM"
@@ -2213,7 +2303,7 @@
     {
      "date": "2026-10-26",
      "symbol": "SPY",
-     "R": 0.195,
+     "R": 0.173,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -2221,7 +2311,7 @@
     {
      "date": "2026-10-26",
      "symbol": "NVDA",
-     "R": 0.089,
+     "R": 0.066,
      "outcome": "flat",
      "entry_time": "10:45 AM",
      "exit_time": "3:55 PM"
@@ -2229,7 +2319,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.016,
      "outcome": "stop",
      "entry_time": "10:50 AM",
      "exit_time": "12:15 PM"
@@ -2237,7 +2327,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AMD",
-     "R": 0.223,
+     "R": 0.216,
      "outcome": "flat",
      "entry_time": "11:05 AM",
      "exit_time": "3:55 PM"
@@ -2245,7 +2335,7 @@
     {
      "date": "2026-10-26",
      "symbol": "TSLA",
-     "R": -0.642,
+     "R": -0.65,
      "outcome": "flat",
      "entry_time": "9:55 AM",
      "exit_time": "3:55 PM"
@@ -2253,7 +2343,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AAPL",
-     "R": 0.621,
+     "R": 0.586,
      "outcome": "flat",
      "entry_time": "10:35 AM",
      "exit_time": "3:55 PM"
@@ -2261,7 +2351,7 @@
     {
      "date": "2026-10-27",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.96,
      "outcome": "target",
      "entry_time": "11:00 AM",
      "exit_time": "12:05 PM"
@@ -2269,7 +2359,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AMD",
-     "R": 0.441,
+     "R": 0.437,
      "outcome": "flat",
      "entry_time": "11:15 AM",
      "exit_time": "3:55 PM"
@@ -2277,7 +2367,7 @@
     {
      "date": "2026-10-27",
      "symbol": "TSLA",
-     "R": 0.421,
+     "R": 0.413,
      "outcome": "flat",
      "entry_time": "11:20 AM",
      "exit_time": "3:55 PM"
@@ -2285,7 +2375,7 @@
     {
      "date": "2026-10-27",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.052,
      "outcome": "stop",
      "entry_time": "11:50 AM",
      "exit_time": "12:35 PM"
@@ -2293,7 +2383,7 @@
     {
      "date": "2026-10-28",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.024,
      "outcome": "stop",
      "entry_time": "12:55 PM",
      "exit_time": "1:20 PM"
@@ -2301,7 +2391,7 @@
     {
      "date": "2026-10-28",
      "symbol": "AMD",
-     "R": 0.506,
+     "R": 0.498,
      "outcome": "flat",
      "entry_time": "2:40 PM",
      "exit_time": "3:55 PM"
@@ -2309,7 +2399,7 @@
     {
      "date": "2026-10-29",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.026,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "10:15 AM"
@@ -2317,7 +2407,7 @@
     {
      "date": "2026-10-29",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:35 AM",
      "exit_time": "3:40 PM"
@@ -2325,7 +2415,7 @@
     {
      "date": "2026-10-29",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.006,
      "outcome": "stop",
      "entry_time": "11:15 AM",
      "exit_time": "1:15 PM"
@@ -2333,7 +2423,7 @@
     {
      "date": "2026-10-30",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.017,
      "outcome": "stop",
      "entry_time": "10:45 AM",
      "exit_time": "12:05 PM"
@@ -2341,7 +2431,7 @@
     {
      "date": "2026-10-30",
      "symbol": "TSLA",
-     "R": 2.0,
+     "R": 1.989,
      "outcome": "target",
      "entry_time": "9:55 AM",
      "exit_time": "10:45 AM"
@@ -2349,7 +2439,7 @@
     {
      "date": "2026-11-02",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.022,
      "outcome": "stop",
      "entry_time": "10:25 AM",
      "exit_time": "10:50 AM"
@@ -2357,7 +2447,7 @@
     {
      "date": "2026-11-02",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "10:30 AM",
      "exit_time": "1:45 PM"
@@ -2365,7 +2455,7 @@
     {
      "date": "2026-11-02",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.958,
      "outcome": "target",
      "entry_time": "9:50 AM",
      "exit_time": "10:20 AM"
@@ -2393,13 +2483,14 @@
     "stop_rule": "or_mid",
     "target_r": 1,
     "symbols": "watchlist",
-    "min_entry": "10:30"
+    "min_entry": "10:30",
+    "slippage_per_share": 0.02
    },
    "trades": [
     {
      "date": "2026-10-19",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.009,
      "outcome": "stop",
      "entry_time": "11:40 AM",
      "exit_time": "12:05 PM"
@@ -2407,7 +2498,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AAPL",
-     "R": 1.0,
+     "R": 0.978,
      "outcome": "target",
      "entry_time": "10:55 AM",
      "exit_time": "11:05 AM"
@@ -2415,7 +2506,7 @@
     {
      "date": "2026-10-21",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.958,
      "outcome": "target",
      "entry_time": "11:15 AM",
      "exit_time": "11:40 AM"
@@ -2423,7 +2514,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AMD",
-     "R": -0.248,
+     "R": -0.254,
      "outcome": "flat",
      "entry_time": "1:15 PM",
      "exit_time": "3:55 PM"
@@ -2431,7 +2522,7 @@
     {
      "date": "2026-10-23",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.008,
      "outcome": "stop",
      "entry_time": "11:20 AM",
      "exit_time": "12:20 PM"
@@ -2439,7 +2530,7 @@
     {
      "date": "2026-10-26",
      "symbol": "NVDA",
-     "R": 1.0,
+     "R": 0.976,
      "outcome": "target",
      "entry_time": "10:45 AM",
      "exit_time": "11:05 AM"
@@ -2447,7 +2538,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.016,
      "outcome": "stop",
      "entry_time": "10:50 AM",
      "exit_time": "12:15 PM"
@@ -2455,7 +2546,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AMD",
-     "R": 0.223,
+     "R": 0.216,
      "outcome": "flat",
      "entry_time": "11:05 AM",
      "exit_time": "3:55 PM"
@@ -2463,7 +2554,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AAPL",
-     "R": 1.0,
+     "R": 0.975,
      "outcome": "target",
      "entry_time": "10:35 AM",
      "exit_time": "11:10 AM"
@@ -2471,7 +2562,7 @@
     {
      "date": "2026-10-27",
      "symbol": "SPY",
-     "R": 1.0,
+     "R": 0.96,
      "outcome": "target",
      "entry_time": "11:00 AM",
      "exit_time": "11:25 AM"
@@ -2479,7 +2570,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AMD",
-     "R": 0.441,
+     "R": 0.437,
      "outcome": "flat",
      "entry_time": "11:15 AM",
      "exit_time": "3:55 PM"
@@ -2487,7 +2578,7 @@
     {
      "date": "2026-10-27",
      "symbol": "TSLA",
-     "R": 0.421,
+     "R": 0.413,
      "outcome": "flat",
      "entry_time": "11:20 AM",
      "exit_time": "3:55 PM"
@@ -2495,7 +2586,7 @@
     {
      "date": "2026-10-27",
      "symbol": "NVDA",
-     "R": -1.0,
+     "R": -1.052,
      "outcome": "stop",
      "entry_time": "11:50 AM",
      "exit_time": "12:35 PM"
@@ -2503,7 +2594,7 @@
     {
      "date": "2026-10-28",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.024,
      "outcome": "stop",
      "entry_time": "12:55 PM",
      "exit_time": "1:20 PM"
@@ -2511,7 +2602,7 @@
     {
      "date": "2026-10-28",
      "symbol": "AMD",
-     "R": 0.506,
+     "R": 0.498,
      "outcome": "flat",
      "entry_time": "2:40 PM",
      "exit_time": "3:55 PM"
@@ -2519,7 +2610,7 @@
     {
      "date": "2026-10-29",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:35 AM",
      "exit_time": "3:40 PM"
@@ -2527,7 +2618,7 @@
     {
      "date": "2026-10-29",
      "symbol": "AMD",
-     "R": -1.0,
+     "R": -1.006,
      "outcome": "stop",
      "entry_time": "11:15 AM",
      "exit_time": "1:15 PM"
@@ -2535,7 +2626,7 @@
     {
      "date": "2026-10-30",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.017,
      "outcome": "stop",
      "entry_time": "10:45 AM",
      "exit_time": "12:05 PM"
@@ -2543,7 +2634,7 @@
     {
      "date": "2026-11-02",
      "symbol": "TSLA",
-     "R": -1.0,
+     "R": -1.01,
      "outcome": "stop",
      "entry_time": "10:30 AM",
      "exit_time": "1:45 PM"
@@ -2574,13 +2665,14 @@
      "AAPL",
      "SPY"
     ],
-    "min_entry": null
+    "min_entry": null,
+    "slippage_per_share": 0.02
    },
    "trades": [
     {
      "date": "2026-10-19",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.013,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "11:25 AM"
@@ -2588,7 +2680,7 @@
     {
      "date": "2026-10-19",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.044,
      "outcome": "stop",
      "entry_time": "10:15 AM",
      "exit_time": "10:35 AM"
@@ -2596,7 +2688,7 @@
     {
      "date": "2026-10-20",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.967,
      "outcome": "target",
      "entry_time": "9:55 AM",
      "exit_time": "10:15 AM"
@@ -2604,7 +2696,7 @@
     {
      "date": "2026-10-21",
      "symbol": "AAPL",
-     "R": 1.314,
+     "R": 1.299,
      "outcome": "flat",
      "entry_time": "10:55 AM",
      "exit_time": "3:55 PM"
@@ -2612,7 +2704,7 @@
     {
      "date": "2026-10-21",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.958,
      "outcome": "target",
      "entry_time": "11:15 AM",
      "exit_time": "12:40 PM"
@@ -2620,7 +2712,7 @@
     {
      "date": "2026-10-23",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.041,
      "outcome": "stop",
      "entry_time": "10:00 AM",
      "exit_time": "10:15 AM"
@@ -2628,7 +2720,7 @@
     {
      "date": "2026-10-26",
      "symbol": "SPY",
-     "R": 0.195,
+     "R": 0.173,
      "outcome": "flat",
      "entry_time": "10:15 AM",
      "exit_time": "3:55 PM"
@@ -2636,7 +2728,7 @@
     {
      "date": "2026-10-26",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.016,
      "outcome": "stop",
      "entry_time": "10:50 AM",
      "exit_time": "12:15 PM"
@@ -2644,7 +2736,7 @@
     {
      "date": "2026-10-27",
      "symbol": "AAPL",
-     "R": 0.621,
+     "R": 0.586,
      "outcome": "flat",
      "entry_time": "10:35 AM",
      "exit_time": "3:55 PM"
@@ -2652,7 +2744,7 @@
     {
      "date": "2026-10-27",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.96,
      "outcome": "target",
      "entry_time": "11:00 AM",
      "exit_time": "12:05 PM"
@@ -2660,7 +2752,7 @@
     {
      "date": "2026-10-28",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.024,
      "outcome": "stop",
      "entry_time": "12:55 PM",
      "exit_time": "1:20 PM"
@@ -2668,7 +2760,7 @@
     {
      "date": "2026-10-29",
      "symbol": "SPY",
-     "R": -1.0,
+     "R": -1.026,
      "outcome": "stop",
      "entry_time": "10:05 AM",
      "exit_time": "10:15 AM"
@@ -2676,7 +2768,7 @@
     {
      "date": "2026-10-30",
      "symbol": "AAPL",
-     "R": -1.0,
+     "R": -1.017,
      "outcome": "stop",
      "entry_time": "10:45 AM",
      "exit_time": "12:05 PM"
@@ -2684,7 +2776,7 @@
     {
      "date": "2026-11-02",
      "symbol": "SPY",
-     "R": 2.0,
+     "R": 1.958,
      "outcome": "target",
      "entry_time": "9:50 AM",
      "exit_time": "10:20 AM"
