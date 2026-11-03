@@ -232,7 +232,7 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
   <div class="topbar"><div class="wrap">
     <div class="brand"><span class="mark"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 10 L5 6 L8 8.5 L13 3" fill="none" stroke="var(--surface-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Trading Journal</div>
     <nav class="sections">
-      <a href="#overview">Overview</a><a href="#stocks">Stocks</a><a href="#versions">Versions</a><a href="#timemachine">Time Machine</a><a href="#backtest">Backtest</a><a href="#trades">Trades</a><a href="#guide">Guide</a>
+      <a href="#overview">Overview</a><a href="#sip">In play</a><a href="#stocks">Stocks</a><a href="#versions">Versions</a><a href="#timemachine">Time Machine</a><a href="#backtest">Backtest</a><a href="#trades">Trades</a><a href="#guide">Guide</a>
     </nav>
     <div class="top-right">
       <span class="pill when" id="when"></span>
@@ -287,6 +287,25 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
         </div>
       </div>
     </div>
+
+    <section class="section" id="sip">
+      <div class="section-head">
+        <div><div class="eyebrow" style="margin-bottom:4px">New research direction</div><h2>Stocks in play</h2>
+          <p class="desc" id="sip-desc">Each day, the 20 stocks with the most unusual volume in their first 5 minutes, traded with versions of the breakout. Trading costs included.</p></div>
+        <div class="chips" id="sip-chips" style="margin-top:0"></div>
+      </div>
+      <div class="card pad">
+        <div class="card-head"><div><h3>Running total by version, after costs</h3><div class="desc">Each line adds up one version's trades day by day. Shaded days are the backtest: the versions were chosen after seeing that period.</div></div></div>
+        <div class="legend eq-legend" id="sip-legend"></div>
+        <div class="chart" id="sip-chart"></div>
+      </div>
+      <div class="card" style="margin-top:12px"><div class="tscroll" id="sip-table"></div><div class="tfoot" id="sip-foot"></div></div>
+      <div class="card" style="margin-top:12px">
+        <div class="card-head" style="padding:18px 22px 0"><div><h3 id="sip-picks-title">Latest picks</h3><div class="desc">The day's 20 stocks in play, ranked by relative volume, with how the first version traded each.</div></div>
+          <select id="sip-day" aria-label="Day"></select></div>
+        <div class="tscroll" id="sip-picks" style="margin-top:12px"></div>
+      </div>
+    </section>
 
     <section class="section" id="stocks">
       <div class="section-head"><div><h2>By stock</h2><p class="desc">Live journal results per stock, next to what the 59-day backtest says for the same rule.</p></div></div>
@@ -1148,6 +1167,122 @@ function backtestByTime() {
   box.querySelectorAll(".cell").forEach((n) => { const c = JSON.parse(n.dataset.c); bindTip(n, () => `<div class="t">${n.dataset.t}</div>${trow("Average per trade", fV(c.avg_R))}${trow("Total", fV(c.total_R))}${trow("Trades", c.fired)}${trow("Won", pct(c.win_rate))}${trow("Target / stop / closed", `${c.target} / ${c.stop} / ${c.flat}`)}`); });
 }
 
+
+// ---------- stocks in play
+const SIP = DATA && DATA.sip;
+const SIPS = { hidden: new Set() };
+function sipSeries() {
+  if (!SIP) return [];
+  const days = SIP.days || [];
+  return (SIP.variants || []).map((v, i) => {
+    const rs = SIP.trades.filter((t) => t.variant === v.id), byDay = {};
+    rs.forEach((t) => { (byDay[t.date] = byDay[t.date] || []).push(t); });
+    let run = 0; const cum = days.map((d) => (run += (byDay[d] || []).reduce((a, t) => a + t.R, 0)));
+    return { id: v.id, label: v.label, v, color: `var(--c${(i % 7) + 1})`, rs, byDay, cum };
+  });
+}
+function sipSection() {
+  const sec = $("sip");
+  if (!SIP || !SIP.days || !SIP.days.length) {
+    $("sip-chart").innerHTML = '<div class="empty">The first stocks-in-play run fills this in after the next market close.</div>';
+    ["sip-table", "sip-picks", "sip-legend", "sip-foot"].forEach((id) => $(id).innerHTML = ""); return;
+  }
+  const since = SIP.since, days = SIP.days, fair = days.filter((d) => d >= since).length;
+  $("sip-chips").innerHTML = [`<b>${SIP.fetched || SIP.universe}</b> stocks scanned daily`, `Top <b>20</b> by relative volume`, `<b>${days.length}</b> days`, `Costs: <b>${(SIP.slip * 100).toFixed(0)}¢</b>/share each way`, `Fair test from <b>${fDate(since)}</b> · ${fair} day${fair === 1 ? "" : "s"}`].map((c) => `<span class="chip">${c}</span>`).join("");
+  const S = sipSeries();
+  // legend
+  $("sip-legend").innerHTML = S.map((x) => { const tot = x.cum[x.cum.length - 1]; return `<button data-k="${x.id}" aria-pressed="${!SIPS.hidden.has(x.id)}"><i style="background:${x.color}"></i>${esc(x.label)} <b class="${cls(tot)}">${fV(tot)}</b></button>`; }).join("");
+  $("sip-legend").querySelectorAll("button").forEach((b) => b.onclick = () => { const k = b.dataset.k; SIPS.hidden.has(k) ? SIPS.hidden.delete(k) : SIPS.hidden.add(k); sipSection(); });
+  sipChart(S.filter((x) => !SIPS.hidden.has(x.id)), days, since);
+  // table
+  let h = `<table><thead><tr><th>Version</th><th class="num">Backtest trades</th><th class="num">Won</th><th class="num">Avg before costs</th><th class="num">Avg after costs</th><th class="num">Profit factor</th><th class="num">Total</th><th class="num">Fair test</th><th class="num">Fair avg</th></tr></thead><tbody>`;
+  let costAvg = [];
+  S.forEach((x) => {
+    const bt = x.rs.filter((t) => t.date < since), ft = x.rs.filter((t) => t.date >= since);
+    const a = stats(bt), f = stats(ft);
+    const gross = bt.length ? bt.reduce((q, t) => q + t.R_gross, 0) / bt.length : null;
+    if (bt.length) costAvg.push(gross - a.avg);
+    const pf = a.pf == null ? "–" : a.pf === Infinity ? "∞" : a.pf.toFixed(2);
+    h += `<tr><td class="sym"><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${x.color};margin-right:8px;vertical-align:-1px"></i>${esc(x.label)}</td>
+      <td class="num">${a.n}</td><td class="num">${pct(a.win)}</td><td class="num ${cls(gross || 0)}">${gross == null ? "–" : fV(gross)}</td>
+      <td class="num"><b class="${cls(a.avg || 0)}">${a.n ? fV(a.avg) : "–"}</b></td><td class="num">${pf}</td><td class="num ${cls(a.tot)}">${a.n ? fV(a.tot) : "–"}</td>
+      <td class="num">${f.n}</td><td class="num ${cls(f.avg || 0)}">${f.n ? fV(f.avg) : '<span class="muted">waiting</span>'}</td></tr>`;
+  });
+  const wl = VERS.find((v) => v.baseline);
+  if (wl) { const bt = wl.trades.filter((t) => t.date < since), a = stats(bt);
+    h += `<tr><td class="muted">For comparison: classic rule on your 5-stock watchlist</td><td class="num muted">${a.n}</td><td class="num muted">${pct(a.win)}</td><td class="num muted">–</td><td class="num muted">${a.n ? fV(a.avg) : "–"}</td><td class="num muted">${a.pf == null ? "–" : a.pf === Infinity ? "∞" : a.pf.toFixed(2)}</td><td class="num muted">${a.n ? fV(a.tot) : "–"}</td><td class="num muted">–</td><td class="num muted">–</td></tr>`; }
+  $("sip-table").innerHTML = h + "</tbody></table>";
+  const ca = costAvg.length ? costAvg.reduce((p, q) => p + q, 0) / costAvg.length : 0;
+  $("sip-foot").innerHTML = `<span>Costs took about <b>${UNIT === "usd" ? fUSD(Math.abs(ca) * RISK).replace(/^[+−]/, "") : Math.abs(ca).toFixed(2) + "R"}</b> off each trade on average. Tight stops make costs large: 4¢ of slippage on a 30¢ stop is 0.13R. Backtest = days before ${fDate(since)}.</span>`;
+  // picks
+  const pdays = Object.keys(SIP.picks || {}).sort().reverse();
+  const sel = $("sip-day");
+  if (!sel.options.length) { sel.innerHTML = pdays.map((d) => `<option value="${d}">${fDate(d, { weekday: "short", month: "short", day: "numeric" })}${d >= since ? " · fair test" : ""}</option>`).join(""); sel.onchange = sipPicks; }
+  sipPicks();
+}
+function sipPicks() {
+  const d = $("sip-day").value; if (!d) return;
+  const picks = SIP.picks[d] || [], v0 = (SIP.variants || [])[0];
+  const tr = {}; SIP.trades.filter((t) => t.date === d && v0 && t.variant === v0.id).forEach((t) => tr[t.symbol] = t);
+  $("sip-picks-title").textContent = `Picks for ${fDate(d, { weekday: "long", month: "short", day: "numeric" })}`;
+  const RES = { target: ["Target", "var(--good)", "▲"], stop: ["Stop", "var(--critical)", "▼"], flat: ["Held to close", "var(--neutral)", "■"] };
+  const maxRv = Math.max(...picks.map((p) => p.rvol), 1);
+  let h = `<table><thead><tr><th>#</th><th>Stock</th><th>Relative volume</th><th>First 5 min</th><th class="num">Daily range (ATR)</th><th class="num">Open → close</th><th>Trade (${esc(v0 ? (v0.short || v0.label) : "")})</th><th class="num">Result</th></tr></thead><tbody>`;
+  picks.forEach((p, i) => {
+    const t = tr[p.symbol], r = t && RES[t.outcome];
+    h += `<tr><td class="muted">${i + 1}</td><td class="sym">${esc(p.symbol)}</td>
+      <td><span style="display:inline-flex;align-items:center;gap:8px"><span style="display:inline-block;height:6px;border-radius:3px;background:var(--series-1);width:${Math.max(4, 70 * p.rvol / maxRv)}px"></span>${p.rvol.toFixed(1)}×</span></td>
+      <td>${p.first === "up" ? '<span style="color:var(--good)">▲</span> up' : p.first === "down" ? '<span style="color:var(--critical)">▼</span> down' : "flat"}</td>
+      <td class="num">$${p.atr.toFixed(2)}</td><td class="num ${cls(p.day_change)}">${sign(p.day_change)}${Math.abs(p.day_change).toFixed(1)}%</td>
+      <td>${t ? `<span class="tag">${t.side === "long" ? "Long" : "Short"}</span> ${px(t.entry)} at ${t.entry_time} · <span style="color:${r[1]}">${r[2]}</span> ${r[0]} ${t.exit_time}` : '<span class="muted">no breakout</span>'}</td>
+      <td class="num">${t ? `<b class="${cls(t.R)}">${fV(t.R)}</b>` : "–"}</td></tr>`;
+  });
+  $("sip-picks").innerHTML = h + "</tbody></table>";
+}
+function sipChart(S, days, since) {
+  const box = $("sip-chart");
+  const narrow = box.clientWidth < 640;
+  const H1 = narrow ? 240 : 320, m = { l: narrow ? 46 : 62, r: narrow ? 64 : 120, t: 28, b: 28 }, H = m.t + H1 + m.b;
+  const [s, W] = svgBox(box, H);
+  const n = days.length, step = (W - m.l - m.r) / Math.max(1, n), X = (i) => m.l + (i + 0.5) * step;
+  const vals = [0]; S.forEach((x) => x.cum.forEach((v) => vals.push(v)));
+  const tk = ticks(Math.min(...vals), Math.max(...vals), 5), y0 = tk[0], y1 = tk[tk.length - 1];
+  const Y = (v) => m.t + (y1 - v) * H1 / (y1 - y0);
+  const sIdx = days.findIndex((d) => d >= since);
+  const xe = sIdx < 0 ? X(n - 1) + step / 2 : X(sIdx) - step / 2;
+  el("rect", { x: m.l, y: m.t, width: Math.max(0, xe - m.l), height: H1, fill: "var(--wash)", opacity: 0.6 }, s);
+  el("text", { x: m.l + 8, y: m.t - 10, class: "lbl", style: "font-weight:600" }, s, "Backtest (in-sample)");
+  if (sIdx >= 0) { el("line", { x1: xe, x2: xe, y1: m.t - 4, y2: m.t + H1, stroke: "var(--text-primary)", "stroke-width": 1.5 }, s); el("text", { x: xe + 6, y: m.t + 14, class: "strong" }, s, "Fair test →"); }
+  else el("text", { x: xe - 6, y: m.t + 14, "text-anchor": "end", class: "lbl" }, s, `Fair test starts ${fDate(since)}`);
+  tk.forEach((t) => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s); el("text", { x: m.l - 10, y: Y(t) + 4, "text-anchor": "end" }, s, axisV(t)); });
+  const every = Math.max(1, Math.ceil(n / Math.max(2, Math.floor((W - m.l - m.r) / 64))));
+  days.forEach((d, i) => { if (i % every === 0) el("text", { x: X(i), y: H - 8, "text-anchor": "middle" }, s, fDate(d)); });
+  const ends = [];
+  S.forEach((x) => {
+    el("path", { d: smooth([[m.l, Y(0)]].concat(x.cum.map((v, i) => [X(i), Y(v)]))), fill: "none", stroke: x.color, "stroke-width": 2.25, "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+    ends.push({ x, v: x.cum[n - 1], y: Y(x.cum[n - 1]) });
+  });
+  ends.sort((p, q) => p.y - q.y);
+  for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 16) ends[k].y = ends[k - 1].y + 16;
+  ends.forEach((e) => {
+    el("circle", { cx: X(n - 1), cy: Y(e.v), r: 3.5, fill: e.x.color, stroke: "var(--surface-1)", "stroke-width": 1.5 }, s);
+    el("line", { x1: X(n - 1) + 4, x2: W - m.r + 8, y1: Y(e.v), y2: e.y, stroke: "var(--axis)" }, s);
+    el("text", { x: W - m.r + 12, y: e.y + 4, class: "lbl" }, s, fV(e.v, UNIT === "usd" ? 0 : 1));
+  });
+  const hov = el("g", { style: "pointer-events:none", opacity: 0 }, s);
+  const cross = el("line", { y1: m.t, y2: m.t + H1, stroke: "var(--text-muted)", "stroke-dasharray": "3 3" }, hov);
+  const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: m.t + H1, fill: "transparent", style: "cursor:crosshair" }, s);
+  hit.addEventListener("mousemove", (ev) => {
+    const bx = s.getBoundingClientRect(), i = Math.max(0, Math.min(n - 1, Math.floor((ev.clientX - bx.left - m.l) / step)));
+    hov.setAttribute("opacity", 1); cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i));
+    const d = days[i];
+    showTip(`<div class="t">${fDate(d, { weekday: "long", month: "short", day: "numeric" })}</div><div class="small muted" style="margin-bottom:5px">${d >= since ? "Fair test" : "Backtest (in-sample)"}</div>` +
+      S.slice().sort((p, q) => q.cum[i] - p.cum[i]).map((x) => { const dd = x.byDay[d] || [], dv = dd.reduce((a, t) => a + t.R, 0);
+        return `<div class="r"><span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${x.color};margin-right:6px"></i>${esc(x.v.short || x.v.label)}</span><b class="${cls(x.cum[i])}">${fV(x.cum[i])}</b></div><div class="r small" style="margin:-2px 0 3px 14px"><span>that day: ${dd.length} trades</span><span class="${cls(dv)}">${dd.length ? fV(dv) : "–"}</span></div>`; }).join(""), ev);
+  });
+  hit.addEventListener("mouseleave", () => { hideTip(); hov.setAttribute("opacity", 0); });
+}
+
 // ---------- trade log
 let SORT = { k: "date", dir: -1 }, FSYM = "all", FSRC = "all", FOUT = "all", LIMIT = 50;
 const COLS = [
@@ -1196,8 +1331,8 @@ $("f-sym").addEventListener("change", (e) => { FSYM = e.target.value; LIMIT = 50
 segBind("units", (u) => { UNIT = u; try { localStorage.setItem("tj-unit", u); } catch (e) {} renderAll(); });
 [...$("units").children].forEach((b) => b.setAttribute("aria-pressed", b.dataset.u === UNIT ? "true" : "false"));
 
-function renderCharts() { eqLegend(); equity(); daily(); byTime(); timeMachine(); }
-function renderAll() { header(); verdict(); kpis(); outcomes(); stockTable(); versionsTable(); backtest(); backtestByTime(); tradeTable(); renderCharts(); }
+function renderCharts() { eqLegend(); equity(); daily(); byTime(); timeMachine(); if (SIP && SIP.days && SIP.days.length) sipChart(sipSeries().filter((x) => !SIPS.hidden.has(x.id)), SIP.days, SIP.since); }
+function renderAll() { header(); verdict(); kpis(); outcomes(); sipSection(); stockTable(); versionsTable(); backtest(); backtestByTime(); tradeTable(); renderCharts(); }
 renderAll();
 let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderCharts, 120); });
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { backtest(); backtestByTime(); });

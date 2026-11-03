@@ -39,6 +39,8 @@ DASHBOARD = os.environ.get("DASHBOARD_PATH") or os.path.join(PROJECT, "dashboard
 CONFIG = os.path.join(HERE, "config.json")
 TEMPLATE = os.path.join(HERE, "dashboard_template.html")
 
+SLIP = 0.02            # assumed slippage per share, each side (entry and exit); set in config.json
+HISTORY = os.path.join(DATA, "history")   # every full session ever downloaded, so backtests grow past 60 days
 OR_BARS = 3            # 15-minute opening range = the 9:30, 9:35, 9:40 bars
 LAST_ENTRY_SLOT = 71   # the 15:25 bar closes at 15:30: no entries after 3:30 PM ET
 FLAT_SLOT = 76         # the 15:50 bar closes at 15:55: flat by 3:55 PM ET
@@ -59,11 +61,13 @@ def log(msg):
 
 def load_config():
     cfg = {"watchlist": ["AAPL", "TSLA", "NVDA", "AMD", "SPY"], "scanner_picks": 5,
-           "stop_rule": "or_mid", "target_r": 1.0, "risk_dollars": 50, "plugin_dir": ""}
+           "stop_rule": "or_mid", "target_r": 1.0, "risk_dollars": 50, "slippage_per_share": 0.02, "plugin_dir": ""}
     if os.path.exists(CONFIG):
         with open(CONFIG) as fh:
             cfg.update(json.load(fh))
     cfg["watchlist"] = [s.strip().upper() for s in cfg["watchlist"] if s.strip()]
+    global SLIP
+    SLIP = float(cfg.get("slippage_per_share") or 0)
     return cfg
 
 
@@ -129,11 +133,41 @@ def get_chart(tm, sym, offline_dir=None):
         time.sleep(0.5)                      # be polite to the free endpoint
     with open(path, "w") as fh:
         fh.write(text)
+    full = parse_full(tm, text, sym)
+    if not offline_dir:
+        full = merge_history(sym, full)
+    return path, full
+
+
+def parse_full(tm, text, sym):
     result = tm.chart_result(text, sym)
     _, bars, _ = tm.parse_bars(result, now_utc())
     days = tm.split_sessions(bars)
-    full = {d: [s[i] for i in range(tm.SESSION_BARS)] for d, s in days.items() if len(s) == tm.SESSION_BARS}
-    return path, full
+    return {d: [s[i] for i in range(tm.SESSION_BARS)] for d, s in days.items() if len(s) == tm.SESSION_BARS}
+
+
+def merge_history(sym, full):
+    """Add the sessions saved on earlier runs, save the union. Compact: [o, h, l, c, v] per bar."""
+    import gzip
+    path = os.path.join(HISTORY, "%s.json.gz" % sym)
+    saved = {}
+    if os.path.exists(path):
+        try:
+            with gzip.open(path, "rt") as fh:
+                saved = json.load(fh)
+        except (OSError, ValueError):
+            saved = {}
+    for d, D in full.items():
+        saved[d] = [[round(b["o"], 4), round(b["h"], 4), round(b["l"], 4), round(b["c"], 4), int(b["v"] or 0)] for b in D]
+    os.makedirs(HISTORY, exist_ok=True)
+    with gzip.open(path + ".tmp", "wt") as fh:
+        json.dump(saved, fh, separators=(",", ":"))
+    os.replace(path + ".tmp", path)
+    out = {}
+    for d, rows in saved.items():
+        out[d] = [{"date": d, "slot": i, "start": "%02d:%02d" % divmod(570 + 5 * i, 60), "o": r[0], "h": r[1], "l": r[2], "c": r[3], "v": r[4]}
+                  for i, r in enumerate(rows)]
+    return out
 
 
 def trade_on(tm, D, stop_rule, target_r, min_entry_min=None):
@@ -160,9 +194,11 @@ def trade_on(tm, D, stop_rule, target_r, min_entry_min=None):
             outcome, exit_px, exit_time = "target", t, tm.clock12(tm.OPEN_MIN + 5 * (b["slot"] + 1))
             break
     R = target_r if outcome == "target" else -1.0 if outcome == "stop" else (exit_px - e) / risk
+    cost = 2 * SLIP / risk                   # slippage on the way in and on the way out
     return {"entry": e, "stop": s, "target": t, "risk": round(risk, 2), "entry_slot": k,
             "entry_time": tm.clock12(tm.OPEN_MIN + 5 * (k + 1)), "or_high": round(oh, 2), "or_low": round(ol, 2),
-            "outcome": outcome, "exit": round(exit_px, 2), "exit_time": exit_time, "R": round(R, 3)}
+            "outcome": outcome, "exit": round(exit_px, 2), "exit_time": exit_time,
+            "R": round(R - cost, 3), "R_gross": round(R, 3), "cost_R": round(cost, 3)}
 
 
 def time_machine(plugin, sym, date, tr, chart_path):
@@ -210,11 +246,37 @@ def ny_now(tm):
     return tm.to_eastern(now_utc())
 
 
+def run_sip(tm, cfg, plugin, a):
+    """Stocks in play (see sip.py). Never lets a problem there stop the main journal."""
+    if getattr(a, "no_sip", False):
+        return
+    try:
+        sys.path.insert(0, HERE)
+        import sip
+        if sip.run(tm, cfg, plugin, PROJECT, DATA, parse_full, SLIP, offline_dir=a.offline):
+            build_dashboard()
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        log("Stocks-in-play step failed (the main journal is fine): %s" % e)
+
+
 def cmd_daily(a):
     cfg = load_config()
     plugin = find_plugin(cfg)
     tm = load_tm(plugin)
+    try:
+        _daily(a, cfg, plugin, tm)
+    finally:
+        run_sip(tm, cfg, plugin, a)
+
+
+def _daily(a, cfg, plugin, tm):
     journal = read_json(JOURNAL, {"entries": [], "days": []})
+    for r in journal["entries"]:              # older entries were logged before costs were counted
+        if r.get("status") == "triggered" and "R_gross" not in r and r.get("risk"):
+            cost = 2 * SLIP / r["risk"]
+            r["R_gross"], r["cost_R"], r["R"] = r["R"], round(cost, 3), round(r["R"] - cost, 3)
     done_days = set(journal["days"])
     ny = ny_now(tm)
     today = ny.date().isoformat()
@@ -306,6 +368,7 @@ def run_versions(tm, cfg, journal, full):
     for v in cfg.get("versions") or []:
         vid = v["id"]
         spec = {k: v.get(k) for k in ("stop_rule", "target_r", "symbols", "min_entry")}
+        spec["slippage_per_share"] = SLIP
         rec = out.get(vid)
         if not rec or rec.get("spec") != spec:          # new or edited version: start over
             rec = out[vid] = {"spec": spec, "trades": [], "days": []}
@@ -386,6 +449,18 @@ def summarize(trades, sessions):
             "win_rate": round(wins / float(n), 4), "avg_R": round(tot / n, 3), "total_R": round(tot, 2)}
 
 
+def slim_sip(st):
+    """Only what the dashboard draws: keeps the page light."""
+    if not st:
+        return None
+    keep = ("date", "symbol", "variant", "side", "R", "R_gross", "outcome", "entry_time", "exit_time", "rvol", "entry", "exit")
+    last = sorted(st.get("picks", {}))[-15:]
+    return {"since": st.get("since"), "variants": st.get("variants"), "days": st.get("days"), "universe": st.get("universe"),
+            "fetched": st.get("fetched"), "updated": st.get("updated"), "slip": st.get("slip"),
+            "picks": {d: st["picks"][d] for d in last},
+            "trades": [{k: t.get(k) for k in keep} for t in st.get("trades", [])]}
+
+
 def build_dashboard():
     cfg = load_config()
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -394,7 +469,8 @@ def build_dashboard():
         nxt += datetime.timedelta(days=1)
     data = {"journal": read_json(JOURNAL, {"entries": [], "days": []}),
             "backtest": read_json(BACKTEST, None),
-            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars", "versions")},
+            "sip": slim_sip(read_json(os.path.join(DATA, "sip", "sip.json"), None)),
+            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars", "versions", "slippage_per_share", "sip")},
             "built": datetime.datetime.now().strftime("%a %b %-d, %-I:%M %p"),
             "built_iso": now.isoformat(),
             "next_run": nxt.astimezone().strftime("%a %b %-d, %-I:%M %p")}
@@ -412,6 +488,7 @@ def main():
     sub = ap.add_subparsers(dest="cmd")
     p = sub.add_parser("daily")
     p.add_argument("--backfill", type=int, default=0, help="also log the last N sessions")
+    p.add_argument("--no-sip", action="store_true", help="skip the stocks-in-play step")
     p.add_argument("--offline", help="folder of saved <SYM>-60d5m.json(.gz) charts (testing)")
     p = sub.add_parser("weekly")
     p.add_argument("--offline", help="folder of saved <SYM>-60d5m.json(.gz) charts (testing)")
