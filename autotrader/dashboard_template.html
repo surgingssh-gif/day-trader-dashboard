@@ -140,6 +140,17 @@ label.chk input { accent-color: var(--series-1); margin: 0; }
 .eq-tag { font-size: 11.5px; font-weight: 650; }
 @media (max-width: 860px) { .eq-stats { flex-wrap: wrap; } .eq-stats > div { flex: 1 1 33%; border-bottom: 1px solid var(--border); } }
 
+
+.eq-card { padding: 22px 22px 18px; }
+.eq-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.eq-label { font-size: 13px; color: var(--text-secondary); display: flex; gap: 10px; align-items: center; }
+.eq-when { color: var(--text-muted); }
+.eq-value { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin: 4px 0 4px; }
+.eq-delta { font-size: 13.5px; color: var(--text-secondary); }
+.eq-delta b { font-weight: 650; }
+#equity svg .ptitle { fill: var(--text-secondary); font-size: 12px; font-weight: 600; }
+#equity svg .pill text { font-weight: 650; font-size: 11px; }
+
 /* outcome bar */
 .obar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; gap: 2px; margin: 6px 0 14px; }
 .obar > div { display: flex; align-items: center; padding: 0 10px; color: #fff; font-size: 12.5px; font-weight: 600; white-space: nowrap; min-width: 0; overflow: hidden; }
@@ -221,7 +232,7 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
   <div class="topbar"><div class="wrap">
     <div class="brand"><span class="mark"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 10 L5 6 L8 8.5 L13 3" fill="none" stroke="var(--surface-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Trading Journal</div>
     <nav class="sections">
-      <a href="#overview">Overview</a><a href="#stocks">Stocks</a><a href="#timemachine">Time Machine</a><a href="#backtest">Backtest</a><a href="#trades">Trades</a><a href="#guide">Guide</a>
+      <a href="#overview">Overview</a><a href="#stocks">Stocks</a><a href="#versions">Versions</a><a href="#timemachine">Time Machine</a><a href="#backtest">Backtest</a><a href="#trades">Trades</a><a href="#guide">Guide</a>
     </nav>
     <div class="top-right">
       <span class="pill when" id="when"></span>
@@ -241,19 +252,22 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
     <div class="card verdict" id="verdict"></div>
     <div class="kpis" id="kpis"></div>
 
-    <div class="card pad eq-card" style="margin-top:12px">
-      <div class="card-head">
-        <div><h3>Running profit</h3><div class="desc">Every trade added up in order. Hover for details, drag on the strip below to zoom.</div></div>
+    <div class="card eq-card" style="margin-top:12px">
+      <div class="eq-top">
+        <div class="eq-hero">
+          <div class="eq-label"><span id="eq-scope">Running profit</span><span class="eq-when" id="eq-when"></span></div>
+          <div class="eq-value" id="eq-value">–</div>
+          <div class="eq-delta" id="eq-delta"></div>
+        </div>
         <div class="eq-controls">
-          <div class="seg" id="eq-mode"><button data-v="total" aria-pressed="true">Total</button><button data-v="split" aria-pressed="false">By stock</button></div>
-          <div class="seg" id="eq-range"><button data-v="all" aria-pressed="true">All</button><button data-v="20" aria-pressed="false">20D</button><button data-v="10" aria-pressed="false">10D</button><button data-v="5" aria-pressed="false">5D</button></div>
-          <label class="chk"><input type="checkbox" id="eq-dots" checked> Trades</label>
-          <label class="chk"><input type="checkbox" id="eq-dd" checked> Below peak</label>
+          <div class="seg" id="eq-mode"><button data-v="total" aria-pressed="true">Total</button><button data-v="split" aria-pressed="false">By stock</button><button data-v="versions" aria-pressed="false">Versions</button></div>
+          <div class="seg" id="eq-range"><button data-v="5" aria-pressed="false">5D</button><button data-v="10" aria-pressed="false">10D</button><button data-v="20" aria-pressed="false">20D</button><button data-v="all" aria-pressed="true">All</button></div>
+          <label class="chk"><input type="checkbox" id="eq-dots" checked> Trade dots</label>
         </div>
       </div>
       <div class="eq-stats" id="eq-stats"></div>
       <div class="legend eq-legend" id="eq-legend"></div>
-      <div class="chart" id="equity" tabindex="0" aria-label="Running profit chart. Use left and right arrow keys to move between trades."></div>
+      <div class="chart" id="equity" tabindex="0" aria-label="Running profit chart. Use the left and right arrow keys to step through trades."></div>
       <div class="chart" id="eq-brush"></div>
     </div>
 
@@ -279,6 +293,14 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
       <div class="card"><div class="tscroll" id="stocktable"></div></div>
     </section>
 
+    <section class="section" id="versions">
+      <div class="section-head">
+        <div><h2>Test versions</h2><p class="desc" id="ver-desc">Variations of the rule running every day next to the live one, on the same watchlist. Only the days after a version was picked count as a fair test.</p></div>
+        <button class="btn" id="ver-chart">Compare on the chart ↑</button>
+      </div>
+      <div class="card"><div class="tscroll" id="vertable"></div></div>
+    </section>
+
     <section class="section" id="timemachine">
       <div class="section-head"><div><h2>Is the Time Machine accurate?</h2><p class="desc">Before each trade, the Time Machine replays the day 10,000 times and estimates the odds. Here's how those odds compared with what happened.</p></div></div>
       <div class="grid g-11">
@@ -300,6 +322,10 @@ footer { margin-top: 28px; color: var(--text-muted); font-size: 12.5px; text-ali
         </div>
         <div class="card pad" id="btsummary"></div>
       </div>
+        <div class="card pad" style="margin-top:12px" id="bt-time-card">
+      <div class="card-head"><div><h3>Backtest by entry time</h3><div class="desc">Same backtest, split by when the breakout triggered (New York time). Average result per trade, win rate and number of trades. Cells with few trades are drawn paler, because they're less reliable.</div></div></div>
+      <div id="bt-time"></div>
+    </div>
     </section>
 
     <section class="section" id="trades">
@@ -497,160 +523,250 @@ function kpis() {
   $("kpis").querySelectorAll(".info").forEach((n) => bindTip(n, `<div>${n.dataset.help}</div>`));
 }
 
-// ---------- running profit (interactive)
-const EQ = TR.slice().sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : (tmin(a.entry_time) - tmin(b.entry_time)) || (a.symbol < b.symbol ? -1 : 1));
+// ---------- running profit: multi-panel interactive chart
+const EQ = TR.slice();                       // already in the order trades happened
 (function () { let run = 0, peak = 0; EQ.forEach((r) => { run += r.R; peak = Math.max(peak, run); r._cum = run; r._pk = peak; }); })();
-const EQS = { mode: "total", a: 0, b: Math.max(0, EQ.length - 1), dots: true, dd: true, hidden: new Set(), hover: null, anim: true, preset: "all" };
+const EQS = { mode: "total", a: 0, b: Math.max(0, EQ.length - 1), dots: true, hidden: new Set(), hover: null, anim: true };
 const OUTC = { target: ["var(--good)", "▲", "Target"], stop: ["var(--critical)", "▼", "Stop"], flat: ["var(--neutral)", "■", "Closed 3:55"] };
-function eqGroups() {
+const GROUPS = (function () {
   const wl = CFG.watchlist || [];
   const g = wl.map((s, i) => ({ key: s, label: s, color: `var(--c${(i % 7) + 1})`, test: (r) => r.symbol === s && r.source !== "scanner" }));
   if (EQ.some((r) => r.source === "scanner")) g.push({ key: "__scanner", label: "Scanner picks", color: `var(--c${(wl.length % 7) + 1})`, test: (r) => r.source === "scanner" });
   g.forEach((x) => { let run = 0; x.cum = EQ.map((r) => (run += x.test(r) ? r.R : 0)); });
   return g;
+})();
+// versions: cumulative by logged day
+const VDAYS = DAYS.slice();
+const VERS = (function () {
+  const V = (J.versions) || {}, order = (CFG.versions || []).map((v) => v.id).filter((id) => V[id]);
+  Object.keys(V).forEach((id) => { if (!order.includes(id)) order.push(id); });
+  return order.map((id, i) => {
+    const v = V[id], byDay = {};
+    v.trades.forEach((t) => { (byDay[t.date] = byDay[t.date] || []).push(t); });
+    let run = 0; const cum = VDAYS.map((d) => (run += (byDay[d] || []).reduce((a, t) => a + t.R, 0)));
+    return { id, label: v.label || id, since: v.since, baseline: v.baseline, color: v.baseline ? "var(--text-secondary)" : `var(--c${(i % 7) + 1})`, trades: v.trades, byDay, cum, spec: v.spec || {} };
+  });
+})();
+function smooth(P) {                          // monotone cubic: smooth without overshooting the real values
+  const n = P.length; if (n < 3) return P.map((p, k) => (k ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
+  const dx = [], dy = [], m = [], t = [];
+  for (let i = 0; i < n - 1; i++) { dx[i] = P[i + 1][0] - P[i][0]; dy[i] = P[i + 1][1] - P[i][1]; m[i] = dy[i] / (dx[i] || 1); }
+  t[0] = m[0]; t[n - 1] = m[n - 2];
+  for (let i = 1; i < n - 1; i++) t[i] = m[i - 1] * m[i] <= 0 ? 0 : 3 * (dx[i - 1] + dx[i]) / ((2 * dx[i] + dx[i - 1]) / m[i - 1] + (dx[i] + 2 * dx[i - 1]) / m[i]);
+  let d = `M${P[0][0].toFixed(1)},${P[0][1].toFixed(1)}`;
+  for (let i = 0; i < n - 1; i++) {
+    const h = dx[i] / 3;
+    d += `C${(P[i][0] + h).toFixed(1)},${(P[i][1] + t[i] * h).toFixed(1)} ${(P[i + 1][0] - h).toFixed(1)},${(P[i + 1][1] - t[i + 1] * h).toFixed(1)} ${P[i + 1][0].toFixed(1)},${P[i + 1][1].toFixed(1)}`;
+  }
+  return d;
 }
-const GROUPS = eqGroups();
 function eqPreset(v) {
-  EQS.preset = v;
   if (v === "all" || !EQ.length) { EQS.a = 0; EQS.b = Math.max(0, EQ.length - 1); return; }
   const days = [...new Set(EQ.map((r) => r.date))];
   const from = days[Math.max(0, days.length - +v)];
   EQS.a = EQ.findIndex((r) => r.date >= from); EQS.b = EQ.length - 1;
 }
+const rangeDates = () => EQ.length ? [EQ[EQS.a].date, EQ[EQS.b].date] : [null, null];
+function setHero(value, when, deltaHtml) {
+  $("eq-value").innerHTML = `<span class="${cls(value)}">${fV(value, UNIT === "usd" ? 2 : 2)}</span>`;
+  $("eq-when").textContent = when || "";
+  $("eq-delta").innerHTML = deltaHtml || "";
+}
+function heroDefault() {
+  if (!EQ.length) { setHero(0, "", "No trades yet"); return; }
+  const a = EQS.a, b = EQS.b, start = a ? EQ[a - 1]._cum : 0, ch = EQ[b]._cum - start, n = b - a + 1;
+  const full = a === 0 && b === EQ.length - 1;
+  $("eq-scope").textContent = EQS.mode === "versions" ? "Running profit · all trades (live rule)" : "Running profit · all trades";
+  setHero(EQ[b]._cum, `as of ${fDate(EQ[b].date, { month: "short", day: "numeric" })}`,
+    full ? `<b class="${cls(ch)}">${ch >= 0 ? "▲" : "▼"} ${fV(ch)}</b> across ${n} trades since ${fDate(EQ[0].date)}`
+         : `<b class="${cls(ch)}">${ch >= 0 ? "▲" : "▼"} ${fV(ch)}</b> in the selected ${n} trades · ${fDate(EQ[a].date)} – ${fDate(EQ[b].date)}`);
+}
 function eqStats() {
   const rows = EQ.slice(EQS.a, EQS.b + 1), s = stats(rows);
   const pf = s.pf == null ? "–" : s.pf === Infinity ? "∞" : s.pf.toFixed(2);
-  const span = rows.length ? `${fDate(rows[0].date)} – ${fDate(rows[rows.length - 1].date)}` : "–";
   $("eq-stats").innerHTML = [
-    ["Period", span], ["Trades", s.n], ["Net", `<span class="${cls(s.tot)}">${s.n ? fV(s.tot) : "–"}</span>`],
+    ["Trades", s.n], ["Net", `<span class="${cls(s.tot)}">${s.n ? fV(s.tot) : "–"}</span>`],
     ["Win rate", pct(s.win)], ["Avg per trade", `<span class="${cls(s.avg || 0)}">${s.n ? fV(s.avg) : "–"}</span>`],
+    ["Best trade", s.best ? `<span class="${cls(s.best.R)}">${fV(s.best.R)}</span> <span class="muted small">${esc(s.best.symbol)}</span>` : "–"],
     ["Profit factor", pf], ["Worst drop", s.n ? `<span class="${s.maxdd > 0 ? "neg-t" : ""}">${fV(-s.maxdd)}</span>` : "–"],
   ].map(([k, v]) => `<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
 }
 function eqLegend() {
   const box = $("eq-legend");
   if (EQS.mode === "total") {
-    box.innerHTML = `<span><i class="line" style="background:var(--series-1)"></i>Running total</span>` +
-      (EQS.dots ? Object.values(OUTC).map(([c, ic, l]) => `<span><span style="color:${c};font-size:10px;margin-right:5px">${ic}</span>${l}</span>`).join("") : "") +
-      (EQS.dd ? `<span><i style="background:var(--dd)"></i>Below peak</span>` : "");
+    box.innerHTML = `<span><i class="line" style="background:var(--pos)"></i>Above zero</span><span><i class="line" style="background:var(--neg)"></i>Below zero</span>` +
+      (EQS.dots ? Object.values(OUTC).map(([c, ic, l]) => `<span><span style="color:${c};font-size:10px;margin-right:5px">${ic}</span>${l}</span>`).join("") : "");
     return;
   }
-  box.innerHTML = GROUPS.map((g) => { const v = g.cum[EQS.b] - (EQS.a ? g.cum[EQS.a - 1] : 0);
-    return `<button data-k="${esc(g.key)}" aria-pressed="${!EQS.hidden.has(g.key)}"><i style="background:${g.color}"></i>${esc(g.label)} <b class="${cls(v)}">${fV(v)}</b></button>`; }).join("") +
-    `<span class="small muted" style="align-self:center">Click to show or hide · values are for the selected period</span>`;
+  const items = EQS.mode === "split" ? GROUPS.map((g) => ({ key: g.key, label: g.label, color: g.color, v: g.cum[EQS.b] - (EQS.a ? g.cum[EQS.a - 1] : 0), dash: false }))
+    : VERS.map((v) => { const [d0, d1] = rangeDates(); const i0 = VDAYS.indexOf(d0), i1 = VDAYS.indexOf(d1); return { key: v.id, label: v.label, color: v.color, v: i1 < 0 ? 0 : v.cum[i1] - (i0 > 0 ? v.cum[i0 - 1] : 0), dash: v.baseline }; });
+  if (EQS.mode === "versions" && !VERS.length) { box.innerHTML = '<span class="muted small">Test versions appear after the next daily run.</span>'; return; }
+  box.innerHTML = items.map((g) => `<button data-k="${esc(g.key)}" aria-pressed="${!EQS.hidden.has(g.key)}"><i style="background:${g.color}${g.dash ? ";background:repeating-linear-gradient(90deg," + g.color + " 0 3px,transparent 3px 5px)" : ""}"></i>${esc(g.label)} <b class="${cls(g.v)}">${fV(g.v)}</b></button>`).join("") +
+    `<span class="small muted" style="align-self:center">Click to show or hide</span>`;
   box.querySelectorAll("button").forEach((b) => b.onclick = () => { const k = b.dataset.k; EQS.hidden.has(k) ? EQS.hidden.delete(k) : EQS.hidden.add(k); eqLegend(); equity(); });
+}
+function pill(s, x, y, text, fill, anchor) {
+  const g = el("g", { class: "pill" }, s), w = text.length * 6.6 + 14;
+  const x0 = anchor === "end" ? x - w : anchor === "start" ? x : x - w / 2;
+  el("rect", { x: x0, y: y - 10, width: w, height: 20, rx: 5, fill }, g);
+  el("text", { x: x0 + w / 2, y: y + 4, "text-anchor": "middle", style: "fill:#fff" }, g, text);
+  return g;
+}
+function eqMargins() {
+  const narrow = $("equity").clientWidth < 640;
+  const r = EQS.mode === "split" ? (narrow ? 62 : 118) : EQS.mode === "versions" ? (narrow ? 62 : 190) : (narrow ? 58 : 86);
+  return { l: narrow ? 46 : 62, r };
 }
 function equity() {
   const box = $("equity");
-  if (!EQ.length) { box.innerHTML = '<div class="empty">No trades yet.</div>'; $("eq-brush").innerHTML = ""; $("eq-stats").innerHTML = ""; $("eq-legend").innerHTML = ""; return; }
-  eqStats();
+  $("eq-dots").parentElement.style.display = EQS.mode === "total" ? "" : "none";
+  if (!EQ.length) { box.innerHTML = '<div class="empty">No trades yet. The chart fills in after the first market close.</div>'; ["eq-brush", "eq-stats", "eq-legend"].forEach((id) => $(id).innerHTML = ""); heroDefault(); return; }
+  eqStats(); heroDefault();
+  if (EQS.mode === "versions") { versionsChart(); eqBrush(); return; }
   const a = EQS.a, b = EQS.b, idx = []; for (let i = a; i <= b; i++) idx.push(i);
   const split = EQS.mode === "split", vis = GROUPS.filter((g) => !EQS.hidden.has(g.key));
-  const H = 320, m = { l: 60, r: split ? 112 : 84, t: 22, b: 30 };
+  const narrow = box.clientWidth < 640;
+  const H1 = narrow ? 240 : 330, H2 = 74, H3 = 74, GAP = 30, BOT = 28;
+  const m = Object.assign(eqMargins(), { t: 16 });
+  const top2 = m.t + H1 + GAP, top3 = top2 + H2 + GAP, H = top3 + H3 + BOT;
   const [s, W] = svgBox(box, H);
-  // values in view: start each view from the point just before it so the line has an anchor
-  const base = a > 0 ? a - 1 : null;
-  const vals = [0];
-  if (split) vis.forEach((g) => idx.forEach((i) => vals.push(g.cum[i])));
-  else idx.forEach((i) => { vals.push(EQ[i]._cum); if (EQS.dd) vals.push(EQ[i]._pk); });
-  if (base != null && !split) vals.push(EQ[base]._cum);
-  const tk = ticks(Math.min(...vals), Math.max(...vals), 5), y0 = tk[0], y1 = tk[tk.length - 1];
   const n = idx.length, step = (W - m.l - m.r) / Math.max(1, n);
   const X = (i) => m.l + (i - a + 0.5) * step;
-  const Y = (v) => m.t + (y1 - v) * (H - m.t - m.b) / (y1 - y0);
-  const defs = el("defs", {}, s);
-  const gid = "eqg" + Math.random().toString(36).slice(2, 7);
-  const grad = el("linearGradient", { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
-  el("stop", { offset: "0%", "stop-color": "var(--series-1)", "stop-opacity": 0.22 }, grad);
-  el("stop", { offset: "100%", "stop-color": "var(--series-1)", "stop-opacity": 0 }, grad);
-  const clip = el("clipPath", { id: gid + "c" }, defs); el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H }, clip);
-  // day bands
+  const base = a > 0 ? a - 1 : null;
+  // panel 1 scale
+  const vals = [0];
+  if (split) vis.forEach((g) => idx.forEach((i) => vals.push(g.cum[i]))); else idx.forEach((i) => vals.push(EQ[i]._cum));
+  if (base != null) vals.push(split ? 0 : EQ[base]._cum);
+  const tk = ticks(Math.min(...vals), Math.max(...vals), narrow ? 4 : 5), y0 = tk[0], y1 = tk[tk.length - 1];
+  const Y = (v) => m.t + (y1 - v) * H1 / (y1 - y0);
+  // panel 2 scale (each trade)
+  const rmax = Math.max(1, ...idx.map((i) => Math.abs(EQ[i].R)));
+  const Y2 = (v) => top2 + H2 / 2 - v * (H2 / 2 - 4) / rmax;
+  // panel 3 scale (below peak)
+  const ddmax = Math.max(0.5, ...idx.map((i) => EQ[i]._pk - EQ[i]._cum));
+  const Y3 = (v) => top3 + v * (H3 - 4) / ddmax;
+  const defs = el("defs", {}, s), uid = Math.random().toString(36).slice(2, 7);
+  // day bands across all panels
   const days = []; idx.forEach((i) => { const d = EQ[i].date; if (!days.length || days[days.length - 1].d !== d) days.push({ d, i0: i, i1: i }); else days[days.length - 1].i1 = i; });
-  const labEvery = Math.max(1, Math.ceil(days.length / Math.max(2, Math.floor((W - m.l - m.r) / 62))));
+  const labEvery = Math.max(1, Math.ceil(days.length / Math.max(2, Math.floor((W - m.l - m.r) / 64))));
   days.forEach((d, k) => {
     const x0 = X(d.i0) - step / 2, x1 = X(d.i1) + step / 2;
-    if (k % 2 === 0) el("rect", { x: x0, y: m.t, width: x1 - x0, height: H - m.t - m.b, fill: "var(--surface-2)" }, s);
-    if (k % labEvery === 0) el("text", { x: (x0 + x1) / 2, y: H - 9, "text-anchor": "middle" }, s, fDate(d.d));
+    if (k % 2 === 0) [[m.t, H1], [top2, H2], [top3, H3]].forEach(([y, h]) => el("rect", { x: x0, y, width: x1 - x0, height: h, fill: "var(--surface-2)" }, s));
+    if (k % labEvery === 0) el("text", { x: (x0 + x1) / 2, y: H - 8, "text-anchor": "middle" }, s, fDate(d.d));
   });
+  // grid + axes
   tk.forEach((t) => {
-    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)", "stroke-dasharray": Math.abs(t) < 1e-9 ? "" : "" }, s);
+    el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s);
     el("text", { x: m.l - 10, y: Y(t) + 4, "text-anchor": "end" }, s, axisV(t));
   });
-  const g = el("g", { "clip-path": `url(#${gid}c)` }, s);
-  const xStart = base != null ? X(a) - step / 2 : X(a) - step / 2;
-  const animate = (p) => { if (!EQS.anim || !p.getTotalLength) return; const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p.getBoundingClientRect(); p.style.transition = "stroke-dashoffset 900ms cubic-bezier(.3,.7,.2,1)"; p.style.strokeDashoffset = 0; };
+  el("text", { x: m.l, y: top2 - 9, class: "ptitle" }, s, "Each trade");
+  if (!narrow) el("text", { x: m.l + 74, y: top2 - 9 }, s, "result of every trade, in order");
+  [rmax, 0, -rmax].forEach((t) => { el("line", { x1: m.l, x2: W - m.r, y1: Y2(t), y2: Y2(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)" }, s); el("text", { x: m.l - 10, y: Y2(t) + 4, "text-anchor": "end" }, s, axisV(t)); });
+  el("text", { x: m.l, y: top3 - 9, class: "ptitle" }, s, "Below peak");
+  if (!narrow) el("text", { x: m.l + 74, y: top3 - 9 }, s, "how far the total sat under its best point");
+  [0, ddmax].forEach((t) => { el("line", { x1: m.l, x2: W - m.r, y1: Y3(t), y2: Y3(t), stroke: t === 0 ? "var(--axis)" : "var(--grid)" }, s); el("text", { x: m.l - 10, y: Y3(t) + 4, "text-anchor": "end" }, s, t ? axisV(-t) : axisV(0)); });
+  const clipId = "c" + uid, clip = el("clipPath", { id: clipId }, defs); el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H }, clip);
+  const G = el("g", { "clip-path": `url(#${clipId})` }, s);
+  const xStart = X(a) - step / 2;
+  const draw = (p, ms) => { if (!EQS.anim || !p.getTotalLength) return; const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p.getBoundingClientRect(); p.style.transition = `stroke-dashoffset ${ms || 1000}ms cubic-bezier(.3,.7,.2,1)`; p.style.strokeDashoffset = 0; };
+  const fadeIn = (node, delay) => { if (!EQS.anim) return; node.style.opacity = 0; node.style.transition = `opacity 400ms ease ${delay || 0}ms`; requestAnimationFrame(() => requestAnimationFrame(() => node.style.opacity = 1)); };
+  let lineY = null;
   if (!split) {
-    const v0 = base != null ? EQ[base]._cum : 0, p0 = base != null ? EQ[base]._pk : 0;
-    const P = [[xStart, v0, p0]].concat(idx.map((i) => [X(i), EQ[i]._cum, EQ[i]._pk]));
-    const line = P.map((p, k) => (k ? "L" : "M") + p[0].toFixed(1) + "," + Y(p[1]).toFixed(1)).join("");
-    if (!EQS.dd) el("path", { d: line + `L${P[P.length - 1][0]},${Y(0)}L${P[0][0]},${Y(0)}Z`, fill: `url(#${gid})` }, g);
-    if (EQS.dd) {
-      let dd = P.map((p, k) => (k ? "L" : "M") + p[0] + "," + Y(p[2])).join("");
-      for (let k = P.length - 1; k >= 0; k--) dd += "L" + P[k][0] + "," + Y(P[k][1]);
-      el("path", { d: dd + "Z", fill: "var(--dd)" }, g);
+    const P = [[xStart, Y(base != null ? EQ[base]._cum : 0)]].concat(idx.map((i) => [X(i), Y(EQ[i]._cum)]));
+    const z = Math.max(0, Math.min(1, (Y(0) - m.t) / H1));
+    const sg = el("linearGradient", { id: "s" + uid, gradientUnits: "userSpaceOnUse", x1: 0, x2: 0, y1: m.t, y2: m.t + H1 }, defs);
+    [[0, "var(--pos)"], [z, "var(--pos)"], [z, "var(--neg)"], [1, "var(--neg)"]].forEach(([o, c]) => el("stop", { offset: o, "stop-color": c }, sg));
+    const fg = el("linearGradient", { id: "f" + uid, gradientUnits: "userSpaceOnUse", x1: 0, x2: 0, y1: m.t, y2: m.t + H1 }, defs);
+    [[0, "var(--pos)", 0.26], [z, "var(--pos)", 0.02], [z, "var(--neg)", 0.02], [1, "var(--neg)", 0.26]].forEach(([o, c, op]) => el("stop", { offset: o, "stop-color": c, "stop-opacity": op }, fg));
+    const line = smooth(P);
+    const area = el("path", { d: line + `L${P[P.length - 1][0].toFixed(1)},${Y(0)}L${P[0][0].toFixed(1)},${Y(0)}Z`, fill: `url(#f${uid})` }, G); fadeIn(area, 300);
+    draw(el("path", { d: line, fill: "none", stroke: `url(#s${uid})`, "stroke-width": 2.5, "stroke-linejoin": "round", "stroke-linecap": "round" }, G));
+    lineY = (i) => Y(EQ[i]._cum);
+    if (EQS.dots && n <= 200) {
+      const dg = el("g", {}, G); fadeIn(dg, 500);
+      idx.forEach((i) => el("circle", { cx: X(i), cy: Y(EQ[i]._cum), r: n > 90 ? 2.25 : 3.25, fill: OUTC[EQ[i].outcome][0], stroke: "var(--surface-1)", "stroke-width": 1.5 }, dg));
     }
-    animate(el("path", { d: line, fill: "none", stroke: "var(--series-1)", "stroke-width": 2.25, "stroke-linejoin": "round", "stroke-linecap": "round" }, g));
-    // high / low annotations
+    // high / low
     let hi = idx[0], lo = idx[0]; idx.forEach((i) => { if (EQ[i]._cum > EQ[hi]._cum) hi = i; if (EQ[i]._cum < EQ[lo]._cum) lo = i; });
-    if (EQS.dots && n <= 160) idx.forEach((i) => { const r = EQ[i]; el("circle", { cx: X(i), cy: Y(r._cum), r: n > 80 ? 2.5 : 3.5, fill: OUTC[r.outcome][0], stroke: "var(--surface-1)", "stroke-width": 1.5 }, g); });
-    if (n > 2) {
-      [[hi, "High", -10], [lo, "Low", 18]].forEach(([i, l, dy]) => {
-        if (l === "Low" && EQ[lo]._cum >= 0 && lo === idx[0]) return;
-        const x = X(i), y = Y(EQ[i]._cum) + dy, anc = x < m.l + 40 ? "start" : x > W - m.r - 40 ? "end" : "middle";
-        el("text", { x, y, "text-anchor": anc, class: "lbl eq-tag" }, s, `${l} ${fV(EQ[i]._cum, UNIT === "usd" ? 0 : 2)}`);
-      });
-    }
-    // end tag
-    const lastV = EQ[b]._cum, ty = Math.max(m.t + 10, Math.min(H - m.b - 10, Y(lastV)));
-    const txt = fV(lastV, UNIT === "usd" ? 0 : 2), tw = txt.length * 7 + 16;
-    el("line", { x1: X(b), x2: W - m.r + 6, y1: Y(lastV), y2: ty, stroke: "var(--series-1)", "stroke-dasharray": "2 3" }, s);
-    el("rect", { x: W - m.r + 6, y: ty - 11, width: tw, height: 22, rx: 6, fill: "var(--series-1)" }, s);
-    el("text", { x: W - m.r + 6 + tw / 2, y: ty + 4, "text-anchor": "middle", style: "fill:#fff;font-weight:650;font-size:12px" }, s, txt);
+    if (n > 2) [[hi, "High", -12], [lo, "Low", 20]].forEach(([i, l, dy]) => {
+      const x = X(i), anc = x < m.l + 44 ? "start" : x > W - m.r - 44 ? "end" : "middle";
+      const t = el("text", { x, y: Y(EQ[i]._cum) + dy, "text-anchor": anc, class: "lbl", style: "font-weight:650" }, s, `${l} ${fV(EQ[i]._cum, UNIT === "usd" ? 0 : 2)}`); fadeIn(t, 700);
+    });
+    const lastV = EQ[b]._cum, ty = Math.max(m.t + 10, Math.min(m.t + H1 - 10, Y(lastV)));
+    el("line", { x1: X(b), x2: W - m.r + 6, y1: Y(lastV), y2: ty, stroke: lastV >= 0 ? "var(--pos)" : "var(--neg)", "stroke-dasharray": "2 3" }, s);
+    pill(s, W - m.r + 6, ty, fV(lastV, UNIT === "usd" ? 0 : 2), lastV >= 0 ? "var(--pos)" : "var(--neg)", "start");
   } else {
     const ends = [];
-    vis.forEach((gr) => {
-      const v0 = base != null ? gr.cum[base] : 0;
-      const P = [[xStart, v0]].concat(idx.map((i) => [X(i), gr.cum[i]]));
-      animate(el("path", { d: P.map((p, k) => (k ? "L" : "M") + p[0].toFixed(1) + "," + Y(p[1]).toFixed(1)).join(""), fill: "none", stroke: gr.color, "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round" }, g));
+    vis.forEach((gr, k) => {
+      const P = [[xStart, Y(base != null ? gr.cum[base] : 0)]].concat(idx.map((i) => [X(i), Y(gr.cum[i])]));
+      draw(el("path", { d: smooth(P), fill: "none", stroke: gr.color, "stroke-width": 2.25, "stroke-linejoin": "round", "stroke-linecap": "round" }, G), 900 + k * 80);
       ends.push({ gr, v: gr.cum[b], y: Y(gr.cum[b]) });
     });
     ends.sort((p, q) => p.y - q.y);
-    for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 15) ends[k].y = ends[k - 1].y + 15;
-    const over = ends.length ? ends[ends.length - 1].y - (H - m.b) : 0;
-    if (over > 0) ends.forEach((e) => e.y -= over);
+    for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 16) ends[k].y = ends[k - 1].y + 16;
+    const over = ends.length ? ends[ends.length - 1].y - (m.t + H1) : 0; if (over > 0) ends.forEach((e) => e.y -= over);
     ends.forEach((e) => {
       el("circle", { cx: X(b), cy: Y(e.v), r: 3.5, fill: e.gr.color, stroke: "var(--surface-1)", "stroke-width": 1.5 }, s);
       el("line", { x1: X(b) + 4, x2: W - m.r + 8, y1: Y(e.v), y2: e.y, stroke: "var(--axis)" }, s);
-      el("text", { x: W - m.r + 12, y: e.y + 4, class: "lbl" }, s, `${e.gr.key === "__scanner" ? "Scanner" : e.gr.label} ${fV(e.v, UNIT === "usd" ? 0 : 2)}`);
+      el("text", { x: W - m.r + 12, y: e.y + 4, class: "lbl" }, s, narrow ? fV(e.v, 0) : `${e.gr.key === "__scanner" ? "Scanner" : e.gr.label} ${fV(e.v, UNIT === "usd" ? 0 : 2)}`);
     });
   }
+  // panel 2: each trade
+  const bw = Math.max(1.5, Math.min(14, step * 0.62));
+  const bars = el("g", {}, G); fadeIn(bars, 200);
+  const barNodes = {};
+  idx.forEach((i) => {
+    const v = EQ[i].R, up = v >= 0, y = up ? Y2(v) : Y2(0), h = Math.abs(Y2(v) - Y2(0));
+    if (h > 0.5) barNodes[i] = el("path", { d: barPath(X(i) - bw / 2, y, bw, h, up), fill: up ? "var(--pos)" : "var(--neg)", opacity: split ? 0.85 : 1 }, bars);
+  });
+  // panel 3: below peak
+  const U = [[xStart, Y3(base != null ? EQ[base]._pk - EQ[base]._cum : 0)]].concat(idx.map((i) => [X(i), Y3(EQ[i]._pk - EQ[i]._cum)]));
+  const ul = U.map((p, k) => (k ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1)).join("");
+  const ua = el("path", { d: ul + `L${U[U.length - 1][0]},${Y3(0)}L${U[0][0]},${Y3(0)}Z`, fill: "var(--neg)", "fill-opacity": 0.14 }, G); fadeIn(ua, 300);
+  draw(el("path", { d: ul, fill: "none", stroke: "var(--neg)", "stroke-width": 1.5, "stroke-linejoin": "round" }, G), 1000);
+  let wd = idx[0]; idx.forEach((i) => { if (EQ[i]._pk - EQ[i]._cum > EQ[wd]._pk - EQ[wd]._cum) wd = i; });
+  if (EQ[wd]._pk - EQ[wd]._cum > 0.01) { const x = X(wd), anc = x > W - m.r - 60 ? "end" : x < m.l + 60 ? "start" : "middle"; el("text", { x, y: Y3(EQ[wd]._pk - EQ[wd]._cum) + 14 > top3 + H3 ? Y3(EQ[wd]._pk - EQ[wd]._cum) - 6 : Y3(EQ[wd]._pk - EQ[wd]._cum) + 14, "text-anchor": anc, class: "lbl", style: "font-weight:650" }, s, `Worst ${fV(-(EQ[wd]._pk - EQ[wd]._cum), UNIT === "usd" ? 0 : 2)}`); }
   EQS.anim = false;
-  // hover layer
-  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: "var(--text-muted)", "stroke-dasharray": "3 3", opacity: 0 }, s);
-  const ring = el("circle", { r: 6.5, fill: "none", stroke: "var(--series-1)", "stroke-width": 2, opacity: 0 }, s);
-  const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H - m.b, fill: "transparent", style: "cursor:crosshair" }, s);
+  // hover: one crosshair through every panel, with axis tags
+  const hov = el("g", { style: "pointer-events:none", opacity: 0 }, s);
+  const cross = el("line", { y1: m.t, y2: top3 + H3, stroke: "var(--text-muted)", "stroke-dasharray": "3 3" }, hov);
+  const hline = el("line", { x1: m.l, x2: W - m.r, stroke: "var(--text-muted)", "stroke-dasharray": "3 3", opacity: 0.6 }, hov);
+  const ring = el("circle", { r: 7, fill: "var(--surface-1)", "stroke-width": 2.5 }, hov);
+  const core = el("circle", { r: 3.5 }, hov);
+  let yTag = null, xTag = null;
+  const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: top3 + H3, fill: "transparent", style: "cursor:crosshair" }, s);
   const show = (i, ev) => {
-    EQS.hover = i; const r = EQ[i];
-    cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("opacity", 1);
-    const yv = split ? null : r._cum;
-    if (yv != null) { ring.setAttribute("cx", X(i)); ring.setAttribute("cy", Y(yv)); ring.setAttribute("stroke", OUTC[r.outcome][0]); ring.setAttribute("opacity", 1); } else ring.setAttribute("opacity", 0);
-    const o = OUTC[r.outcome], tm = r.tm;
+    EQS.hover = i; const r = EQ[i], o = OUTC[r.outcome], tm = r.tm;
+    hov.setAttribute("opacity", 1);
+    cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i));
+    if (yTag) yTag.remove(); if (xTag) xTag.remove();
+    const cy = split ? null : Y(r._cum);
+    if (cy != null) {
+      hline.setAttribute("y1", cy); hline.setAttribute("y2", cy); hline.setAttribute("opacity", 0.6);
+      ring.setAttribute("cx", X(i)); ring.setAttribute("cy", cy); ring.setAttribute("stroke", o[0]); ring.setAttribute("opacity", 1);
+      core.setAttribute("cx", X(i)); core.setAttribute("cy", cy); core.setAttribute("fill", o[0]); core.setAttribute("opacity", 1);
+      yTag = pill(hov, m.l - 4, cy, fV(r._cum, UNIT === "usd" ? 0 : 2), "var(--text-primary)", "end");
+      yTag.querySelector("text").setAttribute("style", "fill:var(--surface-1)");
+    } else { hline.setAttribute("opacity", 0); ring.setAttribute("opacity", 0); core.setAttribute("opacity", 0); }
+    xTag = pill(hov, Math.max(m.l + 40, Math.min(W - m.r - 40, X(i))), H - 12, fDate(r.date, { weekday: "short", month: "short", day: "numeric" }), "var(--text-primary)");
+    xTag.querySelector("text").setAttribute("style", "fill:var(--surface-1)");
+    Object.entries(barNodes).forEach(([k, node]) => node.setAttribute("opacity", +k === i ? 1 : 0.35));
+    if (!split) setHero(r._cum, `after trade ${i + 1} · ${fDate(r.date, { weekday: "short", month: "short", day: "numeric" })}`,
+      `${esc(r.symbol)} <span style="color:${o[0]}">${o[1]}</span> ${o[2]} <b class="${cls(r.R)}">${fV(r.R)}</b> · ${r._pk - r._cum > 0.001 ? `<span class="neg-t">${fV(-(r._pk - r._cum))}</span> below peak` : "at a new high"}`);
     let html = `<div class="t">${esc(r.symbol)} <span class="muted" style="font-weight:400">· trade ${i + 1} of ${EQ.length}</span></div>
-      <div class="small muted" style="margin-bottom:4px">${fDate(r.date, { weekday: "short", month: "short", day: "numeric" })} · ${r.entry_time} → ${r.exit_time} · ${r.source === "scanner" ? "scanner pick" : "watchlist"}</div>
-      ${trow("Entry", px(r.entry))}${trow("Stop · target", `${px(r.stop)} · ${px(r.target)}`)}
-      ${trow("Result", `<span style="color:${o[0]}">${o[1]}</span> ${o[2]} · <span class="${cls(r.R)}">${fV(r.R)}</span>`)}
-      ${tm ? trow("Odds target / stop", `${pct(tm.p_target)} / ${pct(tm.p_stop)}`) : ""}`;
+      <div class="small muted" style="margin-bottom:5px">${r.entry_time} → ${r.exit_time} · ${r.source === "scanner" ? "scanner pick" : "watchlist"}</div>
+      ${trow("Entry", px(r.entry))}${trow("Stop · target", `${px(r.stop)} · ${px(r.target)}`)}${trow("Shares", `${Math.floor(RISK / r.risk)} <span class="muted" style="font-weight:400">(${px(r.risk)} risk each)</span>`)}
+      ${trow("Result", `<span style="color:${o[0]}">${o[1]}</span> ${o[2]} at ${px(r.exit)}`)}${trow("This trade", `<span class="${cls(r.R)}">${fV(r.R)}</span>`)}
+      ${tm ? trow("Odds target · stop", `${pct(tm.p_target)} · ${pct(tm.p_stop)}`) : ""}`;
     if (split) {
       const rows = vis.map((gr) => [gr, gr.cum[i]]).sort((p, q) => q[1] - p[1]);
       html += `<div style="border-top:1px solid var(--border);margin:6px 0 4px"></div>` + rows.map(([gr, v]) => `<div class="r"><span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${gr.color};margin-right:6px"></i>${esc(gr.label)}</span><b class="${cls(v)}">${fV(v)}</b></div>`).join("");
-    } else {
-      html += `<div style="border-top:1px solid var(--border);margin:6px 0 4px"></div>${trow("Running total", `<span class="${cls(r._cum)}">${fV(r._cum)}</span>`)}${r._pk - r._cum > 0.001 ? trow("Below peak", `<span class="neg-t">${fV(-(r._pk - r._cum))}</span>`) : trow("Below peak", "at a new high")}`;
     }
-    if (ev) showTip(html, ev);
-    else { const bx = box.getBoundingClientRect(); showTip(html, { clientX: bx.left + X(i), clientY: bx.top + (yv != null ? Y(yv) : m.t + 40) }); }
+    const bx = box.getBoundingClientRect();
+    showTip(html, ev || { clientX: bx.left + X(i), clientY: bx.top + (cy != null ? cy : m.t + 60) });
   };
-  const clear = () => { EQS.hover = null; hideTip(); cross.setAttribute("opacity", 0); ring.setAttribute("opacity", 0); };
-  hit.addEventListener("mousemove", (ev) => { const bx = s.getBoundingClientRect(); const i = Math.max(a, Math.min(b, a + Math.floor((ev.clientX - bx.left - m.l) / step))); show(i, ev); });
+  const clear = () => { EQS.hover = null; hideTip(); hov.setAttribute("opacity", 0); Object.values(barNodes).forEach((node) => node.setAttribute("opacity", split ? 0.85 : 1)); heroDefault(); };
+  hit.addEventListener("mousemove", (ev) => { const bx = s.getBoundingClientRect(); show(Math.max(a, Math.min(b, a + Math.floor((ev.clientX - bx.left - m.l) / step))), ev); });
   hit.addEventListener("mouseleave", clear);
   box.onkeydown = (e) => {
     if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); const cur = EQS.hover == null ? (e.key === "ArrowRight" ? a - 1 : b + 1) : EQS.hover; show(Math.max(a, Math.min(b, cur + (e.key === "ArrowRight" ? 1 : -1)))); }
@@ -659,38 +775,98 @@ function equity() {
   box.onblur = clear;
   eqBrush();
 }
+function versionsChart() {
+  const box = $("equity");
+  const vis = VERS.filter((v) => !EQS.hidden.has(v.id));
+  if (!VERS.length) { box.innerHTML = '<div class="empty">The test versions start after the next daily run.</div>'; return; }
+  const [d0, d1] = rangeDates();
+  const i0 = Math.max(0, VDAYS.indexOf(d0)), i1 = VDAYS.indexOf(d1) < 0 ? VDAYS.length - 1 : VDAYS.indexOf(d1);
+  const idx = []; for (let i = i0; i <= i1; i++) idx.push(i);
+  const narrow = box.clientWidth < 640;
+  const H1 = narrow ? 260 : 360, BOT = 28, m = Object.assign(eqMargins(), { t: 30 });
+  const H = m.t + H1 + BOT;
+  const [s, W] = svgBox(box, H);
+  const n = idx.length, step = (W - m.l - m.r) / Math.max(1, n);
+  const X = (i) => m.l + (i - i0 + 0.5) * step;
+  const vals = [0]; vis.forEach((v) => idx.forEach((i) => vals.push(v.cum[i])));
+  const tk = ticks(Math.min(...vals), Math.max(...vals), 5), y0 = tk[0], y1 = tk[tk.length - 1];
+  const Y = (v) => m.t + (y1 - v) * H1 / (y1 - y0);
+  const since = VERS.map((v) => v.since).filter(Boolean).sort()[0];
+  const sIdx = since ? VDAYS.findIndex((d) => d >= since) : -1;
+  idx.forEach((i, k) => { if (k % 2 === 0) el("rect", { x: X(i) - step / 2, y: m.t, width: step, height: H1, fill: "var(--surface-2)" }, s); });
+  if (sIdx > i0 || sIdx < 0) {        // shade the days before the versions were picked
+    const xe = sIdx < 0 ? X(i1) + step / 2 : X(sIdx) - step / 2;
+    el("rect", { x: m.l, y: m.t, width: Math.max(0, xe - m.l), height: H1, fill: "var(--wash)", opacity: 0.7 }, s);
+    el("text", { x: m.l + 8, y: m.t - 10, class: "lbl", style: "font-weight:600" }, s, "Before the versions were picked: in-sample, not a fair test");
+    if (sIdx >= 0) { el("line", { x1: xe, x2: xe, y1: m.t - 4, y2: m.t + H1, stroke: "var(--text-primary)", "stroke-width": 1.5 }, s); el("text", { x: xe + 6, y: m.t + 14, class: "strong" }, s, `Picked ${fDate(since)} →`); }
+    else el("text", { x: xe - 6, y: m.t + 14, "text-anchor": "end", class: "lbl" }, s, `Fair test starts ${fDate(since)}`);
+  }
+  tk.forEach((t) => { el("line", { x1: m.l, x2: W - m.r, y1: Y(t), y2: Y(t), stroke: Math.abs(t) < 1e-9 ? "var(--axis)" : "var(--grid)" }, s); el("text", { x: m.l - 10, y: Y(t) + 4, "text-anchor": "end" }, s, axisV(t)); });
+  const labEvery = Math.max(1, Math.ceil(n / Math.max(2, Math.floor((W - m.l - m.r) / 64))));
+  idx.forEach((i, k) => { if (k % labEvery === 0) el("text", { x: X(i), y: H - 8, "text-anchor": "middle" }, s, fDate(VDAYS[i])); });
+  const ends = [];
+  vis.forEach((v, k) => {
+    const start = i0 > 0 ? v.cum[i0 - 1] : 0;
+    const P = [[X(i0) - step / 2, Y(start)]].concat(idx.map((i) => [X(i), Y(v.cum[i])]));
+    const p = el("path", { d: smooth(P), fill: "none", stroke: v.color, "stroke-width": v.baseline ? 2 : 2.5, "stroke-dasharray": v.baseline ? "5 4" : "", "stroke-linejoin": "round", "stroke-linecap": "round" }, s);
+    if (EQS.anim && !v.baseline && p.getTotalLength) { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p.getBoundingClientRect(); p.style.transition = `stroke-dashoffset ${900 + k * 120}ms cubic-bezier(.3,.7,.2,1)`; p.style.strokeDashoffset = 0; }
+    ends.push({ v, val: v.cum[i1], y: Y(v.cum[i1]) });
+  });
+  EQS.anim = false;
+  ends.sort((p, q) => p.y - q.y);
+  for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 16) ends[k].y = ends[k - 1].y + 16;
+  ends.forEach((e) => {
+    el("circle", { cx: X(i1), cy: Y(e.val), r: 3.5, fill: e.v.color, stroke: "var(--surface-1)", "stroke-width": 1.5 }, s);
+    el("line", { x1: X(i1) + 4, x2: W - m.r + 8, y1: Y(e.val), y2: e.y, stroke: "var(--axis)" }, s);
+    el("text", { x: W - m.r + 12, y: e.y + 4, class: "lbl" }, s, narrow ? fV(e.val, 0) : `${e.v.label.length > 22 ? e.v.label.slice(0, 21) + "…" : e.v.label} ${fV(e.val, UNIT === "usd" ? 0 : 2)}`);
+  });
+  const hov = el("g", { style: "pointer-events:none", opacity: 0 }, s);
+  const cross = el("line", { y1: m.t, y2: m.t + H1, stroke: "var(--text-muted)", "stroke-dasharray": "3 3" }, hov);
+  const hit = el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: m.t + H1, fill: "transparent", style: "cursor:crosshair" }, s);
+  hit.addEventListener("mousemove", (ev) => {
+    const bx = s.getBoundingClientRect(), i = Math.max(i0, Math.min(i1, i0 + Math.floor((ev.clientX - bx.left - m.l) / step)));
+    hov.setAttribute("opacity", 1); cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i));
+    const d = VDAYS[i], after = since && d >= since;
+    const rows = vis.map((v) => [v, v.cum[i], (v.byDay[d] || []).reduce((a2, t) => a2 + t.R, 0), (v.byDay[d] || []).length]).sort((p, q) => q[1] - p[1]);
+    showTip(`<div class="t">${fDate(d, { weekday: "long", month: "short", day: "numeric" })}</div><div class="small muted" style="margin-bottom:5px">${after ? "Fair test (after the versions were picked)" : "Before the versions were picked"}</div>
+      ${rows.map(([v, c, day, cnt]) => `<div class="r"><span><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${v.color};margin-right:6px"></i>${esc(v.label)}</span><b class="${cls(c)}">${fV(c)}</b></div><div class="r small" style="margin:-2px 0 3px 14px"><span>that day: ${cnt} trade${cnt === 1 ? "" : "s"}</span><span class="${cls(day)}">${cnt ? fV(day) : "–"}</span></div>`).join("")}`, ev);
+  });
+  hit.addEventListener("mouseleave", () => { hideTip(); hov.setAttribute("opacity", 0); });
+}
 function eqBrush() {
   const box = $("eq-brush"), N = EQ.length;
-  const H = 54, m = { l: 60, r: EQS.mode === "split" ? 112 : 84 };
+  const narrow = $("equity").clientWidth < 640;
+  const H = 52, m = eqMargins();
   const [s, W] = svgBox(box, H);
-  const vals = EQ.map((r) => r._cum).concat([0]), lo = Math.min(...vals), hi = Math.max(...vals) || 1;
+  const vals = EQ.map((r) => r._cum).concat([0]), lo = Math.min(...vals), hi = Math.max(...vals);
   const step = (W - m.l - m.r) / Math.max(1, N);
-  const X = (i) => m.l + (i + 0.5) * step, Y = (v) => 6 + (hi - v) * (H - 12) / ((hi - lo) || 1);
+  const X = (i) => m.l + (i + 0.5) * step, Y = (v) => 7 + (hi - v) * (H - 14) / ((hi - lo) || 1);
   el("rect", { x: m.l, y: 0, width: W - m.l - m.r, height: H, rx: 8, fill: "var(--surface-2)", stroke: "var(--border)" }, s);
-  const line = EQ.map((r, i) => (i ? "L" : "M") + X(i).toFixed(1) + "," + Y(r._cum).toFixed(1)).join("");
-  el("path", { d: line + `L${X(N - 1)},${Y(lo)}L${X(0)},${Y(lo)}Z`, fill: "var(--series-1-soft)" }, s);
-  el("path", { d: line, fill: "none", stroke: "var(--series-1)", "stroke-width": 1.25, opacity: 0.8 }, s);
+  const line = smooth(EQ.map((r, i) => [X(i), Y(r._cum)]));
+  el("path", { d: line + `L${X(N - 1)},${H}L${X(0)},${H}Z`, fill: "var(--series-1-soft)" }, s);
+  el("path", { d: line, fill: "none", stroke: "var(--series-1)", "stroke-width": 1.25, opacity: 0.85 }, s);
   el("line", { x1: m.l, x2: W - m.r, y1: Y(0), y2: Y(0), stroke: "var(--axis)", "stroke-dasharray": "2 3" }, s);
+  if (!narrow) el("text", { x: m.l - 10, y: H / 2 + 4, "text-anchor": "end" }, s, "Zoom");
   const xa = () => m.l + EQS.a * step, xb = () => m.l + (EQS.b + 1) * step;
-  const shadeL = el("rect", { y: 0, height: H, fill: "var(--page)", opacity: 0.65 }, s);
-  const shadeR = el("rect", { y: 0, height: H, fill: "var(--page)", opacity: 0.65 }, s);
-  const sel = el("rect", { y: 0.5, height: H - 1, rx: 6, fill: "transparent", stroke: "var(--series-1)", "stroke-width": 1.5, style: EQS.a === 0 && EQS.b === N - 1 ? "cursor:crosshair" : "cursor:grab" }, s);
-  const hA = el("rect", { y: H / 2 - 11, width: 8, height: 22, rx: 3, fill: "var(--surface-1)", stroke: "var(--series-1)", "stroke-width": 1.5, style: "cursor:ew-resize" }, s);
-  const hB = el("rect", { y: H / 2 - 11, width: 8, height: 22, rx: 3, fill: "var(--surface-1)", stroke: "var(--series-1)", "stroke-width": 1.5, style: "cursor:ew-resize" }, s);
-  const lab = el("text", { y: H - 6, "text-anchor": "end", x: W - m.r - 8 }, s, "");
+  const shadeL = el("rect", { y: 0, height: H, fill: "var(--page)", opacity: 0.7 }, s);
+  const shadeR = el("rect", { y: 0, height: H, fill: "var(--page)", opacity: 0.7 }, s);
+  const full0 = EQS.a === 0 && EQS.b === N - 1;
+  const sel = el("rect", { y: 0.75, height: H - 1.5, rx: 7, fill: "transparent", stroke: "var(--series-1)", "stroke-width": 1.5, style: full0 ? "cursor:crosshair" : "cursor:grab" }, s);
+  const mkH = () => el("rect", { y: H / 2 - 12, width: 9, height: 24, rx: 3, fill: "var(--surface-1)", stroke: "var(--series-1)", "stroke-width": 1.5, style: "cursor:ew-resize" }, s);
+  const hA = mkH(), hB = mkH();
+  const lab = el("text", { y: H - 7, "text-anchor": "end", x: W - m.r - 10, class: "lbl" }, s, "");
   const paint = () => {
     shadeL.setAttribute("x", m.l); shadeL.setAttribute("width", Math.max(0, xa() - m.l));
     shadeR.setAttribute("x", xb()); shadeR.setAttribute("width", Math.max(0, W - m.r - xb()));
     sel.setAttribute("x", xa()); sel.setAttribute("width", Math.max(2, xb() - xa()));
-    hA.setAttribute("x", xa() - 4); hB.setAttribute("x", xb() - 4);
-    lab.textContent = EQS.a === 0 && EQS.b === N - 1 ? "Drag to zoom" : "Double-click to reset";
+    hA.setAttribute("x", xa() - 4.5); hB.setAttribute("x", xb() - 4.5);
+    lab.textContent = EQS.a === 0 && EQS.b === N - 1 ? "Drag here to zoom in" : "Double-click to show all";
   };
   paint();
   const toIdx = (cx) => { const bx = s.getBoundingClientRect(); return Math.max(0, Math.min(N - 1, Math.floor((cx - bx.left - m.l) / step))); };
   let drag = null;
   s.addEventListener("pointerdown", (e) => {
-    const i = toIdx(e.clientX), t = e.target;
-    const full = EQS.a === 0 && EQS.b === N - 1;
+    const i = toIdx(e.clientX), t = e.target, full = EQS.a === 0 && EQS.b === N - 1;
     drag = t === hA && !full ? { k: "a" } : t === hB && !full ? { k: "b" } : t === sel && !full ? { k: "move", off: i - EQS.a, w: EQS.b - EQS.a } : { k: "new", start: i };
     if (drag.k === "new") { EQS.a = EQS.b = i; }
     s.setPointerCapture(e.pointerId); paint(); e.preventDefault();
@@ -703,15 +879,14 @@ function eqBrush() {
     else { EQS.a = Math.min(drag.start, i); EQS.b = Math.max(drag.start, i); }
     paint();
   });
-  const end = () => { if (!drag) return; drag = null; if (EQS.b - EQS.a < 1 && N > 1) { EQS.b = Math.min(N - 1, EQS.a + 1); } setPresetButtons(null); EQS.preset = null; eqLegend(); equity(); };
+  const end = () => { if (!drag) return; drag = null; if (EQS.b - EQS.a < 1 && N > 1) EQS.b = Math.min(N - 1, EQS.a + 1); setPresetButtons(EQS.a === 0 && EQS.b === N - 1 ? "all" : null); eqLegend(); equity(); };
   s.addEventListener("pointerup", end); s.addEventListener("pointercancel", end);
   s.addEventListener("dblclick", () => { eqPreset("all"); setPresetButtons("all"); eqLegend(); equity(); });
 }
 function setPresetButtons(v) { [...$("eq-range").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === v ? "true" : "false")); }
-segBind("eq-mode", (v) => { EQS.mode = v; EQS.anim = true; eqLegend(); equity(); });
+segBind("eq-mode", (v) => { EQS.mode = v; EQS.hidden.clear(); EQS.anim = true; eqLegend(); equity(); });
 segBind("eq-range", (v) => { eqPreset(v); EQS.anim = true; eqLegend(); equity(); });
 $("eq-dots").addEventListener("change", (e) => { EQS.dots = e.target.checked; eqLegend(); equity(); });
-$("eq-dd").addEventListener("change", (e) => { EQS.dd = e.target.checked; eqLegend(); equity(); });
 
 // ---------- daily bars
 function daily() {
@@ -913,6 +1088,66 @@ function backtest() {
       ${Math.abs(best.c.avg_R || 0) < 0.1 ? " The gap is small enough to be luck: no version shows a clear edge yet." : " To switch, change stop_rule and target_r in config.json."}</div></div>`;
 }
 
+
+// ---------- test versions table
+function versionsTable() {
+  const box = $("vertable");
+  if (!VERS.length) { box.innerHTML = '<div class="empty">The test versions start with the next daily run.</div>'; return; }
+  const since = VERS.map((v) => v.since).filter(Boolean).sort()[0];
+  const afterDays = since ? VDAYS.filter((d) => d >= since).length : 0;
+  $("ver-desc").innerHTML = `Variations of the rule running every day next to the live one, on the same watchlist. They were picked on <b>${since ? fDate(since, { weekday: "short", month: "short", day: "numeric" }) : "–"}</b> from the backtest, so only results after that date are a fair test. <b>${afterDays}</b> fair-test day${afterDays === 1 ? "" : "s"} so far.`;
+  const base = VERS.find((v) => v.baseline);
+  const split = (v) => [v.trades.filter((t) => !v.since || t.date >= v.since), v.trades.filter((t) => v.since && t.date < v.since)];
+  const bA = base ? stats(split(base)[0]) : null;
+  const rule = (sp) => `<span class="small muted">${esc([sp.stop_rule === "or_low" ? "Low stop" : "Middle stop", (sp.target_r || 1) + "R", sp.min_entry ? "after " + sp.min_entry : null,
+    Array.isArray(sp.symbols) ? sp.symbols.join(" + ") : "all stocks"].filter(Boolean).join(" · "))}</span>`;
+  let h = `<table><thead><tr><th>Version</th><th>Rule</th><th class="num">Fair test: trades</th><th class="num">Net</th><th class="num">Avg per trade</th><th class="num">Won</th><th class="num">vs live</th><th class="num">Before picked: avg</th><th>Status</th></tr></thead><tbody>`;
+  VERS.forEach((v) => {
+    const [A, B] = split(v).map(stats);
+    const diff = bA && !v.baseline && A.n && bA.n ? A.avg - bA.avg : null;
+    const need = 30;
+    const status = v.baseline ? '<span class="tag">Baseline</span>'
+      : A.n < need ? `<span class="status" style="font-weight:500"><span class="ic" style="color:var(--neutral)">●</span>${A.n}/${need} trades</span>`
+      : diff > 0.05 ? `<span class="status"><span class="ic" style="color:var(--good)">▲</span>Ahead of live</span>`
+      : diff < -0.05 ? `<span class="status"><span class="ic" style="color:var(--critical)">▼</span>Behind live</span>`
+      : `<span class="status" style="font-weight:500"><span class="ic" style="color:var(--neutral)">●</span>Same as live</span>`;
+    h += `<tr><td class="sym"><i style="display:inline-block;width:10px;height:${v.baseline ? 2 : 10}px;border-radius:3px;background:${v.color};margin-right:8px;vertical-align:${v.baseline ? 3 : -1}px"></i>${esc(v.label)}</td>
+      <td>${rule(v.spec)}</td><td class="num">${A.n}</td><td class="num ${cls(A.tot)}">${A.n ? fV(A.tot) : "–"}</td>
+      <td class="num ${cls(A.avg || 0)}">${A.n ? fV(A.avg) : "–"}</td><td class="num">${pct(A.win)}</td>
+      <td class="num ${diff == null ? "" : cls(diff)}">${diff == null ? "–" : fV(diff)}</td>
+      <td class="num muted">${B.n ? fV(B.avg) + ` · ${B.n}×` : "–"}</td><td>${status}</td></tr>`;
+  });
+  box.innerHTML = h + `</tbody></table><div class="tfoot"><span>"Fair test" counts only days after the version was picked. A version needs about ${30} fair-test trades before the comparison means much.</span></div>`;
+}
+$("ver-chart").addEventListener("click", () => {
+  EQS.mode = "versions"; EQS.hidden.clear(); EQS.anim = true;
+  [...$("eq-mode").children].forEach((x) => x.setAttribute("aria-pressed", x.dataset.v === "versions" ? "true" : "false"));
+  eqLegend(); equity(); document.querySelector(".eq-card").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// ---------- backtest by entry time
+function backtestByTime() {
+  const box = $("bt-time");
+  if (!BT || !BT.trades || !BT.trades.length) { $("bt-time-card").style.display = "none"; return; }
+  const V = BT.variants;
+  const B = [["9:50–10:30", 590, 630], ["10:30–11:30", 630, 690], ["11:30–1:00", 690, 780], ["After 1:00", 780, 9999]];
+  const cellsData = B.map(([k, lo, hi]) => ({ k, cells: V.map((v) => {
+    const rs = BT.trades.filter((t) => t.variant === v.id && tmin(t.entry_time) >= lo && tmin(t.entry_time) < hi);
+    const n = rs.length, tot = rs.reduce((a, t) => a + t.R, 0);
+    return { fired: n, avg_R: n ? tot / n : null, total_R: tot, win_rate: n ? rs.filter((t) => t.R > 0).length / n : null,
+      target: rs.filter((t) => t.outcome === "target").length, stop: rs.filter((t) => t.outcome === "stop").length, flat: rs.filter((t) => t.outcome === "flat").length };
+  }) }));
+  const max = Math.max(0.1, ...cellsData.flatMap((r) => r.cells.map((c) => Math.abs(c.avg_R || 0))));
+  const cur = (CFG.stop_rule === "or_low" ? "low-" : "mid-") + CFG.target_r + "R";
+  let h = `<div class="heat" style="grid-template-columns: 110px repeat(${V.length}, 1fr)"><div class="h"></div>${V.map((v) => `<div class="h" style="flex-direction:column;align-items:flex-start;justify-content:flex-end"><span style="color:var(--text-secondary);font-weight:600">${v.stop_rule === "or_low" ? "Low stop" : "Middle stop"} · ${v.target_r}R</span>${v.id === cur ? '<span class="tag" style="margin-top:3px">your live rule</span>' : ""}</div>`).join("")}`;
+  cellsData.forEach((r) => {
+    h += `<div class="rowlab">${r.k}</div>` + r.cells.map((c, j) => { const [bg, fg] = heatColor(c.avg_R == null ? null : c.avg_R * Math.sqrt(Math.min(1, c.fired / 30)), max);
+      return `<div class="cell" style="background:${bg};color:${fg}" data-t="${esc(r.k + " · " + V[j].label)}" data-c='${JSON.stringify(c)}'><b>${c.fired ? fV(c.avg_R) : "–"}</b><span>${c.fired ? pct(c.win_rate) + " · " + c.fired + "×" : "no trades"}</span></div>`; }).join("");
+  });
+  box.innerHTML = h + "</div>";
+  box.querySelectorAll(".cell").forEach((n) => { const c = JSON.parse(n.dataset.c); bindTip(n, () => `<div class="t">${n.dataset.t}</div>${trow("Average per trade", fV(c.avg_R))}${trow("Total", fV(c.total_R))}${trow("Trades", c.fired)}${trow("Won", pct(c.win_rate))}${trow("Target / stop / closed", `${c.target} / ${c.stop} / ${c.flat}`)}`); });
+}
+
 // ---------- trade log
 let SORT = { k: "date", dir: -1 }, FSYM = "all", FSRC = "all", FOUT = "all", LIMIT = 50;
 const COLS = [
@@ -962,10 +1197,10 @@ segBind("units", (u) => { UNIT = u; try { localStorage.setItem("tj-unit", u); } 
 [...$("units").children].forEach((b) => b.setAttribute("aria-pressed", b.dataset.u === UNIT ? "true" : "false"));
 
 function renderCharts() { eqLegend(); equity(); daily(); byTime(); timeMachine(); }
-function renderAll() { header(); verdict(); kpis(); outcomes(); stockTable(); backtest(); tradeTable(); renderCharts(); }
+function renderAll() { header(); verdict(); kpis(); outcomes(); stockTable(); versionsTable(); backtest(); backtestByTime(); tradeTable(); renderCharts(); }
 renderAll();
 let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderCharts, 120); });
-matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => backtest());
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { backtest(); backtestByTime(); });
 </script>
 </body>
 </html>

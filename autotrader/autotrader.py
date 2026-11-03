@@ -136,11 +136,14 @@ def get_chart(tm, sym, offline_dir=None):
     return path, full
 
 
-def trade_on(tm, D, stop_rule, target_r):
-    """The pack's opening-range breakout on one session. None when it never triggered."""
+def trade_on(tm, D, stop_rule, target_r, min_entry_min=None):
+    """The pack's opening-range breakout on one session. None when it never triggered
+    (or, with min_entry_min, when the first breakout came before that time of day)."""
     oh, ol = tm.opening_range(D, OR_BARS)
     k = next((i for i in range(OR_BARS, LAST_ENTRY_SLOT + 1) if D[i]["c"] > oh), None)
     if k is None:
+        return None
+    if min_entry_min is not None and tm.OPEN_MIN + 5 * (k + 1) < min_entry_min:
         return None
     e = round(D[k]["c"], 2)
     s = tm.rule_stop({"stop_rule": stop_rule}, oh, ol, e, True)
@@ -239,6 +242,10 @@ def cmd_daily(a):
         todo = [d for d in todo if d > max(done_days)][-10:]
     if not todo:
         log("Nothing new to log (latest session %s is already in the journal)." % sessions[-1])
+        if run_versions(tm, cfg, journal, full):
+            write_json(JOURNAL, journal)
+            log("Test versions updated.")
+            build_dashboard()
         return
 
     picks = []
@@ -279,10 +286,53 @@ def cmd_daily(a):
         journal["days"].append(d)
     journal["days"] = sorted(set(journal["days"]))
     journal["entries"].sort(key=lambda r: (r["date"], r["symbol"]))
+    run_versions(tm, cfg, journal, full)
     journal["updated"] = now_utc().isoformat() + "Z"
     write_json(JOURNAL, journal)
     log("Logged %d session(s): %s" % (len(todo), ", ".join(todo)))
     build_dashboard()
+
+
+def hm_to_min(t):
+    h, m = str(t).split(":")
+    return int(h) * 60 + int(m)
+
+
+def run_versions(tm, cfg, journal, full):
+    """Test versions of the rule, run on every logged day next to the live rule.
+    Results after a version's "since" date are the honest, out-of-sample test."""
+    out = journal.setdefault("versions", {})
+    changed = False
+    for v in cfg.get("versions") or []:
+        vid = v["id"]
+        spec = {k: v.get(k) for k in ("stop_rule", "target_r", "symbols", "min_entry")}
+        rec = out.get(vid)
+        if not rec or rec.get("spec") != spec:          # new or edited version: start over
+            rec = out[vid] = {"spec": spec, "trades": [], "days": []}
+        rec.update(label=v.get("label", vid), since=v.get("since"), baseline=bool(v.get("baseline")))
+        syms = cfg["watchlist"] if v.get("symbols") in (None, "watchlist") else [x.upper() for x in v["symbols"]]
+        me = hm_to_min(v["min_entry"]) if v.get("min_entry") else None
+        done = set(rec["days"])
+        for d in journal["days"]:
+            if d in done or not any(d in full.get(sym, {}) for sym in syms):
+                continue
+            for sym in syms:
+                D = full.get(sym, {}).get(d)
+                if D is None:
+                    continue
+                tr = trade_on(tm, D, v.get("stop_rule", "or_mid"), float(v.get("target_r", 1)), me)
+                if tr:
+                    rec["trades"].append({"date": d, "symbol": sym, "R": tr["R"], "outcome": tr["outcome"],
+                                          "entry_time": tr["entry_time"], "exit_time": tr["exit_time"]})
+            rec["days"].append(d)
+            changed = True
+        rec["days"].sort()
+        rec["trades"].sort(key=lambda t: (t["date"], t["entry_time"], t["symbol"]))
+    for vid in list(out):                               # versions removed from the config
+        if vid not in {v["id"] for v in cfg.get("versions") or []}:
+            del out[vid]
+            changed = True
+    return changed
 
 
 def cmd_weekly(a):
@@ -344,7 +394,7 @@ def build_dashboard():
         nxt += datetime.timedelta(days=1)
     data = {"journal": read_json(JOURNAL, {"entries": [], "days": []}),
             "backtest": read_json(BACKTEST, None),
-            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars")},
+            "config": {k: cfg.get(k) for k in ("watchlist", "scanner_picks", "stop_rule", "target_r", "risk_dollars", "versions")},
             "built": datetime.datetime.now().strftime("%a %b %-d, %-I:%M %p"),
             "built_iso": now.isoformat(),
             "next_run": nxt.astimezone().strftime("%a %b %-d, %-I:%M %p")}

@@ -10,5 +10,44 @@
   "stop_rule": "or_mid",
   "target_r": 1.0,
   "risk_dollars": 50,
+  "versions": [
+    {
+      "id": "live-watchlist",
+      "label": "Live rule (watchlist only)",
+      "stop_rule": "or_mid",
+      "target_r": 1,
+      "symbols": "watchlist",
+      "since": "2026-11-03",
+      "baseline": true
+    },
+    {
+      "id": "mid-2R",
+      "label": "2R target",
+      "stop_rule": "or_mid",
+      "target_r": 2,
+      "symbols": "watchlist",
+      "since": "2026-11-03"
+    },
+    {
+      "id": "after-1030",
+      "label": "Only breakouts after 10:30",
+      "stop_rule": "or_mid",
+      "target_r": 1,
+      "symbols": "watchlist",
+      "min_entry": "10:30",
+      "since": "2026-11-03"
+    },
+    {
+      "id": "aapl-spy-2R",
+      "label": "AAPL + SPY only, 2R target",
+      "stop_rule": "or_mid",
+      "target_r": 2,
+      "symbols": [
+        "AAPL",
+        "SPY"
+      ],
+      "since": "2026-11-03"
+    }
+  ],
   "plugin_dir": ""
 }
