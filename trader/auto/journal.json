@@ -1393,6 +1393,308 @@
      "avg_R": -0.087
     }
    }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "AAPL",
+   "source": "watchlist",
+   "rule": "mid-1R",
+   "status": "no_trigger"
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "ABNB",
+   "source": "scanner",
+   "rule": "mid-1R",
+   "entry": 170.88,
+   "stop": 168.27,
+   "target": 173.49,
+   "risk": 2.61,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 170.05,
+   "or_low": 166.51,
+   "outcome": "flat",
+   "exit": 171.16,
+   "exit_time": "3:55 PM",
+   "R": 0.107,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.2542,
+    "p_stop": 0.2705,
+    "p_neither": 0.4753,
+    "p_green": 0.4756,
+    "avg_R": -0.033,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Close to a coin flip: target first 25.4 % vs stop first 27.1 %.",
+    "history": {
+     "triggered": 32,
+     "target": 12,
+     "stop": 8,
+     "close": 12,
+     "avg_R": 0.1
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "ADI",
+   "source": "scanner",
+   "rule": "mid-1R",
+   "entry": 427.15,
+   "stop": 424.02,
+   "target": 430.28,
+   "risk": 3.13,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 426.91,
+   "or_low": 421.15,
+   "outcome": "target",
+   "exit": 430.28,
+   "exit_time": "10:20 AM",
+   "R": 1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.4757,
+    "p_stop": 0.5159,
+    "p_neither": 0.0084,
+    "p_green": 0.4804,
+    "avg_R": -0.04,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Close to a coin flip: target first 47.6 % vs stop first 51.6 %.",
+    "history": {
+     "triggered": 31,
+     "target": 13,
+     "stop": 11,
+     "close": 7,
+     "avg_R": 0.057
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "ADSK",
+   "source": "scanner",
+   "rule": "mid-1R",
+   "entry": 255.4,
+   "stop": 252.08,
+   "target": 258.72,
+   "risk": 3.32,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 254.29,
+   "or_low": 249.89,
+   "outcome": "target",
+   "exit": 258.72,
+   "exit_time": "11:10 AM",
+   "R": 1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.4177,
+    "p_stop": 0.3978,
+    "p_neither": 0.1845,
+    "p_green": 0.5097,
+    "avg_R": 0.019,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Close to a coin flip: target first 41.8 % vs stop first 39.8 %.",
+    "history": {
+     "triggered": 29,
+     "target": 12,
+     "stop": 9,
+     "close": 8,
+     "avg_R": 0.149
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "AMD",
+   "source": "watchlist",
+   "rule": "mid-1R",
+   "status": "no_trigger"
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "AME",
+   "source": "scanner",
+   "rule": "mid-1R",
+   "entry": 245.22,
+   "stop": 244.08,
+   "target": 246.36,
+   "risk": 1.14,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 245.03,
+   "or_low": 243.15,
+   "outcome": "target",
+   "exit": 246.36,
+   "exit_time": "10:15 AM",
+   "R": 1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.4805,
+    "p_stop": 0.5179,
+    "p_neither": 0.0016,
+    "p_green": 0.4811,
+    "avg_R": -0.038,
+    "seed": 19,
+    "pool": 54,
+    "verdict": "Close to a coin flip: target first 48.0 % vs stop first 51.8 %.",
+    "history": {
+     "triggered": 32,
+     "target": 12,
+     "stop": 14,
+     "close": 6,
+     "avg_R": -0.066
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "AMZN",
+   "source": "scanner",
+   "rule": "mid-1R",
+   "entry": 250.51,
+   "stop": 246.33,
+   "target": 254.69,
+   "risk": 4.18,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 250.39,
+   "or_low": 242.28,
+   "outcome": "stop",
+   "exit": 246.33,
+   "exit_time": "3:35 PM",
+   "R": -1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.148,
+    "p_stop": 0.1052,
+    "p_neither": 0.7468,
+    "p_green": 0.535,
+    "avg_R": 0.054,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Leans toward the target: target first 14.8 % vs stop first 10.5 %.",
+    "history": {
+     "triggered": 34,
+     "target": 10,
+     "stop": 17,
+     "close": 7,
+     "avg_R": -0.234
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "NVDA",
+   "source": "watchlist",
+   "rule": "mid-1R",
+   "entry": 209.67,
+   "stop": 207.87,
+   "target": 211.47,
+   "risk": 1.8,
+   "entry_slot": 10,
+   "entry_time": "10:25 AM",
+   "or_high": 209.03,
+   "or_low": 206.73,
+   "outcome": "stop",
+   "exit": 207.87,
+   "exit_time": "10:50 AM",
+   "R": -1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.3535,
+    "p_stop": 0.4511,
+    "p_neither": 0.1954,
+    "p_green": 0.4439,
+    "avg_R": -0.106,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Leans toward the stop: target first 35.4 % vs stop first 45.1 %.",
+    "history": {
+     "triggered": 30,
+     "target": 11,
+     "stop": 13,
+     "close": 6,
+     "avg_R": -0.056
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "SPY",
+   "source": "watchlist",
+   "rule": "mid-1R",
+   "entry": 760.32,
+   "stop": 759.36,
+   "target": 761.28,
+   "risk": 0.96,
+   "entry_slot": 3,
+   "entry_time": "9:50 AM",
+   "or_high": 760.01,
+   "or_low": 758.72,
+   "outcome": "target",
+   "exit": 761.28,
+   "exit_time": "10:10 AM",
+   "R": 1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.469,
+    "p_stop": 0.531,
+    "p_neither": 0.0,
+    "p_green": 0.469,
+    "avg_R": -0.062,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Close to a coin flip: target first 46.9 % vs stop first 53.1 %.",
+    "history": {
+     "triggered": 37,
+     "target": 21,
+     "stop": 16,
+     "close": 0,
+     "avg_R": 0.135
+    }
+   }
+  },
+  {
+   "date": "2026-11-02",
+   "symbol": "TSLA",
+   "source": "watchlist",
+   "rule": "mid-1R",
+   "entry": 410.79,
+   "stop": 406.97,
+   "target": 414.61,
+   "risk": 3.82,
+   "entry_slot": 11,
+   "entry_time": "10:30 AM",
+   "or_high": 410.45,
+   "or_low": 403.5,
+   "outcome": "stop",
+   "exit": 406.97,
+   "exit_time": "1:45 PM",
+   "R": -1.0,
+   "status": "triggered",
+   "tm": {
+    "p_target": 0.4612,
+    "p_stop": 0.4274,
+    "p_neither": 0.1114,
+    "p_green": 0.5184,
+    "avg_R": 0.036,
+    "seed": 19,
+    "pool": 59,
+    "verdict": "Close to a coin flip: target first 46.1 % vs stop first 42.7 %.",
+    "history": {
+     "triggered": 35,
+     "target": 13,
+     "stop": 15,
+     "close": 7,
+     "avg_R": -0.056
+    }
+   }
   }
  ],
  "days": [
@@ -1405,7 +1707,8 @@
   "2026-10-27",
   "2026-10-28",
   "2026-10-29",
-  "2026-10-30"
+  "2026-10-30",
+  "2026-11-02"
  ],
- "updated": "2026-11-02T19:05:03Z"
+ "updated": "2026-11-03T03:03:52Z"
 }
